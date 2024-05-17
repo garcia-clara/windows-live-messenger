@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.aerobutton {
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+.aerobutton:hover {
+    border-image: url("assets/general/aerobutton_border.png") 2 round;
+    background-size: 100% 100%;
+}
+.aerobutton:active {
+    border-image: url("assets/general/aerobutton_border_down.png") 2 round;
+}

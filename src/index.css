@@ -13,3 +13,11 @@
 .aerobutton:active {
     border-image: url("assets/general/aerobutton_border_down.png") 2 round;
 }
+
+.divider {
+    box-shadow: 0 3px 4px black;
+}
+
+.white-light {
+    text-shadow: 0 1px 3px white;
+}

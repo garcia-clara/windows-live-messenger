@@ -1,10 +1,9 @@
 import React from 'react';
-import bg from '../assets/bg.jpg';
+import bg from '../assets/bg1.jpg';
 
 const Background = ({ children }) => {
   return (
-    // <div className="bg-no-repeat" style={{ backgroundImage: `url(${bg})`}}>
-<div className="bg-gradient-to-b from-[#3bb2ea] via-white to-white>">
+<div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})`}}>
   {children}
 </div>
 

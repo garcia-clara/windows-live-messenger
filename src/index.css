@@ -21,3 +21,20 @@
 .white-light {
     text-shadow: 0 1px 3px white;
 }
+
+.searchbar {
+    background-image: url('./assets/general/magnifying-glass.svg'); /* URL de votre icône SVG locale */
+    background-size: 20px 20px; /* Taille de l'icône */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Position de l'icône */
+    box-shadow: inset 0px 7px 6px -7px rgba(0,0,0,0.1);
+}
+
+.hovercontact:hover {
+    cursor: pointer;
+    border: 1px solid #80D2F1;
+    border-radius: 3px;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,234,249,1) 70%, rgb(198, 237, 255) 97%);
+    
+}

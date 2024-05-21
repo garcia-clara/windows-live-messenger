@@ -1,0 +1,29 @@
+[
+    {
+        "name": "[heart] Clara [heart]",
+        "status": "online",
+        "message" : "hi everyone!",
+        "isFavorite" : 1
+    },
+
+    {
+        "name": "val",
+        "status": "busy",
+        "message" : "wassup",
+        "isFavorite" : 0
+    },
+
+    {
+        "name": "★·.·´¯`·.·★ JENNY ★·.·´¯`·.·★",
+        "status": "away",
+        "message" : "Love is the flower you've got to let grow [rose]",
+        "isFavorite" : 0
+    },
+
+    {
+        "name": "Anne ♥",
+        "status": "offline",
+        "message" : "Loving you makes life worth it [wink]",
+        "isFavorite" : 0
+    }
+]

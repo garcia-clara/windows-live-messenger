@@ -3,10 +3,11 @@ import bg from '../assets/bg1.jpg';
 
 const Background = ({ children }) => {
   return (
-<div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})`}}>
-  {children}
-</div>
-
+    <div className='relative bg-no-repeat bg-bottom bg-[length:100%_400px] bg-gradient-to-t from-[#d1f1ff] via-white'>
+      <div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})`}}>
+        {children}
+      </div>
+    </div>
   );
 };
 

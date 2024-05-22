@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Background from "../components/Background";
-import AvatarSmall from "../components/AvatarSmall";
 import SearchBar from "../components/SearchBar";
 import ContactCategory from "../components/ContactList";
 import arrow from "../assets/general/arrow.png";
@@ -12,6 +11,7 @@ import contactlistlayout from "../assets/chat/410.png";
 import contactsData from '../data/contacts.json';
 import divider from "../assets/general/divider.png";
 import WhatsNew from '../components/WhatsNew';
+import UserInformations from '../components/UserInformations';
 
 const HomePage = () => {
 
@@ -32,27 +32,7 @@ const HomePage = () => {
         <div className="flex flex-col w-full font-sans text-base h-screen">
         {/* Personnal informations row */}
           <div className="flex justify-between px-4 pt-4">
-            <div className="flex">
-            <AvatarSmall/>
-            <div>
-              <div className="flex items-center">
-                <div className="flex aerobutton cursor-pointer items-center pl-1 white-light">
-                  <p className="text-lg">Username</p>
-                  <p className="ml-1">(Status)</p>
-                  <div className="mx-1">
-                    <img src={arrow} alt="" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex aerobutton pl-1 items-center white-light">
-                <p>Share a quick message</p>
-                <div className="ml-1">
-                  <img src={arrow} alt="" />
-                </div>
-              </div>
-            </div>
-            </div>
+            <UserInformations />
         {/* Hotmail icon */}
             <div className="w-9 flex items-end">
               <div><img src={mail} alt=""/></div>

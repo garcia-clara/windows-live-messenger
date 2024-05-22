@@ -7,9 +7,9 @@
     },
 
     {
-        "name": "val",
+        "name": "Jack...",
         "status": "busy",
-        "message" : "wassup",
+        "message" : "[beer][cocktail][cocktail][beer][cocktail][beer][cocktail]...[sick]",
         "isFavorite" : 0
     },
 
@@ -23,7 +23,42 @@
     {
         "name": "Anne ♥",
         "status": "offline",
-        "message" : "Loving you makes life worth it [wink]",
+        "message" : "Loving you makes life worth it",
+        "isFavorite" : 0
+    },
+
+    {
+        "name": "(( [sun] Kassandra",
+        "status": "offline",
+        "message" : "[heart] I luv u 4 ever [heart]",
+        "isFavorite" : 0
+    },
+
+    {
+        "name": "Graham",
+        "status": "offline",
+        "message" : "i need a new job :/",
+        "isFavorite" : 0
+    },
+
+    {
+        "name": "[umbrella]...Laurence...[umbrella]",
+        "status": "offline",
+        "message" : "[cool]Let's go les Habs!!!!!![cool]",
+        "isFavorite" : 0
+    },
+
+    {
+        "name": "[star] GUILLAUME [star]",
+        "status": "online",
+        "message" : "Playing Assassin's Creed [thup]",
+        "isFavorite" : 0
+    },
+
+    {
+        "name": "[devil] sтɘpн            ×",
+        "status": "online",
+        "message" : "",
         "isFavorite" : 0
     }
 ]

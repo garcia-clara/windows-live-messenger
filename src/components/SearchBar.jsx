@@ -27,7 +27,7 @@ const SearchBar = ({ initialValue }) => {
 
   return (
     <input
-      className="p-1.5 border rounded-sm w-full searchbar bg-transparent"
+      className="p-1.5 border rounded-[4px] w-full searchbar bg-transparent text-[#6b8fa3]"
       ref={inputRef}
       type="text"
       value={isReset ? "" : value}

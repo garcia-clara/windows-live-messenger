@@ -10,6 +10,8 @@ import addcontact from "../assets/contacts/add.ico";
 import showmenu from "../assets/contacts/1489.png";
 import contactlistlayout from "../assets/chat/410.png";
 import contactsData from '../data/contacts.json';
+import divider from "../assets/general/divider.png";
+import WhatsNew from '../components/WhatsNew';
 
 const HomePage = () => {
 
@@ -27,9 +29,9 @@ const HomePage = () => {
 
   return (
     <Background>
-        <div className="flex flex-col w-full pt-4  font-sans text-base p-4 h-screen">
+        <div className="flex flex-col w-full font-sans text-base h-screen">
         {/* Personnal informations row */}
-          <div className="flex justify-between">
+          <div className="flex justify-between px-4 pt-4">
             <div className="flex">
             <AvatarSmall/>
             <div>
@@ -60,10 +62,10 @@ const HomePage = () => {
 
         {/* Contacts row */}
         <div className="h-full">
-        <div className="w-full h-[0.5px] divider"></div>
+        <img src={divider} alt="" className='mb-[-5px] pointer-events-none' />
 
         {/* Searchbar and icons */}
-          <div className="flex items-center mt-2">
+          <div className="flex items-center mt-2 px-4">
             <SearchBar initialValue="Search contacts or the web..."/>
             <div className="flex gap-1 items-center aerobutton p-1 ml-1">
               <div><img src={addcontact} alt="" /></div>
@@ -85,9 +87,12 @@ const HomePage = () => {
         <ContactCategory title="Offline" contacts={offlineContacts} count={offlineContacts.length}/>
         </div>
 
+        {/* What's New row */}
+        <WhatsNew />
 
         {/* Footer row */}
-        <footer className="w-full flex justify-center">
+        <div className='w-full bg-white h-[1px] shadow-sm shadow-[#6b8fa3]'></div>
+        <footer className="w-full flex justify-center pb-4">
           <div className="mt-4"><img src={ad} alt="" /></div>
         </footer>
         </div>

@@ -19,7 +19,7 @@ const UserInformation = () => {
     return (
         <div className="flex">
             <AvatarSmall/>
-            <div>
+            <div className='ml-[-6px]'>
                 <div className="flex items-center">
                     <div className="flex aerobutton cursor-pointer items-center pl-1 white-light">
                         <p className="text-lg">{user.name}</p>

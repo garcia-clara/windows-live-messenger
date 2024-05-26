@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from 'react';
 import AvatarLarge from "../components/AvatarLarge";
+import statusFrames from "../imports/statusFrames";
 import Background from "../components/Background";
-import StatusDropdown from "../components/StatusDropdown";
+import Dropdown from "../components/Dropdown";
 import { useNavigate } from "react-router-dom";
 import "7.css/dist/7.scoped.css";
 
@@ -11,6 +12,14 @@ const LoginPage = () => {
   const handleSignIn = () => {
     navigate("/");
   };
+
+  const options = [
+    { value: 'Available', label: 'Available', image: statusFrames.onlineDot },
+    { value: 'Busy', label: 'Busy', image: statusFrames.busyDot },
+    { value: 'Away', label: 'Away', image: statusFrames.awayDot },
+    { value: 'Offline', label: 'Appear offline', image: statusFrames.offlineDot },
+  ];
+
 
   return (
     <Background>
@@ -34,23 +43,25 @@ const LoginPage = () => {
 
           {/* Status */}
           <div className="flex my-4">
-            <p>Sign in as : </p>
-            <StatusDropdown />
+            <p>Sign in as: </p>
+            <Dropdown 
+              options={options} 
+            />
           </div>
 
           {/* Checkboxes */}
           <div>
             <div className="mt-2">
               <input type="checkbox" id="rememberme" />
-              <label for="rememberme">Remember me</label>
+              <label htmlFor="rememberme">Remember me</label>
             </div>
             <div className="mt-2">
               <input type="checkbox" id="rememberpassword" />
-              <label for="rememberpassword">Remember my password</label>
+              <label htmlFor="rememberpassword">Remember my password</label>
             </div>
             <div className="mt-2">
               <input type="checkbox" id="signinautomatically" />
-              <label for="signinautomatically">Sign me in automatically</label>
+              <label htmlFor="signinautomatically">Sign me in automatically</label>
             </div>
           </div>
         </fieldset>

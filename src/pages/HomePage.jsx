@@ -5,9 +5,9 @@ import ContactCategory from "../components/ContactList";
 import arrow from "../assets/general/arrow.png";
 import ad from "../assets/ad.png"
 import mail from "../assets/general/mail.png";
-import addcontact from "../assets/contacts/add.ico";
+import addcontact from "../assets/contacts/add_contact.png";
 import showmenu from "../assets/contacts/1489.png";
-import contactlistlayout from "../assets/chat/410.png";
+import contactlistlayout from "../assets/contacts/change_contact_list_layout.png";
 import contactsData from '../data/contacts.json';
 import divider from "../assets/general/divider.png";
 import WhatsNew from '../components/WhatsNew';
@@ -47,15 +47,15 @@ const HomePage = () => {
         {/* Searchbar and icons */}
           <div className="flex items-center mt-2 px-4">
             <SearchBar initialValue="Search contacts or the web..."/>
-            <div className="flex gap-1 items-center aerobutton p-1 ml-1">
-              <div><img src={addcontact} alt="" /></div>
+            <div className="flex gap-1 items-center aerobutton p-1 ml-1 h-6">
+              <div className='w-5'><img src={addcontact} alt="" /></div>
               <div><img src={arrow} alt="" /></div>
             </div>
-            <div className="flex gap-1 items-center aerobutton p-1">
-              <div><img src={contactlistlayout} alt="" /></div>
+            <div className="flex gap-1 items-center aerobutton p-1 h-6">
+              <div className='w-5'><img src={contactlistlayout} alt="" /></div>
             </div>
-            <div className="flex gap-1 items-center aerobutton p-1">
-              <div><img src={showmenu} alt="" /></div>
+            <div className="flex gap-1 items-center aerobutton p-1 h-6">
+              <div className='w-5'><img src={showmenu} alt="" /></div>
               <div><img src={arrow} alt="" /></div>
             </div>
           </div>

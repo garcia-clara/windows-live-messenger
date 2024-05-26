@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import defaultAvatar from "../assets/usertiles/default.png";
-import userData from "../data/user.json";
 import statusFrames from "../imports/statusFrames";
 
-const AvatarSmall = () => {
+const AvatarSmall = ({ user }) => {
   const [userAvatar, setUserAvatar] = useState(defaultAvatar);
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
 
   useEffect(() => {
-    import(`${userData[0].image}`)
+    import(`${user.image}`)
       .then((image) => {
         setUserAvatar(image.default);
       })
@@ -16,24 +15,24 @@ const AvatarSmall = () => {
         setUserAvatar(defaultAvatar);
       });
 
-    switch (userData[0].status) {
-      case "online":
+    switch (user.status) {
+      case "Available":
         setUserStatus(statusFrames.OnlineSmall);
         break;
-      case "offline":
+      case "Offline":
         setUserStatus(statusFrames.OfflineSmall);
         break;
-      case "away":
+      case "Away":
         setUserStatus(statusFrames.AwaySmall);
         break;
-      case "busy":
+      case "Busy":
         setUserStatus(statusFrames.BusySmall);
         break;
       default:
         setUserStatus(statusFrames.OnlineSmall);
         break;
     }
-  }, []);
+  }, [user]);
 
   return (
     <div className="h-[80px] w-[80px] relative">

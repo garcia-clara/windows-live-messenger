@@ -3,30 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import arrow from '../assets/general/arrow.png';
 import data from '../data/user.json';
 
-const Dropdown = ({ options, name, status }) => {
+const Dropdown = ({ options, name, status, setUser }) => {
   const [selectedOption, setSelectedOption] = useState(options.find(option => option.value === status) || options[0]);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(data[0])
-
-  const handleStatusChange = (event) => {
-    const newStatus = event.target.value;
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      status: newStatus
-    }));
-  };
 
   const handleOptionClick = (option, event) => {
     if (option.value !== "Sign out") {
       setSelectedOption(option);
+      setUser(prevUser => ({
+        ...prevUser,
+        status: option.value
+      }));
     } else {
       navigate('/login');
     }
     setIsOpen(false);
-    handleStatusChange(event);
-  };  
+  };
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -44,8 +38,6 @@ const Dropdown = ({ options, name, status }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
-
 
   return (
     <div className="relative inline-block" ref={dropdownRef}>
@@ -70,7 +62,7 @@ const Dropdown = ({ options, name, status }) => {
             <li
               key={option.value}
               className="px-4 hover:bg-gray-100 cursor-pointer flex items-center"
-              onClick={() => handleOptionClick(option, event)}
+              onClick={(event) => handleOptionClick(option, event)}
             >
               {option.image ? (
                 <img src={option.image} alt={option.label} className="inline-block mt-0.5 mr-2 w-2" />

@@ -1,10 +1,11 @@
 import React from 'react';
+import Background from '../components/Background';
 
 const ChatPage = () => {
   return (
-    <div>
-      <h1>Bienvenue sur MSN Clone - Chat Page</h1>
-    </div>
+    <Background>
+
+    </Background>
   );
 };
 

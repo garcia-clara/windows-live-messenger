@@ -7,6 +7,7 @@ import emoticons from '../imports/emoticons';
 import favoritesIcon from '../assets/general/favorites.png'
 import openTabArrow from '../assets/general/open_tab_arrow.png';
 import closedTabArrow from '../assets/general/closed_tab_arrow.png';
+import { useNavigate } from "react-router-dom";
 
 const ContactCategory = ({ title, contacts, count }) => {
     const [isOpen, setIsOpen] = useState(true);
@@ -32,6 +33,8 @@ const ContactCategory = ({ title, contacts, count }) => {
 
 const Contacts = ({ contact }) => {
 
+    const navigate = useNavigate();
+    
     // Change le statut
     const whichStatus = (contactStatus) => {
         switch (contactStatus) {
@@ -60,9 +63,13 @@ const Contacts = ({ contact }) => {
         });
     };
 
+    const openChat = () => {
+        navigate("/chat");
+    }
+
 
     return (
-        <div className="flex gap-1 px-6 items-center hovercontact border border-transparent">
+        <div className="flex gap-1 px-6 items-center hovercontact border border-transparent" onClick={openChat}>
             <div className='w-2 mt-1'><img src={whichStatus(contact.status)} alt="contact-status" /></div>
             <p className='flex gap-1'>{replaceEmoticons(contact.name)}</p>
             {!contact.message == "" &&  <p>-</p>}

@@ -1,23 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AvatarSmall from "../components/AvatarSmall";
 import arrow from "../assets/general/arrow.png";
-import userData from '../data/user.json';
+import initialUserData from '../data/user.json';
 import Dropdown from './Dropdown';
 import statusFrames from "../imports/statusFrames";
 
-
 const UserInformation = () => {
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        if (userData.length > 0) {
-            setUser(userData[0]); // Assuming you want to display the first user in the array
-        }
-    }, []);
-
-    if (!user) {
-        return null; // Or a loading spinner, or some placeholder
-    }
+    const [user, setUser] = useState(initialUserData[0]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [message, setMessage] = useState(user.message);
+    const inputRef = useRef(null);
 
     const options = [
         { value: 'Available', label: 'Available', image: statusFrames.onlineDot },
@@ -25,17 +17,66 @@ const UserInformation = () => {
         { value: 'Away', label: 'Away', image: statusFrames.awayDot },
         { value: 'Offline', label: 'Appear offline', image: statusFrames.offlineDot },
         { value: 'Sign out', label: 'Sign out'}
-      ];
+    ];
+
+    const handleMessageClick = () => {
+        setIsEditing(true);
+    };
+
+    const handleInputChange = (e) => {
+        setMessage(e.target.value);
+        adjustInputWidth();
+    };
+
+    const handleInputBlur = () => {
+        setUser(prevUser => ({
+            ...prevUser,
+            message
+        }));
+        setIsEditing(false);
+    };
+
+    const handleInputKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleInputBlur();
+        }
+    };
+
+    const adjustInputWidth = () => {
+        if (inputRef.current) {
+            inputRef.current.style.width = `${inputRef.current.value.length}ch`;
+        }
+    };
+
+    useEffect(() => {
+        if (isEditing) {
+            adjustInputWidth();
+        }
+    }, [isEditing]);
 
     return (
         <div className="flex">
-            <AvatarSmall/>
+            <AvatarSmall user={user} />
             <div className='ml-[-6px]'>
                 <div className="flex items-center">
-                        <Dropdown options={options} name={user.name} status={user.status}/>
+                    <Dropdown options={options} name={user.name} status={user.status} setUser={setUser} />
                 </div>
                 <div className="flex aerobutton pl-1 items-center white-light">
-                    <p>{user.message}</p>
+                    {isEditing ? (
+                        <input
+                            ref={inputRef}
+                            type="text"
+                            value={message}
+                            onChange={handleInputChange}
+                            onBlur={handleInputBlur}
+                            onKeyPress={handleInputKeyPress}
+                            autoFocus
+                            className="border border-gray-300 rounded outline-none"
+                            style={{ width: `${message.length}ch` }}
+                        />
+                    ) : (
+                        <p onClick={handleMessageClick} className="cursor-pointer">{user.message}</p>
+                    )}
                     <div className="ml-1">
                         <img src={arrow} alt="arrow icon" />
                     </div>

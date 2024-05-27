@@ -1,5 +1,6 @@
 [
     {
+        "id": 2,
         "name": "[heart] Clara [heart]",
         "status": "online",
         "message" : "hi everyone!",
@@ -7,6 +8,7 @@
     },
 
     {
+        "id": 3,
         "name": "Jack...",
         "status": "busy",
         "message" : "[beer][cocktail][cocktail][beer][cocktail][beer][cocktail]...[sick]",
@@ -14,6 +16,7 @@
     },
 
     {
+        "id": 4,
         "name": "★·.·´¯`·.·★ JENNY ★·.·´¯`·.·★",
         "status": "away",
         "message" : "Love is the flower you've got to let grow [rose]",
@@ -21,6 +24,7 @@
     },
 
     {
+        "id": 5,
         "name": "Anne ♥",
         "status": "offline",
         "message" : "Loving you makes life worth it",
@@ -28,6 +32,7 @@
     },
 
     {
+        "id": 6,
         "name": "(( [sun] Kassandra",
         "status": "offline",
         "message" : "[heart] I luv u 4 ever [heart]",
@@ -35,6 +40,7 @@
     },
 
     {
+        "id": 7,
         "name": "Graham",
         "status": "offline",
         "message" : "i need a new job :/",
@@ -42,6 +48,7 @@
     },
 
     {
+        "id": 8,
         "name": "[umbrella]...Laurence...[umbrella]",
         "status": "offline",
         "message" : "[cool]Let's go les Habs!!!!!![cool]",
@@ -49,6 +56,7 @@
     },
 
     {
+        "id": 9,
         "name": "[star] GUILLAUME [star]",
         "status": "online",
         "message" : "Playing Assassin's Creed [thup]",
@@ -56,6 +64,7 @@
     },
 
     {
+        "id": 10,
         "name": "[devil] sтɘpн            ×",
         "status": "online",
         "message" : "",

@@ -32,7 +32,7 @@ const ChatPage = () => {
       <div className="flex items-center w-full h-[31.4px] bg-white p-2 gap-2">
         <img src={contactChatIcon} alt="" />
         <p className="flex gap-1">{replaceEmoticons(contact.name)}</p>
-        <p>{contact.email}</p>
+        <p>&lt;{contact.email}&gt;</p>
       </div>
       <div
         className="flex items-center justify-between h-[31.4px] bg-no-repeat shadow-lg"

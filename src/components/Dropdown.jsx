@@ -44,11 +44,19 @@ const Dropdown = ({ options }) => {
 
   return (
     <div className="relative inline-block" ref={dropdownRef}>
-      <div onClick={handleToggleDropdown} className="flex aerobutton cursor-pointer items-center px-1 white-light">
+      <div onClick={handleToggleDropdown} className="flex aerobutton cursor-pointer items-center px-1 ml-1 white-light">
+      { user.name == "" ? 
+      <div className="flex items-center">
+        <img className='inline-block mt-0.5 mr-2 w-2' src={selectedOption.image} alt="" />
+        <p className="capitalize">{selectedOption.label}</p>
+      </div> 
+      : 
         <div className="flex items-center">
-          <p className="text-lg">{user.name}</p>
-          <p className="ml-1 capitalize">({selectedOption.label})</p>
-        </div>
+        <p className="text-lg">{user.name}</p>
+        <p className="ml-1 capitalize">({selectedOption.label})</p>
+      </div>
+      }
+        
         <img src={arrow} className="inline-block mb-0.5 ml-2" alt="Toggle Dropdown" />
       </div>
 

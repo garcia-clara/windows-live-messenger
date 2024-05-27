@@ -19,7 +19,6 @@ const Dropdown = ({ options }) => {
       setSelectedOption(option);
       setUser({ ...user, status: option.value });
     } else {
-      clearUser();
       navigate('/login');
     }
     setIsOpen(false);

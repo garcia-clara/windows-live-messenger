@@ -5,9 +5,13 @@ import Background from "../components/Background";
 import Dropdown from "../components/Dropdown";
 import { useNavigate } from "react-router-dom";
 import "7.css/dist/7.scoped.css";
+import useUserStore from '../lib/user-store';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const clearUser = useUserStore(state => state.clearUser);
+
+  clearUser();
 
   const handleSignIn = () => {
     navigate("/");

@@ -61,7 +61,7 @@ const ChatPage = () => {
       <Background>
         <div className="px-4 pt-4 grid grid-cols-[170px__1fr]">
           <div className="h-full flex flex-col items-center justify-between">
-            <AvatarLarge />
+            <AvatarLarge image={contact.image} status={contact.status}/>
             <AvatarLarge />
           </div>
           <div>

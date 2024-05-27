@@ -5,6 +5,7 @@
         "email": "clara58@hotmail.com",
         "status": "online",
         "message" : "hi everyone!",
+        "image" : "../assets/usertiles/anime-girl.gif",
         "isFavorite" : 1
     },
 
@@ -14,6 +15,7 @@
         "email": "clara58@hotmail.com",
         "status": "busy",
         "message" : "[beer][cocktail][cocktail][beer][cocktail][beer][cocktail]...[sick]",
+        "image" : "../assets/usertiles/0c5319e7147890e45265faad3b17701c1de71b12.png",
         "isFavorite" : 0
     },
 
@@ -23,6 +25,7 @@
         "email": "clara58@hotmail.com",
         "status": "away",
         "message" : "Love is the flower you've got to let grow [rose]",
+        "image" : "../assets/usertiles/0c5319e7147890e45265faad3b17701c1de71b12.png",
         "isFavorite" : 0
     },
 
@@ -32,6 +35,7 @@
         "email": "clara58@hotmail.com",
         "status": "offline",
         "message" : "Loving you makes life worth it",
+        "image" : "../assets/usertiles/17759b7986d2f66aaf44930c955eccc5e95447bb.png",
         "isFavorite" : 0
     },
 
@@ -41,6 +45,7 @@
         "email": "clara58@hotmail.com",
         "status": "offline",
         "message" : "[heart] I luv u 4 ever [heart]",
+        "image" : "../assets/usertiles/1d539656cd11e2d2d6de8eb573c6419dce54f4b4.png",
         "isFavorite" : 0
     },
 
@@ -50,6 +55,7 @@
         "email": "clara58@hotmail.com",
         "status": "offline",
         "message" : "i need a new job :/",
+        "image" : "../assets/usertiles/1e75ad9e5d6c0d5cd06857012ad06dbc40e08698.png",
         "isFavorite" : 0
     },
 
@@ -59,6 +65,7 @@
         "email": "clara58@hotmail.com",
         "status": "offline",
         "message" : "[cool]Let's go les Habs!!!!!![cool]",
+        "image" : "../assets/usertiles/246d355c48c095edff078045d2e05c3cb0a2ba79.png",
         "isFavorite" : 0
     },
 
@@ -68,6 +75,7 @@
         "email": "clara58@hotmail.com",
         "status": "online",
         "message" : "Playing Assassin's Creed [thup]",
+        "image" : "../assets/usertiles/37edba888161bc32742923800fe27820fb4cb494.png",
         "isFavorite" : 0
     },
 
@@ -77,6 +85,7 @@
         "email": "clara58@hotmail.com",
         "status": "online",
         "message" : "",
+        "image" : "../assets/usertiles/3802323cc4b82330f3fae5b962f95f41727f75a1.gif",
         "isFavorite" : 0
     }
 ]

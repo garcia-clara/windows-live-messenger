@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AvatarSmall from "../components/AvatarSmall";
 import arrow from "../assets/general/arrow.png";
-import initialUserData from '../data/user.json';
 import Dropdown from './Dropdown';
 import statusFrames from "../imports/statusFrames";
+import useUserStore from '../lib/user-store';
 
 const UserInformation = () => {
-    const [user, setUser] = useState(initialUserData[0]);
+    const user = useUserStore(state => state.user);
+    const setUser = useUserStore(state => state.setUser);
     const [isEditing, setIsEditing] = useState(false);
     const [message, setMessage] = useState(user.message);
     const inputRef = useRef(null);
@@ -16,7 +17,7 @@ const UserInformation = () => {
         { value: 'Busy', label: 'Busy', image: statusFrames.busyDot },
         { value: 'Away', label: 'Away', image: statusFrames.awayDot },
         { value: 'Offline', label: 'Appear offline', image: statusFrames.offlineDot },
-        { value: 'Sign out', label: 'Sign out'}
+        { value: 'Sign out', label: 'Sign out' }
     ];
 
     const handleMessageClick = () => {
@@ -29,10 +30,7 @@ const UserInformation = () => {
     };
 
     const handleInputBlur = () => {
-        setUser(prevUser => ({
-            ...prevUser,
-            message
-        }));
+        setUser({ ...user, message });
         setIsEditing(false);
     };
 
@@ -56,10 +54,10 @@ const UserInformation = () => {
 
     return (
         <div className="flex">
-            <AvatarSmall user={user} />
+            <AvatarSmall />
             <div className='ml-[-6px]'>
                 <div className="flex items-center">
-                    <Dropdown options={options} name={user.name} status={user.status} setUser={setUser} />
+                    <Dropdown options={options} />
                 </div>
                 <div className="flex aerobutton pl-1 items-center white-light">
                     {isEditing ? (

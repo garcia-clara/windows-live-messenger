@@ -7,10 +7,12 @@ import emoticons from '../imports/emoticons';
 import favoritesIcon from '../assets/general/favorites.png'
 import openTabArrow from '../assets/general/open_tab_arrow.png';
 import closedTabArrow from '../assets/general/closed_tab_arrow.png';
+import useContactStore from '../lib/contact-store';
 import { useNavigate } from "react-router-dom";
 
 const ContactCategory = ({ title, contacts, count }) => {
     const [isOpen, setIsOpen] = useState(true);
+
 
     const toggleAccordion = () => {
         setIsOpen(!isOpen);
@@ -19,8 +21,8 @@ const ContactCategory = ({ title, contacts, count }) => {
     return (
         <div className="mt-2">
             <div className="flex items-center cursor-pointer ml-1 hovercontact border border-transparent" onClick={toggleAccordion}>
-                <h2>{isOpen ? <img src={closedTabArrow}/> : <img src={openTabArrow}/>}</h2>
-                {title === "Favorites" && <img src={favoritesIcon} className='mr-1' />}
+                <h2>{isOpen ? <img src={closedTabArrow} alt="close tab" /> : <img src={openTabArrow} alt="open tab" />}</h2>
+                {title === "Favorites" && <img src={favoritesIcon} className='mr-1' alt="favorites icon" />}
                 <h2 className='text-[16px] text-[#1D2F7F] mr-1'>{title}</h2>
                 <h2 className='opacity-40'>({count})</h2>
             </div>
@@ -32,8 +34,9 @@ const ContactCategory = ({ title, contacts, count }) => {
 };
 
 const Contacts = ({ contact }) => {
-
     const navigate = useNavigate();
+    const setContact = useContactStore(state => state.setContact);
+
     
     // Change le statut
     const whichStatus = (contactStatus) => {
@@ -56,23 +59,23 @@ const Contacts = ({ contact }) => {
         return message.split(/(\[.*?\])/).map((part, index) => {
             const match = part.match(/\[(.*?)\]/);
             if (match && emoticons[match[1]]) {
-                return <div className='flex items-center'><img key={index} src={emoticons[match[1]]} alt={match[1]} className='w-[14px] h-[14px]'/></div>;
+                return <div className='flex items-center'><img key={index} src={emoticons[match[1]]} alt={match[1]} className='w-[14px] h-[14px]' /></div>;
             } else {
                 return part;
             }
         });
     };
 
-    const openChat = () => {
-        navigate("/chat");
+    const openChat = (contact) => {
+        navigate(`/chat/${contact.id}`);
     }
-
+    
 
     return (
-        <div className="flex gap-1 px-6 items-center hovercontact border border-transparent" onClick={openChat}>
+        <div className="flex gap-1 px-6 items-center hovercontact border border-transparent" onClick={() => openChat(contact)}>
             <div className='w-2 mt-1'><img src={whichStatus(contact.status)} alt="contact-status" /></div>
             <p className='flex gap-1'>{replaceEmoticons(contact.name)}</p>
-            {!contact.message == "" &&  <p>-</p>}
+            {!contact.message === "" &&  <p>-</p>}
             <p className='flex gap-1 text-gray-400'>{replaceEmoticons(contact.message)}</p>
         </div>
     );

@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import defaultAvatar from "../assets/usertiles/default.png";
 import statusFrames from "../imports/statusFrames";
+import useUserStore from '../lib/user-store';
 
-const AvatarSmall = ({ user }) => {
+const AvatarSmall = () => {
+  const { user, setUser } = useUserStore();
   const [userAvatar, setUserAvatar] = useState(defaultAvatar);
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
 
   useEffect(() => {
-    import(`${user.image}`)
-      .then((image) => {
-        setUserAvatar(image.default);
-      })
-      .catch((error) => {
-        setUserAvatar(defaultAvatar);
-      });
+    if (user.image) {
+      import(`${user.image}`)
+        .then((image) => {
+          setUserAvatar(image.default);
+        })
+        .catch(() => {
+          setUserAvatar(defaultAvatar);
+        });
+    }
 
     switch (user.status) {
       case "Available":

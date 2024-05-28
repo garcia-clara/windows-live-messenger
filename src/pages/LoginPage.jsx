@@ -6,6 +6,7 @@ import Dropdown from "../components/Dropdown";
 import { useNavigate } from "react-router-dom";
 import "7.css/dist/7.scoped.css";
 import useUserStore from '../lib/user-store';
+import bg from '../assets/bg1.jpg';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const LoginPage = () => {
 
   return (
     <Background>
+      <div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})`}}>
       <div className="flex flex-col items-center w-full pt-4 win7 font-sans text-base">
         <AvatarLarge />
         <p className="mt-4 text-xl text-[#1D2F7F]">Sign in</p>
@@ -74,6 +76,7 @@ const LoginPage = () => {
         <button className="mt-4" onClick={handleSignIn}>
           Sign in
         </button>
+      </div>
       </div>
     </Background>
   );

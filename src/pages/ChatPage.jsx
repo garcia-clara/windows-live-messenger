@@ -5,11 +5,19 @@ import contactChatIcon from "../assets/chat/contact_chat_icon.png";
 import { useParams } from "react-router-dom";
 import "7.css/dist/7.scoped.css";
 import showmenu from "../assets/contacts/1489.png";
-import arrow from "../assets/general/arrow_white.png";
+import arrowWhite from "../assets/general/arrow_white.png";
+import arrow from "../assets/general/arrow.png";
 import AvatarLarge from "../components/AvatarLarge";
 import divider from "../assets/general/divider.png";
 import contacts from "../data/contacts.json";
 import emoticons from "../imports/emoticons";
+import bg from '../assets/bg1.jpg';
+import selectEmoticon from "../assets/chat/select_emoticon.png";
+import selectWink from "../assets/chat/select_wink.png";
+import sendNudge from "../assets/chat/send_nudge.png";
+import changeFont from "../assets/chat/change_font.png";
+import changeBackground from "../assets/chat/select_background.png";
+import messageDot from "../assets/chat/message_dot.png";
 
 const ChatPage = () => {
   const { id } = useParams();
@@ -28,7 +36,8 @@ const ChatPage = () => {
 };
 
   return (
-    <div className="flex flex-col w-full font-sans text-base h-screen">
+    <div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})`}}>
+    <div className="flex flex-col w-full font-sans text-base h-full">
       <div className="flex items-center w-full h-[31.4px] bg-white p-2 gap-2">
         <img src={contactChatIcon} alt="" />
         <p className="flex gap-1">{replaceEmoticons(contact.name)}</p>
@@ -53,27 +62,68 @@ const ChatPage = () => {
             <img src={showmenu} alt="" />
           </div>
           <div>
-            <img src={arrow} alt="" />
+            <img src={arrowWhite} alt="" />
           </div>
         </div>
       </div>
 
       <Background>
-        <div className="px-4 pt-4 grid grid-cols-[170px__1fr]">
+        <div className="px-4 pt-4 grid grid-cols-[170px__1fr] h-full">
           <div className="h-full flex flex-col items-center justify-between">
             <AvatarLarge image={contact.image} status={contact.status}/>
-            <AvatarLarge />
-          </div>
-          <div>
-            <div className="flex items-center white-light mb-10">
-              <p className="text-lg flex gap-1">{replaceEmoticons(contact.name)}</p>
-              <p className="ml-1 capitalize">({contact.status})</p>
+            <div>
+              <AvatarLarge />
+              <div className="h-10"/>
             </div>
-            <img src={divider} alt="" className='mb-[-5px] pointer-events-none' />
+          </div>
+          <div className="flex flex-col items-center justify-between">
+            <div>
+              <div className="flex items-center white-light mb-10">
+                <p className="text-lg flex gap-1">{replaceEmoticons(contact.name)}</p>
+                <p className="ml-1 capitalize">({contact.status})</p>
+              </div>
+              <img src={divider} alt="" className='mb-[-5px] pointer-events-none' />
+            </div>
 
+            <div className="h-full w-full my-4 text-sm">
+                <p className="flex">{replaceEmoticons(contact.name)} says:</p>
+                <div className="flex items-center gap-2"><div><img src={messageDot} alt="" /></div>Hiiiiiiiii!</div>
+                <div className="flex items-center gap-2"><div><img src={messageDot} alt="" /></div>Wassup??!</div>
+                <p className="flex">Valentin says:</p>
+                <div className="flex items-center gap-2"><div><img src={messageDot} alt="" /></div>Fine thanks!</div>
+            </div>
+
+
+            <div className="w-full">
+              <p className="opacity-50 my-1">Last message received at 17:24 on 28/05/2009.</p>
+              <img src={divider} alt="" className='pointer-events-none' />
+              <input type="text" className="w-full border rounded-[4px] outline-none p-1"/>
+              <div className="flex">
+                  <div className="flex items-center aerobutton p-1 h-6">
+                    <div className='w-5'><img src={selectEmoticon} alt="" /></div>
+                    <div><img src={arrow} alt="" /></div>
+                  </div>
+                  <div className="flex items-center aerobutton p-1 h-6">
+                    <div className='w-5'><img src={selectWink} alt="" /></div>
+                    <div><img src={arrow} alt="" /></div>
+                  </div>
+                  <div className="flex items-center aerobutton p-1 h-6">
+                    <div><img src={sendNudge} alt="" /></div>
+                  </div>
+                  <div className="flex items-center aerobutton p-1 h-6">
+                    <div><img src={changeFont} alt="" /></div>
+                  </div>
+                  <div className="flex items-center aerobutton p-1 h-6">
+                    <div className='w-5'><img src={changeBackground} alt="" /></div>
+                    <div><img src={arrow} alt="" /></div>
+                  </div>
+              </div>
+              <div className="h-10"/>
+            </div>
           </div>
         </div>
       </Background>
+    </div>
     </div>
   );
 };

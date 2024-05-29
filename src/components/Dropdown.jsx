@@ -2,11 +2,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import arrow from '../assets/general/arrow.png';
 import useUserStore from '../lib/user-store';
+import ChangeDisplayPictureModal from './ChangeDisplayPictureModal';
 
 const Dropdown = ({ options }) => {
   const user = useUserStore(state => state.user);
   const setUser = useUserStore(state => state.setUser);
   const clearUser = useUserStore(state => state.clearUser);
+  const [showModal, setShowModal] = React.useState(false);
 
   const [selectedOption, setSelectedOption] = useState(options.find(option => option.value === user.status) || options[0]);
   const [isOpen, setIsOpen] = useState(false);
@@ -15,12 +17,28 @@ const Dropdown = ({ options }) => {
   const navigate = useNavigate();
 
   const handleOptionClick = (option, event) => {
-    if (option.value !== "Sign out") {
-      setSelectedOption(option);
-      setUser({ ...user, status: option.value });
-    } else {
-      navigate('/login');
+
+    switch(option.value) {
+      case "Available":
+      case "Busy":
+      case "Away":
+      case "Offline":
+        setSelectedOption(option);
+        setUser({ ...user, status: option.value });
+        break;
+    
+      case "Sign out":
+        navigate('/login');
+        break;
+
+      case "ChangeDisplayPicture":
+        setShowModal(true);
+        break;
+    
+      default:
+        break;
     }
+
     setIsOpen(false);
   };
 
@@ -60,7 +78,7 @@ const Dropdown = ({ options }) => {
       </div>
 
       {isOpen && (
-        <ul className="absolute bg-white border border-gray-300 rounded shadow w-[150px] mt-1 z-10 py-1">
+        <ul className="absolute bg-white border border-gray-300 rounded shadow w-[300px] mt-1 z-10 py-1">
           {options.map((option) => (
             <li
               key={option.value}
@@ -77,6 +95,8 @@ const Dropdown = ({ options }) => {
           ))}
         </ul>
       )}
+
+{showModal && <ChangeDisplayPictureModal setShowModal={setShowModal} />}
     </div>
   );
 };

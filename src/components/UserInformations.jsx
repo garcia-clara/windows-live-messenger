@@ -17,7 +17,8 @@ const UserInformation = () => {
         { value: 'Busy', label: 'Busy', image: statusFrames.busyDot },
         { value: 'Away', label: 'Away', image: statusFrames.awayDot },
         { value: 'Offline', label: 'Appear offline', image: statusFrames.offlineDot },
-        { value: 'Sign out', label: 'Sign out' }
+        { value: 'Sign out', label: 'Sign out' },
+        { value: 'ChangeDisplayPicture', label: 'Change display picture...' }
     ];
 
     const handleMessageClick = () => {

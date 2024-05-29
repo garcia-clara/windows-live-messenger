@@ -18,7 +18,7 @@ app.use(cors({
         messages: messages,
       }, {
         headers: {
-          'Authorization': `Bearer sk-proj-JVPCs5SrWky0LWoFbiXbT3BlbkFJJRykFpYxihYWJ4sp48Kp`, // Remplacez par votre clé API
+          'Authorization': `Bearer [API_KEY]`,
           'Content-Type': 'application/json'
         }
       });

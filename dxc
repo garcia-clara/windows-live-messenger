@@ -1,0 +1,101 @@
+[33mcommit 08f76c12a53c195d9843f2775289a2a36044abfb[m[33m ([m[1;36mHEAD -> [m[1;32mchatgpt[m[33m)[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Wed May 29 20:06:49 2024 +0200
+
+    chatgpt setup
+
+[33mcommit f8c946586d4bcdd011662ec9686b22201e18d1d2[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Wed May 29 20:04:12 2024 +0200
+
+    chatgpt setup
+
+[33mcommit 84d1b166a466b925f899a7a3ec0c425dfa976beb[m[33m ([m[1;32mchatgptsetup[m[33m)[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Wed May 29 19:59:31 2024 +0200
+
+    chatgpt setup but bugged, modal for changing displayed picture started
+
+[33mcommit cc32f738d0a7e25f5244b12f8f0f7d86888d164a[m[33m ([m[1;31morigin/chatpage[m[33m, [m[1;32mchatpage[m[33m)[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Tue May 28 18:04:51 2024 +0200
+
+    chat page in progress
+
+[33mcommit e9a46add6e1a8445f0131c575aeea06be146ede1[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Mon May 27 20:48:24 2024 +0200
+
+    chat images
+
+[33mcommit 5cfd38bc4e8fd9f390acd63ac2dff28a477b0c46[m[33m ([m[1;31morigin/zustand[m[33m, [m[1;32mzustand[m[33m)[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Mon May 27 19:40:52 2024 +0200
+
+    dropdown fix
+
+[33mcommit a5de27750412cff2e865e2ea2cd56b951f02082f[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Mon May 27 18:59:19 2024 +0200
+
+    zustand
+
+[33mcommit f76c1c62655cab1e8a43e795b29824b1b3b18a5b[m[33m ([m[1;31morigin/homepage[m[33m, [m[1;32mhomepage[m[33m)[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Sun May 26 20:41:06 2024 +0200
+
+    frame status display and message editing
+
+[33mcommit 9c023f1ad18e82d03e60a37fc44d89c1f2e20a6f[m[33m ([m[1;32mtoken[m[33m)[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Sun May 26 14:15:20 2024 +0200
+
+    dropdown for home and login page
+
+[33mcommit a2ed8a3c4d2356af429cbb1f5de51abd7578e532[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Sat May 25 20:42:19 2024 +0200
+
+    user status frames setup
+
+[33mcommit d09ce4781dbb16c6d3acc0b939ca75ec1e71c2e7[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Wed May 22 20:52:52 2024 +0200
+
+    usertiles added
+
+[33mcommit bf499facaf5d0cefc2052b3e8a62da39eae651b1[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Wed May 22 16:34:11 2024 +0200
+
+    home page still in progress
+
+[33mcommit 8dde147242b834990e50d44fa91f26766c214d2f[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Tue May 21 18:58:46 2024 +0200
+
+    contact list in progress
+
+[33mcommit 5b6ca3d9752c7fb79d9c549534d9d04ab468459e[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Fri May 17 22:32:35 2024 +0200
+
+    starting home page
+
+[33mcommit 9e02c5e17986166619e87dac66b6d827b4ed9584[m[33m ([m[1;31morigin/windows7css[m[33m, [m[1;32mwindows7css[m[33m)[m
+Author: Clara <clara.garcia.contact@gmail.com>
+Date:   Fri May 17 21:07:30 2024 +0200
+
+    login page fronnt finished
+
+[33mcommit 500fb708cb58638f73e3d71b45687007a3fb8988[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: Clara <c.garcia@cfa-insta.fr>
+Date:   Fri May 17 18:45:53 2024 +0200
+
+    starting with login page
+
+[33mcommit f3bc72a5ff83443b59aa0c265a6f5419d22b774d[m
+Author: Clara <c.garcia@cfa-insta.fr>
+Date:   Fri May 17 18:41:07 2024 +0200
+
+    first commit

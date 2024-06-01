@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Background from "../components/Background";
 import navbarBackground from "../assets/background/chat_navbar_background.png";
 import contactChatIcon from "../assets/chat/contact_chat_icon.png";
@@ -23,14 +23,112 @@ import useUserStore from '../lib/user-store';
 import chatIconsBackground from '../assets/background/chat_icons_background.png';
 import chatPointBackground from '../assets/background/chat_background_point.png';
 import chatIconsSeparator from '../assets/background/chat_icons_separator.png';
-import nudgeSound from '../sounds/nudge.mp3';
+import sounds from "../imports/sounds";
+import axios from 'axios';
 
 const ChatPage = () => {
   const { id } = useParams();
-  const user = useUserStore(state => state.user);
   const [shaking, setShaking] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const [lastMessageTime, setLastMessageTime] = useState(null);
+  const [contactTyping, setContactTyping] = useState(false);
+  const user = useUserStore(state => state.user);
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+
+
+  useEffect(() => {
+    localStorage.setItem('chatMessages', JSON.stringify(messages));
+  }, [messages]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (input.trim() === '') return;
+
+    const newMessage = { role: 'user', content: input };
+    const newMessages = [...messages, newMessage];
+
+    setMessages(newMessages);
+    setInput('');
+    simulateContactTyping(); // Simulate contact typing
+    setTimeout(() => {
+    getAssistantResponse(); // Get assistant's response after a delay
+    }, 100000); // Simulated delay for response
+
+    try {
+      const response = await axios.post(
+        'https://api.openai.com/v1/chat/completions',
+        {
+          model: 'gpt-3.5-turbo',
+          messages: newMessages,
+          max_tokens: 300,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${apiKey}`, // Replace YOUR_API_KEY with your actual API key
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      if (response.data.choices && response.data.choices.length > 0) {
+        const botMessage = {
+          role: 'assistant',
+          content: response.data.choices[0].message.content.trim(),
+        };
+        setMessages([...newMessages, botMessage]);
+        const audio = new Audio(sounds.newmessage);
+        audio.play();
+      } else {
+        throw new Error('No response choices received');
+      }
+    } catch (error) {
+      console.error('Error fetching response from OpenAI:', error);
+
+      let errorMessageContent = 'Error fetching response from OpenAI.';
+
+      if (error.response) {
+        console.error('Status:', error.response.status);
+        console.error('Data:', error.response.data);
+        if (error.response.status === 429) {
+          errorMessageContent = 'Too many requests. Please try again later.';
+        } else if (error.response.status === 404) {
+          errorMessageContent = 'API endpoint not found. Please check the URL and model.';
+        }
+      }
+
+      const errorMessage = { role: 'assistant', content: errorMessageContent };
+      setMessages([...newMessages, errorMessage]);
+
+    }
+  };
 
   const contact = contacts.find((c) => c.id === parseInt(id, 10));
+
+
+// Simulating someone typing
+  useEffect(() => {
+    const getLastMessageTime = () => {
+      if (messages.length > 0) {
+        const lastMessage = messages[messages.length - 1];
+        if (lastMessage.role === 'assistant') {
+          const currentDate = new Date();
+          const options = { year: '2-digit', month: '2-digit', day: '2-digit' };
+          const formattedDate = currentDate.toLocaleDateString([], options);
+          const formattedTime = currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          setLastMessageTime(`${formattedTime} on ${formattedDate}`);
+        }
+      }
+    };
+    getLastMessageTime();
+  }, [messages]);
+
+  const simulateContactTyping = () => {
+    setContactTyping(true);
+    setTimeout(() => {
+      setContactTyping(false);
+    }, 1500); // Simulated typing duration
+  };
 
   const replaceEmoticons = (message) => {
     return message.split(/(\[.*?\])/).map((part, index) => {
@@ -44,15 +142,13 @@ const ChatPage = () => {
 };
 
 const handleNudgeClick = () => {
-  console.log("Nudge triggered!");
-
-  const audio = new Audio(nudgeSound);
+  const audio = new Audio(sounds.nudge);
   audio.play();
 
   setShaking(true);
   setTimeout(() => {
     setShaking(false);
-  }, 500); // La durée doit correspondre à celle définie dans l'animation CSS
+  }, 500);
 };
 
   return (
@@ -106,17 +202,36 @@ const handleNudgeClick = () => {
             </div>
 
             <div className="h-full w-full my-4 text-sm">
-                <p className="flex">{replaceEmoticons(contact.name)} says:</p>
-                <div className="flex items-center gap-2"><div><img src={messageDot} alt="" /></div>Hiiiiiiiii!</div>
-                <div className="flex items-center gap-2"><div><img src={messageDot} alt="" /></div>Wassup??!</div>
-                <p className="flex">{replaceEmoticons(user.name)} says:</p>
-                <div className="flex items-center gap-2"><div><img src={messageDot} alt="" /></div>Going back in 2009</div>
+
+                {messages.map((message, index) => (
+                  <div key={index} className={`message ${message.role}`}>
+                    {/* Affichage du nom de l'expéditeur */}
+                      {message.role === 'user' ? 
+                      <p className="flex">{replaceEmoticons(user.name)} says:</p>
+                      : 
+                      <p className="flex">{replaceEmoticons(contact.name)} says:</p>
+                      }
+                    {/* Affichage du contenu du message */}
+                    <div className="flex gap-2">
+                      <div className="flex items-center">
+                        <div><img src={messageDot} alt="" /></div>
+                        </div>{message.content}</div>
+                  </div>
+                ))}
             </div>
 
             <div className="w-full">
-              <p className="opacity-50 my-1">Last message received at 17:24 on 28/05/2009.</p>
+            {contactTyping && <p className="flex">{replaceEmoticons(contact.name)} is typing...</p>}
+            {lastMessageTime && (
+                  <p className="opacity-50 my-1">
+                    Last message received at {lastMessageTime}
+                  </p>
+                )}
               <img src={divider} alt="" className='pointer-events-none' />
-              <input type="text" className="w-full border rounded-t-[4px] outline-none p-1 bg-[#f6fcff] border-[#bdd5df]"/>
+              {/*--------------------- INPUT ---------------------*/}
+              <form onSubmit={handleSubmit}>
+                <input  type="text" value={input} onChange={(e) => setInput(e.target.value)} className="w-full border rounded-t-[4px] outline-none p-1 bg-[#f6fcff] border-[#bdd5df]"/>
+              </form>
               <div><img className="absolute bottom-[68px] left-[173.6px]" src={chatPointBackground} alt="" /></div>
               <div className="flex border-x border-b rounded-b-[4px] border-[#bdd5df]" style={{ backgroundImage: `url(${chatIconsBackground})`}}>
                   <div className="flex items-center aerobutton p-1 h-6">

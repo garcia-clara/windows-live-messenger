@@ -12,6 +12,8 @@ import contactsData from '../data/contacts.json';
 import divider from "../assets/general/divider.png";
 import WhatsNew from '../components/WhatsNew';
 import UserInformations from '../components/UserInformations';
+import bg from '../assets/bg1.jpg';
+import hotmail from '../assets/general/hotmail.png'
 
 const HomePage = () => {
 
@@ -29,13 +31,14 @@ const HomePage = () => {
 
   return (
     <Background>
+      <div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})`}}>
         <div className="flex flex-col w-full font-sans text-base h-screen">
         {/* Personnal informations row */}
           <div className="flex justify-between px-4 pt-4">
             <UserInformations />
         {/* Hotmail icon */}
-            <div className="w-9 flex items-end">
-              <div><img src={mail} alt=""/></div>
+            <div className="w-9 mb-2 flex items-end">
+              <div><img src={hotmail} alt=""/></div>
             </div>
           </div>
         
@@ -76,6 +79,7 @@ const HomePage = () => {
           <div className="mt-4"><img src={ad} alt="" /></div>
         </footer>
         </div>
+      </div>
     </Background>
   );
 };

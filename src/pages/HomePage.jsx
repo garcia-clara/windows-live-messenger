@@ -13,6 +13,7 @@ import divider from "../assets/general/divider.png";
 import WhatsNew from '../components/WhatsNew';
 import UserInformations from '../components/UserInformations';
 import bg from '../assets/bg1.jpg';
+import hotmail from '../assets/general/hotmail.png'
 
 const HomePage = () => {
 
@@ -36,8 +37,8 @@ const HomePage = () => {
           <div className="flex justify-between px-4 pt-4">
             <UserInformations />
         {/* Hotmail icon */}
-            <div className="w-9 flex items-end">
-              <div><img src={mail} alt=""/></div>
+            <div className="w-9 mb-2 flex items-end">
+              <div><img src={hotmail} alt=""/></div>
             </div>
           </div>
         

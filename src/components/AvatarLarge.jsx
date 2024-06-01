@@ -11,7 +11,7 @@ const AvatarLarge = ({ image, status }) => {
   const [contactStatus, setContactStatus] = useState(statusFrames.OnlineSmall);
 
   useEffect(() => {
-    console.log("useEffect triggered, image:", image); // Log the value of image
+    console.log("image:", image); // Log the value of image
 
     // Check if user.image is available and load its avatar
     if (user.image) {

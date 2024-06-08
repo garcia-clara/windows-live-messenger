@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import defaultAvatar from "../assets/usertiles/default.png";
+import defaultAvatar from "/assets/usertiles/default.png";
 import statusFrames from "../imports/statusFrames";
 import useUserStore from "../lib/user-store";
 
@@ -8,7 +8,7 @@ const AvatarLarge = ({ image, status }) => {
   const [userAvatar, setUserAvatar] = useState(defaultAvatar);
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
   const [contactStatus, setContactStatus] = useState(statusFrames.OnlineSmall);
-  const imagesrc = "../assets/usertiles/0c5319e7147890e45265faad3b17701c1de71b12.png";
+  const imagesrc = "/assets/usertiles/0c5319e7147890e45265faad3b17701c1de71b12.png";
 
   useEffect(() => {
    

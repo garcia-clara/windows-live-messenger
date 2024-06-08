@@ -6,7 +6,7 @@ import Dropdown from "../components/Dropdown";
 import { useNavigate } from "react-router-dom";
 import "7.css/dist/7.scoped.css";
 import useUserStore from '../lib/user-store';
-import bg from '../assets/bg1.jpg';
+import bg from '/assets/background/background.jpg';
 import CryptoJS from 'crypto-js';
 
 const LoginPage = () => {

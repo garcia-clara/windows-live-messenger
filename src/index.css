@@ -7,11 +7,11 @@
     border: 2px solid transparent;
 }
 .aerobutton:hover {
-    border-image: url("assets/general/aerobutton_border.png") 2 round;
+    border-image: url("/assets/general/aerobutton_border.png") 2 round;
     background-size: 100% 100%;
 }
 .aerobutton:active {
-    border-image: url("assets/general/aerobutton_border_down.png") 2 round;
+    border-image: url("/assets/general/aerobutton_border_down.png") 2 round;
 }
 
 .divider {
@@ -23,7 +23,7 @@
 }
 
 .searchbar {
-    background-image: url('./assets/general/magnifying-glass.png'); /* URL de votre icône SVG locale */
+    background-image: url('.//assets/general/magnifying-glass.png'); /* URL de votre icône SVG locale */
     background-size: 12px 12px; /* Taille de l'icône */
     background-repeat: no-repeat;
     background-position: right 10px center; /* Position de l'icône */

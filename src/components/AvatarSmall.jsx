@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import defaultAvatar from "../assets/usertiles/default.png";
+import defaultAvatar from "/assets/usertiles/default.png";
 import statusFrames from "../imports/statusFrames";
 
 const AvatarSmall = () => {

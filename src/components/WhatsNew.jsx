@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import divider from "../assets/general/divider.png";
+import divider from "/assets/general/divider.png";
 
 const WhatsNew = () => {
     const [content, setContent] = useState(0);

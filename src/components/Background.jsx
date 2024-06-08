@@ -1,5 +1,5 @@
 import React from 'react';
-import bg from '../assets/bg1.jpg';
+import bg from '/assets/background/background.jpg';
 
 const Background = ({ children }) => {
   return (

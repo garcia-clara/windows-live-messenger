@@ -3,7 +3,7 @@
         "name": "Clara",
         "status": "away",
         "message" : "That there's some good in this world... and it's worth fighting for.",
-        "image" : "../assets/usertiles/anime-girl.gif"
+        "image" : "/assets/usertiles/anime-girl.gif"
 
     }
 ]

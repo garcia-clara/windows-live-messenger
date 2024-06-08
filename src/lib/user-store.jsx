@@ -8,7 +8,7 @@ const useUserStore = create((set) => ({
     email: '',
     status: 'busy',
     message: 'Your store is a hook! You can put anything in it: primitives, objects, functions. The set function merges state',
-    image:'../assets/usertiles/anime-girl.gif'
+    image:'/assets/usertiles/anime-girl.gif'
   },
   setUser: (user) => set({ user }),
   clearUser: () => set({

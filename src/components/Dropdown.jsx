@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import arrow from '../assets/general/arrow.png';
+import arrow from '/assets/general/arrow.png';
 import ChangeDisplayPictureModal from './ChangeDisplayPictureModal';
 
 const Dropdown = ({ options }) => {

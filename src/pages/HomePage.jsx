@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Background from "../components/Background";
 import SearchBar from "../components/SearchBar";
 import ContactCategory from "../components/ContactList";
-import arrow from "../assets/general/arrow.png";
-import ad from "../assets/ad.png"
-import mail from "../assets/general/mail.png";
-import addcontact from "../assets/contacts/add_contact.png";
-import showmenu from "../assets/contacts/1489.png";
-import contactlistlayout from "../assets/contacts/change_contact_list_layout.png";
+import arrow from "/assets/general/arrow.png";
+import ad from "/assets/ad.png"
+import mail from "/assets/general/mail.png";
+import addcontact from "/assets/contacts/add_contact.png";
+import showmenu from "/assets/contacts/1489.png";
+import contactlistlayout from "/assets/contacts/change_contact_list_layout.png";
 import contactsData from '../data/contacts.json';
-import divider from "../assets/general/divider.png";
+import divider from "/assets/general/divider.png";
 import WhatsNew from '../components/WhatsNew';
 import UserInformations from '../components/UserInformations';
-import bg from '../assets/bg1.jpg';
-import hotmail from '../assets/general/hotmail.png'
+import bg from '/assets/background/background.jpg';
+import hotmail from '/assets/general/hotmail.png'
 
 const HomePage = () => {
 

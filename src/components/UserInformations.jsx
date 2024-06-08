@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AvatarSmall from "../components/AvatarSmall";
-import arrow from "../assets/general/arrow.png";
+import arrow from "/assets/general/arrow.png";
 import Dropdown from './Dropdown';
 import statusFrames from "../imports/statusFrames";
 

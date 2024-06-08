@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import online from "../assets/status/online-dot.png";
-import busy from "../assets/status/busy-dot.png";
-import away from "../assets/status/away-dot.png";
-import offline from "../assets/status/offline-dot.png";
+import online from "/assets/status/online-dot.png";
+import busy from "/assets/status/busy-dot.png";
+import away from "/assets/status/away-dot.png";
+import offline from "/assets/status/offline-dot.png";
 import emoticons from '../imports/emoticons';
-import favoritesIcon from '../assets/general/favorites.png'
-import openTabArrow from '../assets/general/open_tab_arrow.png';
-import closedTabArrow from '../assets/general/closed_tab_arrow.png';
+import favoritesIcon from '/assets/general/favorites.png'
+import openTabArrow from '/assets/general/open_tab_arrow.png';
+import closedTabArrow from '/assets/general/closed_tab_arrow.png';
 
 import { useNavigate } from "react-router-dom";
 

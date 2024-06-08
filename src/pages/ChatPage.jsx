@@ -85,7 +85,7 @@ const ChatPage = () => {
     } catch (error) {
       console.error('Error fetching response from OpenAI:', error);
 
-      let errorMessageContent = 'Error fetching response from OpenAI.';
+      let errorMessageContent = "Oops! It seems you haven't created your .env file or haven't correctly added your OpenAI API key. To start chatting, make sure you've created a .env file with the correct configuration. Additionally, ensure your OpenAI API key is properly inserted. Remember, you must have sufficient credit to make requests and engage in chat conversations.";
 
       if (error.response) {
         console.error('Status:', error.response.status);

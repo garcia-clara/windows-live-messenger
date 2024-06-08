@@ -7,46 +7,22 @@ const AvatarLarge = ({ image, status }) => {
   const { user } = useUserStore();
   const [userAvatar, setUserAvatar] = useState(defaultAvatar);
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
-  const [contactAvatar, setContactAvatar] = useState(defaultAvatar);
   const [contactStatus, setContactStatus] = useState(statusFrames.OnlineSmall);
+  const imagesrc = "../assets/usertiles/0c5319e7147890e45265faad3b17701c1de71b12.png";
 
   useEffect(() => {
-    console.log("image:", image); // Log the value of image
-
-    // Check if user.image is available and load its avatar
-    if (user.image) {
-      import(`${user.image}`)
-        .then((image) => {
-          setUserAvatar(image.default);
-        })
-        .catch(() => {
-          setUserAvatar(defaultAvatar);
-        });
-    }
-
-    // Check if image is available and load its avatar
-    if (image) {
-      import(`${image}`)
-        .then((img) => {
-          setContactAvatar(img.default);
-        })
-        .catch(() => {
-          setContactAvatar(defaultAvatar);
-        });
-    }
-
-    // Update user status
+   
     switch (user.status) {
-      case "available":
+      case "Available":
         setUserStatus(statusFrames.OnlineLarge);
         break;
-      case "offline":
+      case "Offline":
         setUserStatus(statusFrames.OfflineLarge);
         break;
-      case "away":
+      case "Away":
         setUserStatus(statusFrames.AwayLarge);
         break;
-      case "busy":
+      case "Busy":
         setUserStatus(statusFrames.BusyLarge);
         break;
       default:
@@ -54,7 +30,6 @@ const AvatarLarge = ({ image, status }) => {
         break;
     }
 
-    // Update contact status
     switch (status) {
       case "available":
         setContactStatus(statusFrames.OnlineLarge);
@@ -72,13 +47,14 @@ const AvatarLarge = ({ image, status }) => {
         setContactStatus(statusFrames.OnlineLarge);
         break;
     }
-  }, [user, image, status]); // Include image and status in the dependency array
+  }, [user, status]); // Include only user and status in the dependency array
 
   return (
     <div className="h-28 w-28">
+      {console.log(image)}
       <img
         className="absolute ml-[9px] mt-[8px] w-24 rounded-sm"
-        src={image ? contactAvatar : userAvatar}
+        src={image || defaultAvatar}
         alt="Avatar"
       />
       <img

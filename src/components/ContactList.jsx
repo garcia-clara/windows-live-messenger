@@ -7,7 +7,7 @@ import emoticons from '../imports/emoticons';
 import favoritesIcon from '../assets/general/favorites.png'
 import openTabArrow from '../assets/general/open_tab_arrow.png';
 import closedTabArrow from '../assets/general/closed_tab_arrow.png';
-import useContactStore from '../lib/contact-store';
+
 import { useNavigate } from "react-router-dom";
 
 const ContactCategory = ({ title, contacts, count }) => {
@@ -35,7 +35,6 @@ const ContactCategory = ({ title, contacts, count }) => {
 
 const Contacts = ({ contact }) => {
     const navigate = useNavigate();
-    const setContact = useContactStore(state => state.setContact);
 
     
     // Change le statut

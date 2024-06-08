@@ -3,11 +3,14 @@ import AvatarSmall from "../components/AvatarSmall";
 import arrow from "../assets/general/arrow.png";
 import Dropdown from './Dropdown';
 import statusFrames from "../imports/statusFrames";
-import useUserStore from '../lib/user-store';
 
 const UserInformation = () => {
-    const user = useUserStore(state => state.user);
-    const setUser = useUserStore(state => state.setUser);
+    const [user, setUser] = useState({
+        message: localStorage.getItem('message') || '',
+        status: localStorage.getItem('status') || 'Available',
+        name: localStorage.getItem('name') || ''
+    });
+
     const [isEditing, setIsEditing] = useState(false);
     const [message, setMessage] = useState(user.message);
     const inputRef = useRef(null);
@@ -32,6 +35,7 @@ const UserInformation = () => {
 
     const handleInputBlur = () => {
         setUser({ ...user, message });
+        localStorage.setItem('message', message);
         setIsEditing(false);
     };
 
@@ -53,14 +57,23 @@ const UserInformation = () => {
         }
     }, [isEditing]);
 
+    const handleStatusChange = (status) => {
+        setUser({ ...user, status });
+        localStorage.setItem('status', status);
+    };
+
     return (
         <div className="flex">
             <AvatarSmall />
-            <div className='ml-[-6px]'>
+            <div className='ml-[-12px]'>
                 <div className="flex items-center">
-                    <Dropdown options={options} />
+                    <Dropdown 
+                        options={options} 
+                        value={user.status}
+                        onChange={handleStatusChange} 
+                    />
                 </div>
-                <div className="flex aerobutton pl-1 items-center white-light">
+                <div className="flex aerobutton pl-1 ml-1 items-center white-light" onClick={handleMessageClick}>
                     {isEditing ? (
                         <input
                             ref={inputRef}
@@ -74,7 +87,9 @@ const UserInformation = () => {
                             style={{ width: `${message.length}ch` }}
                         />
                     ) : (
-                        <p onClick={handleMessageClick} className="cursor-pointer">{user.message}</p>
+                        <p className="cursor-pointer">
+                            {message || 'Share a quick message...'}
+                        </p>
                     )}
                     <div className="ml-1">
                         <img src={arrow} alt="arrow icon" />

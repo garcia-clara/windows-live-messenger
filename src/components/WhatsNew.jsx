@@ -20,14 +20,14 @@ const WhatsNew = () => {
             }, 500);
         }, 5000);
 
-        return () => clearInterval(intervalId); // Cleanup the interval on component unmount
+        return () => clearInterval(intervalId);
     }, []);
 
     return (
         <div className='px-4 pb-11'>
             <div className="w-full"><img src={divider} alt="" /></div>
             <p className="text-[16px] pt-2 text-[#1D2F7F]">What's new</p>
-            <p className={fadeClass}>{messages[content]}</p> {/* Apply the dynamic class here */}
+            <p className={fadeClass}>{messages[content]}</p>
         </div>
     );
 }

@@ -7,7 +7,6 @@ import invisible from '/assets/status/invisible.png';
 import offlineDot from '/assets/status/offline-dot.png';
 import online from '/assets/status/online.png';
 import onlineDot from '/assets/status/online-dot.png';
-
 import AwayLarge from '/assets/status/status_frame_away_large.png';
 import AwaySmall from '/assets/status/status_frame_away_small.png';
 import BusyLarge from '/assets/status/status_frame_busy_large.png';
@@ -17,7 +16,6 @@ import OfflineSmall from '/assets/status/status_frame_offline_small.png';
 import OnlineLarge from '/assets/status/status_frame_online_large.png';
 import OnlineSmall from '/assets/status/status_frame_online_small.png';
 
-// Export the images as an object
 const statusFrames = {
   away,
   awayDot,

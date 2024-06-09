@@ -36,8 +36,6 @@ const ContactCategory = ({ title, contacts, count }) => {
 const Contacts = ({ contact }) => {
     const navigate = useNavigate();
 
-    
-    // Change le statut
     const whichStatus = (contactStatus) => {
         switch (contactStatus) {
             case 'online':
@@ -49,11 +47,10 @@ const Contacts = ({ contact }) => {
             case 'offline':
                 return offline;
             default:
-                return offline; // or some default status
+                return offline;
         }
     };
 
-    // Replace emoticons
     const replaceEmoticons = (message) => {
         return message.split(/(\[.*?\])/).map((part, index) => {
             const match = part.match(/\[(.*?)\]/);

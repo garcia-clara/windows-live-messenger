@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
 import defaultAvatar from "/assets/usertiles/default.png";
 import statusFrames from "../imports/statusFrames";
-import useUserStore from "../lib/user-store";
 
 const AvatarLarge = ({ image, status }) => {
-  const { user } = useUserStore();
-  const [userAvatar, setUserAvatar] = useState(defaultAvatar);
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
   const [contactStatus, setContactStatus] = useState(statusFrames.OnlineSmall);
-  const imagesrc = "/assets/usertiles/0c5319e7147890e45265faad3b17701c1de71b12.png";
 
   useEffect(() => {
    
-    switch (user.status) {
+    switch (localStorage.getItem('status')) {
       case "Available":
         setUserStatus(statusFrames.OnlineLarge);
         break;
@@ -26,7 +22,7 @@ const AvatarLarge = ({ image, status }) => {
         setUserStatus(statusFrames.BusyLarge);
         break;
       default:
-        setUserStatus(statusFrames.OnlineLarge);
+        setUserStatus(statusFrames.OfflineLarge);
         break;
     }
 
@@ -47,11 +43,10 @@ const AvatarLarge = ({ image, status }) => {
         setContactStatus(statusFrames.OnlineLarge);
         break;
     }
-  }, [user, status]); // Include only user and status in the dependency array
+  }, [status]);
 
   return (
     <div className="h-28 w-28">
-      {console.log(image)}
       <img
         className="absolute ml-[9px] mt-[8px] w-24 rounded-sm"
         src={image || defaultAvatar}

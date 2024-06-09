@@ -1,53 +1,112 @@
-import React from "react";
+import React, { useState, useRef  } from "react";
+import "7.css/dist/7.scoped.css";
+import AvatarLarge from "./AvatarLarge";
+import usertiles from "../imports/usertiles";
+import defaultAvatar from "/assets/usertiles/default.png";
 
 const ChangeDisplayPictureModal = ({ setShowModal }) => {
+
+  const [userPicture, setUserPicture] = useState(localStorage.getItem('picture'));
+
+  const updateUserPicture = (imageSrc) => {
+      localStorage.setItem('picture', imageSrc)
+      setUserPicture(imageSrc);
+  };
+
+  const removeUserPicture = () => {
+      localStorage.setItem('picture', '')
+      setUserPicture(defaultAvatar);
+  };
+
+    const fileInputRef = useRef(null);
+  
+    const handleButtonClick = () => {
+      fileInputRef.current.click();
+    };
+  
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const imageSrc = event.target.result;
+          updateUserPicture(imageSrc); // Call updateUserPicture to update the user's picture
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
   return (
     <>
-      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-        <div className="relative w-auto my-6 mx-auto max-w-3xl">
-          {/*content*/}
-          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            {/*header*/}
-            <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-              <h3 className="text-3xl font-semibold">Modal Title</h3>
-              <button
-                className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                onClick={() => setShowModal(false)}
-              >
-                <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                  ×
-                </span>
-              </button>
+    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+      <div className="relative w-auto my-6 mx-auto max-w-3xl">
+        {/*content*/}
+        <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none bg-gradient-to-t from-[#c3d4ec83] via-white">
+
+          {/*header*/}
+          <div className="flex items-start justify-between rounded-t bg">
+            <p className="p-1">Display Picture</p>
+            <button
+              className="py-1 px-3 rounded-tr-lg hover:bg-red-700 hover:text-white"
+              onClick={() => setShowModal(false)}
+            ><p className="text-[10px]">╳</p></button>
+          </div>
+
+          {/*body*/}
+          <div className="mx-4 mb-6">
+            <p className="mt-2 text-xl text-[#1D2F7F]">Select a display picture</p>
+            <p className="opacity-60">Choose how you want to appear in Messenger:</p>
+          </div>
+
+          <div className="flex ml-2">
+
+            <div className="win7">
+            <div className="flex flex-wrap gap-2.5 h-[351px] w-72 overflow-y-auto p-2.5 has-scrollbar mb-2">
+                <div className="font-bold w-full mb-[-5px]">Regular pictures</div>
+                  {Object.entries(usertiles).map(([name, src]) => (
+                    <div key={name} onClick={() => updateUserPicture(src)} className="cursor-pointer">
+                      <img
+                          key={name}
+                          src={src}
+                          alt={name}
+                          className="w-12 shadow-lg usertiles-shadow border border-hidden"
+                      />
+                    </div>
+                  ))}
+
             </div>
-            {/*body*/}
-            <div className="relative p-6 flex-auto">
-              <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-                I always felt like I could do anything. That’s the main thing people are controlled by! Thoughts- their perception of themselves! They're slowed down by their perception of themselves. If you're taught you can’t do anything, you won’t do anything. I was taught I could do everything.
-              </p>
             </div>
-            {/*footer*/}
-            <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-              <button
-                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                Close
-              </button>
-              <button
-                className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                type="button"
-                onClick={() => setShowModal(false)}
-              >
-                Save Changes
-              </button>
+
+            <div className="flex flex-col items-center mx-4">
+              <div className="mb-12"><AvatarLarge image={userPicture}/></div>
+              <div className="win7 flex flex-col w-32 gap-0.5">
+                <button disabled>Webcam picture...</button>
+                <button disabled>Dynamic picture...</button>
+                <button onClick={handleButtonClick}>Browse...</button>
+                <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange}/>
+                <button onClick={removeUserPicture}>Remove</button>
+                <button disabled>Modify...</button>
+              </div>
             </div>
+    
+          </div>
+
+
+          {/*footer*/}
+
+          <p className="link ml-4">Get a webcam</p>
+          <p className="mb-4 link ml-4">Download more pictures...</p>
+          <div className='w-full bg-white h-[1px] shadow-sm shadow-[#6b8fa3]' />
+          <div className="flex items-center justify-end rounded-b win7 p-3 gap-1.5">
+            <button type="button" onClick={() => { setShowModal(false); window.location.reload(); }}>OK</button>
+            <button type="button" onClick={() => setShowModal(false)}>Close</button>
           </div>
         </div>
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-    </>
-  );
+    </div>
+    <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+  </>
+  )
 };
 
 export default ChangeDisplayPictureModal;

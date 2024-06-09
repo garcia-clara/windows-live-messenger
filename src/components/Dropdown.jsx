@@ -9,10 +9,9 @@ const Dropdown = ({ options }) => {
     message: localStorage.getItem('message') || '',
     status: localStorage.getItem('status') || 'Available',
     name: localStorage.getItem('name') || ''
-});
+  });
 
-  const [showModal, setShowModal] = React.useState(false);
-
+  const [showModal, setShowModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options.find(option => option.value === user.status) || options[0]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,27 +20,23 @@ const Dropdown = ({ options }) => {
 
   const handleOptionClick = (option) => {
     switch(option.value) {
-      case "Available":
-      case "Busy":
-      case "Away":
-      case "Offline":
+      case 'Available':
+      case 'Busy':
+      case 'Away':
+      case 'Offline':
         setSelectedOption(option);
         localStorage.setItem('status', option.value);
         break;
-    
-      case "Sign out":
+      case 'Sign out':
         localStorage.clear();
         navigate('/login');
         break;
-
-      case "ChangeDisplayPicture":
+      case 'ChangeDisplayPicture':
         setShowModal(true);
         break;
-    
       default:
         break;
     }
-
     setIsOpen(false);
   };
 
@@ -72,7 +67,7 @@ const Dropdown = ({ options }) => {
           </div>
         ) : (
           <div className="flex items-center">
-            <p className="text-lg">{user.name !== "" ? user.name : user.email}</p>
+            <p className="text-lg">{user.name !== '' ? user.name : user.email}</p>
             <p className="ml-1 capitalize">({selectedOption.label})</p>
           </div>
         )}
@@ -81,19 +76,23 @@ const Dropdown = ({ options }) => {
 
       {isOpen && (
         <ul className="absolute bg-white border border-gray-300 rounded shadow w-[300px] mt-1 z-10 py-1">
-          {options.map((option) => (
-            <li
-              key={option.value}
-              className="px-4 hover:bg-gray-100 cursor-pointer flex items-center"
-              onClick={() => handleOptionClick(option)}
-            >
-              {option.image ? (
-                <img src={option.image} alt={option.label} className="inline-block mt-0.5 mr-2 w-2" />
-              ) : (
-                <div className="w-4" />
-              )}
-              {option.label}
-            </li>
+          {options.map((option, index) => (
+            option.separator ? (
+              <li key={`separator-${index}`} className="border-t my-1"></li>
+            ) : (
+              <li
+                key={option.value}
+                className="px-4 hover:bg-gray-100 cursor-pointer flex items-center"
+                onClick={() => handleOptionClick(option)}
+              >
+                {option.image ? (
+                  <img src={option.image} alt={option.label} className="inline-block mt-0.5 mr-2 w-2" />
+                ) : (
+                  <div className="w-4" />
+                )}
+                {option.label}
+              </li>
+            )
           ))}
         </ul>
       )}

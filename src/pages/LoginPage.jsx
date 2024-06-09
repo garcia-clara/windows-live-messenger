@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AvatarLarge from "../components/AvatarLarge";
 import statusFrames from "../imports/statusFrames";
 import Background from "../components/Background";
 import Dropdown from "../components/Dropdown";
 import { useNavigate } from "react-router-dom";
 import "7.css/dist/7.scoped.css";
-import useUserStore from '../lib/user-store';
 import bg from '/assets/background/background.jpg';
 import CryptoJS from 'crypto-js';
+import { isAuthenticated } from '../utils/auth';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const clearUser = useUserStore(state => state.clearUser);
 
-  // Initialize state hooks for each input field and checkbox
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState('Available');
@@ -21,7 +19,12 @@ const LoginPage = () => {
   const [rememberPassword, setRememberPassword] = useState(false);
   const [signInAutomatically, setSignInAutomatically] = useState(false);
 
-  clearUser();
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/');
+    }
+  }, [navigate]);
+
 
   const handleSignIn = () => {
     // Hash the password

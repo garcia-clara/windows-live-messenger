@@ -8,10 +8,12 @@
 		"new-cap": ["error", {
 			"capIsNewExceptions": [
 				"ArrayCreate",
+				"CompareArrayElements",
 				"CreateDataPropertyOrThrow",
 				"GetIntrinsic",
 				"IsCallable",
 				"LengthOfArrayLike",
+				"SortIndexedProperties",
 				"ToObject",
 				"ToString",
 			],

@@ -20,8 +20,12 @@ const UserInformation = () => {
         { value: 'Busy', label: 'Busy', image: statusFrames.busyDot },
         { value: 'Away', label: 'Away', image: statusFrames.awayDot },
         { value: 'Offline', label: 'Appear offline', image: statusFrames.offlineDot },
+        { separator: true },
         { value: 'Sign out', label: 'Sign out' },
-        { value: 'ChangeDisplayPicture', label: 'Change display picture...' }
+        { separator: true },
+        { value: 'ChangeDisplayPicture', label: 'Change display picture...' },
+        { value: 'ChangeScene', label: 'Change scene...' },
+        { value: 'ChangeDisplayName', label: 'Change display name...' }
     ];
 
     const handleMessageClick = () => {

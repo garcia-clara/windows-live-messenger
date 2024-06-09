@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v1.1.4](https://github.com/es-shims/Array.prototype.toSorted/compare/v1.1.3...v1.1.4) - 2024-06-02
+
+### Fixed
+
+- [Refactor] update implementation to match latest spec [`#3`](https://github.com/es-shims/Array.prototype.toSorted/issues/3)
+
+### Commits
+
+- [Dev Deps] update `@es-shims/api`, `@ljharb/eslint-config`, `hasown`, `tape` [`159d118`](https://github.com/es-shims/Array.prototype.toSorted/commit/159d11848629e0468f9f10a1e36001f937c0c6ea)
+- [Deps] update `call-bind`, `es-abstract`, `es-errors` [`7d32e67`](https://github.com/es-shims/Array.prototype.toSorted/commit/7d32e67417f436d5e8a66bf8286b9ead9296c4f1)
+- [meta] add missing `engines.node` [`b49466b`](https://github.com/es-shims/Array.prototype.toSorted/commit/b49466b473d116b5a53209491163bfd2c3aa89bc)
+
 ## [v1.1.3](https://github.com/es-shims/Array.prototype.toSorted/compare/v1.1.2...v1.1.3) - 2024-02-04
 
 ### Commits

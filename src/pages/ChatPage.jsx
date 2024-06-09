@@ -36,10 +36,17 @@ const ChatPage = () => {
   const user = useUserStore(state => state.user);
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
+  useEffect(() => {
+    const savedMessages = localStorage.getItem("chatMessages"); // Retrieve messages from local storage
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages)); // Set messages state from local storage
+    }
+  }, []); // Load messages on component mount
 
   useEffect(() => {
     localStorage.setItem('chatMessages', JSON.stringify(messages));
   }, [messages]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,7 +113,7 @@ const ChatPage = () => {
   const contact = contacts.find((c) => c.id === parseInt(id, 10));
 
 
-// Simulating someone typing
+
   useEffect(() => {
     const getLastMessageTime = () => {
       if (messages.length > 0) {

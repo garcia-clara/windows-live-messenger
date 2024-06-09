@@ -5,7 +5,7 @@ const WhatsNew = () => {
     const [content, setContent] = useState(0);
     const [fadeClass, setFadeClass] = useState('fade-in');
     const messages = [
-        "Find the github repository of this MSN clone here !",
+        "Find the github repository of this MSN clone <a href='https://github.com/your_repository' class='link'>here</a>!",
         "Message 2",
         "Message 3",
         "Message 4",
@@ -27,7 +27,7 @@ const WhatsNew = () => {
         <div className='px-4 pb-11'>
             <div className="w-full"><img src={divider} alt="" /></div>
             <p className="text-[16px] pt-2 text-[#1D2F7F]">What's new</p>
-            <p className={fadeClass}>{messages[content]}</p>
+            <p className={fadeClass} dangerouslySetInnerHTML={{ __html: messages[content] }} />
         </div>
     );
 }

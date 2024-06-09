@@ -3,6 +3,7 @@ import "7.css/dist/7.scoped.css";
 import AvatarLarge from "./AvatarLarge";
 import usertiles from "../imports/usertiles";
 import defaultAvatar from "/assets/usertiles/default.png";
+import WLMIcon from "/assets/general/wlm-icon.png";
 
 const ChangeDisplayPictureModal = ({ setShowModal }) => {
 
@@ -44,10 +45,13 @@ const ChangeDisplayPictureModal = ({ setShowModal }) => {
         <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none bg-gradient-to-t from-[#c3d4ec83] via-white">
 
           {/*header*/}
-          <div className="flex items-start justify-between rounded-t bg">
-            <p className="p-1">Display Picture</p>
+          <div className="flex items-start justify-between rounded-t-lg bg-[#f3f3f3]">
+            <div className="flex items-center ml-1">
+              <div><img src={WLMIcon} /></div>
+              <p className="ml-1 pt-1">Display Picture</p>
+            </div>
             <button
-              className="py-1 px-3 rounded-tr-lg hover:bg-red-700 hover:text-white"
+              className="pb-2 pt-1 px-3 rounded-tr-lg hover:bg-red-700 hover:text-white"
               onClick={() => setShowModal(false)}
             ><p className="text-[10px]">╳</p></button>
           </div>

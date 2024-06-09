@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import online from "/assets/status/online-dot.png";
 import busy from "/assets/status/busy-dot.png";
 import away from "/assets/status/away-dot.png";
 import offline from "/assets/status/offline-dot.png";
 import emoticons from '../imports/emoticons';
-import favoritesIcon from '/assets/general/favorites.png'
+import favoritesIcon from '/assets/general/favorites.png';
 import openTabArrow from '/assets/general/open_tab_arrow.png';
 import closedTabArrow from '/assets/general/closed_tab_arrow.png';
 
@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const ContactCategory = ({ title, contacts, count }) => {
     const [isOpen, setIsOpen] = useState(true);
-
 
     const toggleAccordion = () => {
         setIsOpen(!isOpen);
@@ -55,7 +54,7 @@ const Contacts = ({ contact }) => {
         return message.split(/(\[.*?\])/).map((part, index) => {
             const match = part.match(/\[(.*?)\]/);
             if (match && emoticons[match[1]]) {
-                return <div className='flex items-center'><img key={index} src={emoticons[match[1]]} alt={match[1]} className='w-[14px] h-[14px]' /></div>;
+                return <span className='flex items-center' key={index}><img src={emoticons[match[1]]} alt={match[1]} className='w-[14px] h-[14px]' /></span>;
             } else {
                 return part;
             }
@@ -65,14 +64,13 @@ const Contacts = ({ contact }) => {
     const openChat = (contact) => {
         navigate(`/chat/${contact.id}`);
     }
-    
 
     return (
         <div className="flex gap-1 px-6 items-center hovercontact border border-transparent" onClick={() => openChat(contact)}>
             <div className='w-2 mt-1'><img src={whichStatus(contact.status)} alt="contact-status" /></div>
-            <p className='flex gap-1'>{replaceEmoticons(contact.name)}</p>
-            {!contact.message === "" &&  <p>-</p>}
-            <p className='flex gap-1 text-gray-400'>{replaceEmoticons(contact.message)}</p>
+            <span className='flex gap-1'>{replaceEmoticons(contact.name)}</span>
+            {!contact.message === "" &&  <span>-</span>}
+            <span className='flex gap-1 text-gray-400'>{replaceEmoticons(contact.message)}</span>
         </div>
     );
 };
@@ -80,8 +78,8 @@ const Contacts = ({ contact }) => {
 const ContactList = ({ contacts }) => {
     return (
         <div className="accordion">
-            {contacts.map((contact, index) => (
-                <Contacts key={index} contact={contact} />
+            {contacts.map((contact) => (
+                <Contacts key={contact.id} contact={contact} />
             ))}
         </div>
     );

@@ -71,25 +71,31 @@
     80% { transform: translate(-1px, -1px) rotate(1deg); }
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
-  }
-  
-  .nudge {
-    animation: nudge 0.5s; /* Durée de l'animation */
-    animation-iteration-count: 1; /* Nombre d'itérations de l'animation */
-    -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    scrollbar-width: none; /* for Firefox */
-    overflow-y: scroll;
-  }
-  
-  .link {
-    color : #1232c2;
-  }
+}
 
-  .link:hover {
+.nudge {
+    animation: nudge 0.5s; /* Duration of the animation */
+    animation-iteration-count: 1; /* Number of iterations of the animation */
+    overflow: hidden; /* Hide scrollbars */
+    -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer, Edge */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+body {
+    overflow: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.link {
+    color : #1232c2;
+}
+
+.link:hover {
     cursor: pointer;
     text-decoration: underline;
-  }
+}
 
-  .usertiles-shadow {
+.usertiles-shadow {
     box-shadow: 3px 2px 4px 0px rgba(0,0,0,0.35);
-  }
+}

@@ -3,12 +3,13 @@ import AvatarSmall from "../components/AvatarSmall";
 import arrow from "/assets/general/arrow.png";
 import Dropdown from './Dropdown';
 import statusFrames from "../imports/statusFrames";
+import { replaceEmoticons } from '../helpers/replaceEmoticons';
 
 const UserInformation = () => {
     const [user, setUser] = useState({
-        message: localStorage.getItem('message') || '',
+        message: localStorage.getItem('message'),
         status: localStorage.getItem('status') || 'Available',
-        name: localStorage.getItem('name') || ''
+        name: localStorage.getItem('name')
     });
 
     const [isEditing, setIsEditing] = useState(false);
@@ -91,8 +92,8 @@ const UserInformation = () => {
                             style={{ width: `${message.length}ch` }}
                         />
                     ) : (
-                        <p className="cursor-pointer">
-                            {message || 'Share a quick message...'}
+                        <p className="cursor-pointer flex gap-1">
+                            {replaceEmoticons(message) || 'Share a quick message...'}
                         </p>
                     )}
                     <div className="ml-1">

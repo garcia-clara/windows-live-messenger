@@ -5,7 +5,7 @@ import usertiles from "../imports/usertiles";
 import defaultAvatar from "/assets/usertiles/default.png";
 import WLMIcon from "/assets/general/wlm-icon.png";
 
-const ChangeDisplayPictureModal = ({ setShowModal }) => {
+const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
 
   const [userPicture, setUserPicture] = useState(localStorage.getItem('picture'));
 
@@ -52,7 +52,7 @@ const ChangeDisplayPictureModal = ({ setShowModal }) => {
             </div>
             <button
               className="pb-2 pt-1 px-3 rounded-tr-lg hover:bg-red-700 hover:text-white"
-              onClick={() => setShowModal(false)}
+              onClick={() => setShowChangePictureModal(false)}
             ><p className="text-[10px]">╳</p></button>
           </div>
 
@@ -102,8 +102,8 @@ const ChangeDisplayPictureModal = ({ setShowModal }) => {
           <p className="mb-4 link ml-4">Download more pictures...</p>
           <div className='w-full bg-white h-[1px] shadow-sm shadow-[#6b8fa3]' />
           <div className="flex items-center justify-end rounded-b win7 p-3 gap-1.5">
-            <button type="button" onClick={() => { setShowModal(false); window.location.reload(); }}>OK</button>
-            <button type="button" onClick={() => setShowModal(false)}>Close</button>
+            <button type="button" onClick={() => { setShowChangePictureModal(false); window.location.reload(); }}>OK</button>
+            <button type="button" onClick={() => setShowChangePictureModal(false)}>Close</button>
           </div>
         </div>
       </div>

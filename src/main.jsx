@@ -6,15 +6,18 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import ChatPage from './pages/ChatPage';
 import PrivateRoute from './components/PrivateRoute';
+import { EmoticonProvider } from './contexts/EmoticonContext'; // Correct import for EmoticonProvider
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<PrivateRoute element={HomePage} />} />
-        <Route path="/chat/:id" element={<PrivateRoute element={ChatPage} />} />
-      </Routes>
-    </Router>
+    <EmoticonProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<PrivateRoute element={HomePage} />} />
+          <Route path="/chat/:id" element={<PrivateRoute element={ChatPage} />} />
+        </Routes>
+      </Router>
+    </EmoticonProvider>
   </React.StrictMode>
 );

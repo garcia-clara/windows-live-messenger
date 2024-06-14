@@ -3,10 +3,10 @@ import online from "/assets/status/online-dot.png";
 import busy from "/assets/status/busy-dot.png";
 import away from "/assets/status/away-dot.png";
 import offline from "/assets/status/offline-dot.png";
-import emoticons from '../imports/emoticons';
 import favoritesIcon from '/assets/general/favorites.png';
 import openTabArrow from '/assets/general/open_tab_arrow.png';
 import closedTabArrow from '/assets/general/closed_tab_arrow.png';
+import { replaceEmoticons } from '../helpers/replaceEmoticons';
 
 import { useNavigate } from "react-router-dom";
 
@@ -50,16 +50,6 @@ const Contacts = ({ contact }) => {
         }
     };
 
-    const replaceEmoticons = (message) => {
-        return message.split(/(\[.*?\])/).map((part, index) => {
-            const match = part.match(/\[(.*?)\]/);
-            if (match && emoticons[match[1]]) {
-                return <span className='flex items-center' key={index}><img src={emoticons[match[1]]} alt={match[1]} className='w-[14px] h-[14px]' /></span>;
-            } else {
-                return part;
-            }
-        });
-    };
 
     const openChat = (contact) => {
         navigate(`/chat/${contact.id}`);

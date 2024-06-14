@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import "7.css/dist/7.scoped.css";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import Background from "../components/Background";
@@ -8,6 +7,8 @@ import useUserStore from '../lib/user-store';
 import contacts from "../data/contacts.json";
 import emoticons from "../imports/emoticons";
 import sounds from "../imports/sounds";
+import EmoticonSelector from '../components/EmoticonSelector';
+import EmoticonContext from '../contexts/EmoticonContext'; // Ensure this import is correct
 import navbarBackground from "/assets/background/chat_navbar_background.png";
 import contactChatIcon from "/assets/chat/contact_chat_icon.png";
 import showmenu from "/assets/contacts/1489.png";
@@ -15,7 +16,6 @@ import arrowWhite from "/assets/general/arrow_white.png";
 import arrow from "/assets/general/arrow.png";
 import divider from "/assets/general/divider.png";
 import bg from '/assets/background/background.jpg';
-import selectEmoticon from "/assets/chat/select_emoticon.png";
 import selectWink from "/assets/chat/select_wink.png";
 import sendNudge from "/assets/chat/send_nudge.png";
 import changeFont from "/assets/chat/change_font.png";
@@ -24,7 +24,6 @@ import messageDot from "/assets/chat/message_dot.png";
 import chatIconsBackground from '/assets/background/chat_icons_background.png';
 import chatPointBackground from '/assets/background/chat_background_point.png';
 import chatIconsSeparator from '/assets/background/chat_icons_separator.png';
-import EmoticonSelector from '../components/EmoticonSelector';
 
 const ChatPage = () => {
   const { id } = useParams();
@@ -38,10 +37,28 @@ const ChatPage = () => {
   const [contactTyping, setContactTyping] = useState(false);
   const user = useUserStore(state => state.user);
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+  const { selectedEmoticon, setSelectedEmoticon } = useContext(EmoticonContext);
+
+  useEffect(() => {
+    if (selectedEmoticon) {
+      setInput((prevInput) => prevInput + selectedEmoticon);
+      setSelectedEmoticon(null);
+    }
+  }, [selectedEmoticon, setSelectedEmoticon]);
 
   useEffect(() => {
     localStorage.setItem('chatMessages', JSON.stringify(messages));
   }, [messages]);
+
+  const handleInputChange = (e) => {
+    const updatedInput = e.target.value;
+    if (updatedInput.endsWith(')')) {
+      const replacedInput = replaceEmoticons(updatedInput);
+      setInput(replacedInput);
+    } else {
+      setInput(updatedInput);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -141,7 +158,7 @@ const ChatPage = () => {
         return <span key={index}>{part}</span>;
       }
     });
-  };  
+  };
 
   const handleNudgeClick = () => {
     const audio = new Audio(sounds.nudge);
@@ -152,8 +169,6 @@ const ChatPage = () => {
       setShaking(false);
     }, 500);
   };
-
-
   return (
     <div className={`bg-no-repeat bg-[length:100%_100px] h-screen ${shaking ? 'nudge' : ''}`} style={{ backgroundImage: `url(${bg})` }}>
     <div className="flex flex-col w-full font-sans text-base h-full">
@@ -236,8 +251,13 @@ const ChatPage = () => {
               <img src={divider} alt="" className='pointer-events-none' />
               {/*--------------------- INPUT ---------------------*/}
               <form onSubmit={handleSubmit}>
-                <input  type="text" value={input} onChange={(e) => setInput(e.target.value)} className="w-full border rounded-t-[4px] outline-none p-1 bg-[#F6FCFF] border-[#bdd5df]"/>
-              </form>
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  className="w-full border rounded-t-[4px] outline-none p-1 bg-[#F6FCFF] border-[#bdd5df]"
+                />
+                </form>
               <div><img className="absolute bottom-[68px] left-[173.6px]" src={chatPointBackground} alt="" /></div>
               <div className="flex border-x border-b rounded-b-[4px] border-[#bdd5df]" style={{ backgroundImage: `url(${chatIconsBackground})`}}>
                   {EmoticonSelector()}

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import arrow from '/assets/general/arrow.png';
 import ChangeDisplayPictureModal from './ChangeDisplayPictureModal';
+import OptionsModal from './OptionsModal';
+import { replaceEmoticons } from '../helpers/replaceEmoticons';
 
 const Dropdown = ({ options }) => {
   const [user, setUser] = useState({
@@ -11,7 +13,8 @@ const Dropdown = ({ options }) => {
     name: localStorage.getItem('name') || ''
   });
 
-  const [showModal, setShowModal] = useState(false);
+  const [changePictureShowModal, setShowChangePictureModal] = useState(false);
+  const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options.find(option => option.value === user.status) || options[0]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +35,10 @@ const Dropdown = ({ options }) => {
         navigate('/login');
         break;
       case 'ChangeDisplayPicture':
-        setShowModal(true);
+        setShowChangePictureModal(true);
+        break;
+      case 'ChangeDisplayName':
+        setShowOptionsModal(true);
         break;
       default:
         break;
@@ -67,7 +73,7 @@ const Dropdown = ({ options }) => {
           </div>
         ) : (
           <div className="flex items-center">
-            <p className="text-lg">{user.name !== '' ? user.name : user.email}</p>
+            <p className="text-lg flex gap-1">{user.name !== '' ? replaceEmoticons(user.name) : user.email}</p>
             <p className="ml-1 capitalize">({selectedOption.label})</p>
           </div>
         )}
@@ -97,7 +103,8 @@ const Dropdown = ({ options }) => {
         </ul>
       )}
 
-      {showModal && <ChangeDisplayPictureModal setShowModal={setShowModal} />}
+      {changePictureShowModal && <ChangeDisplayPictureModal setShowChangePictureModal={setShowChangePictureModal} />}
+      {showOptionsModal && <OptionsModal setShowOptionsModal={setShowOptionsModal} />}
     </div>
   );
 };

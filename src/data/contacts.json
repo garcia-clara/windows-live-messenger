@@ -1,10 +1,10 @@
 [
     {
         "id": 2,
-        "name": "[heart] Clara [heart]",
+        "name": "ChatGPT",
         "email": "clara58@hotmail.com",
         "status": "online",
-        "message" : "hi everyone!",
+        "message" : "Your must create the .env file and add a valid OpenAI API key to chat with me (;))",
         "image" : "/assets/usertiles/anime-girl.gif",
         "isFavorite" : 1
     },

@@ -1,23 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import selectEmoticon from "/assets/chat/select_emoticon.png";
 import arrow from "/assets/general/arrow.png";
 import pinnedEmoticons from '../imports/pinnedEmoticons';
+import EmoticonContext from '../contexts/EmoticonContext'; // Correct import
 
 const EmoticonSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const { setSelectedEmoticon } = useContext(EmoticonContext);
 
-  const options = [
-    { value: 'option1', label: 'Option 1' },
-    { value: 'option2', label: 'Option 2' },
-    { value: 'option3', label: 'Option 3' },
-    // Add more options as needed
-  ];
-
-  const handleOptionClick = (option) => {
-    setSelectedOption(option);
+  const addEmoticon = (emoticon) => {
+    setSelectedEmoticon(emoticon);
     setIsOpen(false);
-    // Perform any action you need with the selected option
   };
 
   const lastUsedEmoticons = Array.from({ length: 11 });
@@ -49,7 +42,7 @@ const EmoticonSelector = () => {
             </div>
             <div className="flex flex-wrap gap-1 mb-2">
              {Object.entries(pinnedEmoticons).map(([name, src]) => (
-                    <div key={name} className="cursor-pointer border w-7 h-7 flex justify-center items-center">
+                    <div key={name} className="cursor-pointer border w-7 h-7 flex justify-center items-center" onClick={() => addEmoticon(name)}>
                       <div>
                         <img
                             key={name}

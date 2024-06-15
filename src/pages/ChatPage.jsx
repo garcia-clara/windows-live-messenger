@@ -24,6 +24,7 @@ import messageDot from "/assets/chat/message_dot.png";
 import chatIconsBackground from '/assets/background/chat_icons_background.png';
 import chatPointBackground from '/assets/background/chat_background_point.png';
 import chatIconsSeparator from '/assets/background/chat_icons_separator.png';
+import { replaceEmoticons } from "../helpers/replaceEmoticons";
 
 const ChatPage = () => {
   const { id } = useParams();
@@ -38,6 +39,7 @@ const ChatPage = () => {
   const user = useUserStore(state => state.user);
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   const { selectedEmoticon, setSelectedEmoticon } = useContext(EmoticonContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (selectedEmoticon) {
@@ -149,16 +151,6 @@ const ChatPage = () => {
     }, 1500); // Simulated typing duration
   };
 
-  const replaceEmoticons = (message) => {
-    return message.split(/(\[.*?\])/).map((part, index) => {
-      const match = part.match(/\[(.*?)\]/);
-      if (match && emoticons[match[1]]) {
-        return <span key={index} className='flex items-center'><img src={emoticons[match[1]]} alt={match[1]} className='w-[14px] h-[14px]' /></span>;
-      } else {
-        return <span key={index}>{part}</span>;
-      }
-    });
-  };
 
   const handleNudgeClick = () => {
     const audio = new Audio(sounds.nudge);
@@ -174,7 +166,7 @@ const ChatPage = () => {
     <div className="flex flex-col w-full font-sans text-base h-full">
       <div className="flex items-center w-full h-[31.4px] bg-white p-2 gap-2">
         <img src={contactChatIcon} alt="" />
-        <p className="flex gap-1">{replaceEmoticons(contact.name)}</p>
+        <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}></p>
         <p>&lt;{contact.email}&gt;</p>
       </div>
       <div
@@ -206,14 +198,14 @@ const ChatPage = () => {
           <div className="h-full flex flex-col items-center justify-between">
             <AvatarLarge image={contact.image} status={contact.status}/>
             <div>
-              <AvatarLarge />
+              <AvatarLarge image={localStorage.getItem("picture")}/>
               <div className="h-10"/>
             </div>
           </div>
           <div className="flex flex-col items-center justify-between win7">
             <div>
               <div className="flex items-center white-light mb-10">
-                <p className="text-lg flex gap-1">{replaceEmoticons(contact.name)}</p>
+              <p className="flex gap-1 text-lg" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}></p>
                 <p className="ml-1 capitalize">({contact.status})</p>
               </div>
               <img src={divider} alt="" className='mb-[-5px] pointer-events-none' />
@@ -222,19 +214,24 @@ const ChatPage = () => {
             <div className="h-[610px] w-full my-4 text-sm overflow-y-auto has-scrollbar pr-2">
               {messages.map((message, index) => (
                 <div key={index} className={`message ${message.role}`}>
+
                   {/* Affichage du nom de l'expéditeur */}
+                  <div className="flex text-black text-opacity-70">
                   {message.role === 'user' ? 
-                    <p className="flex">{replaceEmoticons(user.name)} says:</p>
+                    <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }}/>
                     : 
-                    <p className="flex">{replaceEmoticons(contact.name)} says:</p>
-                  }
+                    <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}/>
+                  } 
+                  <p className="ml-1">says:</p>
+                  </div>
+
                   {/* Affichage du contenu du message */}
-                  <div className="flex gap-2 items-start">
+                  <div className="flex gap-2 items-start ml-1">
                     <div className="flex-shrink-0 mt-2.5">
                       <img src={messageDot} alt="Message Dot" />
                     </div>
-                    <div>
-                      {message.content}
+                    <div className="flex gap-1">
+                    <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(message.content) }}/>
                     </div>
                   </div>
                 </div>

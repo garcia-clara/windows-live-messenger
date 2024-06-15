@@ -58,9 +58,9 @@ const Contacts = ({ contact }) => {
     return (
         <div className="flex gap-1 px-6 items-center hovercontact border border-transparent" onClick={() => openChat(contact)}>
             <div className='w-2 mt-1'><img src={whichStatus(contact.status)} alt="contact-status" /></div>
-            <span className='flex gap-1'>{replaceEmoticons(contact.name)}</span>
-            {!contact.message === "" &&  <span>-</span>}
-            <span className='flex gap-1 text-gray-400'>{replaceEmoticons(contact.message)}</span>
+            <span className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}></span>
+            <span>{!contact.message ? null : "-"}</span>
+            <span className="flex gap-1 text-gray-400" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.message) }}></span>
         </div>
     );
 };

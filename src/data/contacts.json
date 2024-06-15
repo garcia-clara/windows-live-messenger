@@ -2,10 +2,10 @@
     {
         "id": 2,
         "name": "ChatGPT",
-        "email": "clara58@hotmail.com",
+        "email": "openai@hotmail.com",
         "status": "online",
-        "message" : "Your must create the .env file and add a valid OpenAI API key to chat with me (;))",
-        "image" : "/assets/usertiles/anime-girl.gif",
+        "message" : "You must create the .env file and add a valid OpenAI API key to chat with me (co)",
+        "image" : "/assets/usertiles/custom/openai.png",
         "isFavorite" : 1
     },
 
@@ -14,7 +14,7 @@
         "name": "Jack...",
         "email": "clara58@hotmail.com",
         "status": "busy",
-        "message" : "[beer][cocktail][cocktail][beer][cocktail][beer][cocktail]...[sick]",
+        "message" : "(b)(d)(d)(b)(d)(b)(b)...+o(",
         "image" : "/assets/usertiles/winter.gif",
         "isFavorite" : 0
     },
@@ -24,7 +24,7 @@
         "name": "★·.·´¯`·.·★ JENNY ★·.·´¯`·.·★",
         "email": "clara58@hotmail.com",
         "status": "away",
-        "message" : "Love is the flower you've got to let grow [rose]",
+        "message" : "Love is the flower you've got to let grow (r)",
         "image" : "/assets/usertiles/daisy.png",
         "isFavorite" : 0
     },
@@ -41,10 +41,10 @@
 
     {
         "id": 6,
-        "name": "(( [sun] Kassandra",
+        "name": "(( (#) Kassandra",
         "email": "clara58@hotmail.com",
         "status": "offline",
-        "message" : "[heart] I luv u 4 ever [heart]",
+        "message" : "(l) I luv u 4 ever (l)",
         "image" : "/assets/usertiles/gerber_daisy.png",
         "isFavorite" : 0
     },
@@ -61,27 +61,27 @@
 
     {
         "id": 8,
-        "name": "[umbrella]...Laurence...[umbrella]",
+        "name": "(um)...Laurence...(um)",
         "email": "clara58@hotmail.com",
         "status": "offline",
-        "message" : "[cool]Let's go les Habs!!!!!![cool]",
+        "message" : "(h)Let's go les Habs!!!!!!(h)",
         "image" : "/assets/usertiles/sports.png",
         "isFavorite" : 0
     },
 
     {
         "id": 9,
-        "name": "[star] GUILLAUME [star]",
+        "name": "(*) GUILLAUME (*)",
         "email": "clara58@hotmail.com",
         "status": "online",
-        "message" : "Playing Assassin's Creed [thup]",
+        "message" : "Playing Assassin's Creed (y)",
         "image" : "/assets/usertiles/fall.gif",
         "isFavorite" : 0
     },
 
     {
         "id": 10,
-        "name": "[devil] sтɘpн            ×",
+        "name": "(6) sтɘpн            ×",
         "email": "clara58@hotmail.com",
         "status": "online",
         "message" : "",

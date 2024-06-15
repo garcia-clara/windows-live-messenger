@@ -1,3 +1,4 @@
+// Dropdown.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import arrow from '/assets/general/arrow.png';
@@ -5,7 +6,7 @@ import ChangeDisplayPictureModal from './ChangeDisplayPictureModal';
 import OptionsModal from './OptionsModal';
 import { replaceEmoticons } from '../helpers/replaceEmoticons';
 
-const Dropdown = ({ options }) => {
+const Dropdown = ({ options, onChange }) => {
   const [user, setUser] = useState({
     email: localStorage.getItem('email') || '',
     message: localStorage.getItem('message') || '',
@@ -29,6 +30,7 @@ const Dropdown = ({ options }) => {
       case 'Offline':
         setSelectedOption(option);
         localStorage.setItem('status', option.value);
+        onChange(option.value); // Call onChange when a status is selected
         break;
       case 'Sign out':
         localStorage.clear();
@@ -73,7 +75,11 @@ const Dropdown = ({ options }) => {
           </div>
         ) : (
           <div className="flex items-center">
-            <p className="text-lg flex gap-1">{user.name !== '' ? replaceEmoticons(user.name) : user.email}</p>
+            {user.name !== '' ?
+            <span className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }}></span>
+            : 
+            <span className="flex gap-1 text-gray-400" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.email) }}></span>
+            }
             <p className="ml-1 capitalize">({selectedOption.label})</p>
           </div>
         )}

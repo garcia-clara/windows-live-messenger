@@ -42,7 +42,7 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
     <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
       <div className="relative w-auto my-6 mx-auto max-w-3xl">
         {/*content*/}
-        <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none bg-gradient-to-t from-[#c3d4ec83] via-white">
+        <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none bg-gradient-to-t from-[#c3d4ec83] via-white to-[#c3d4ec83]">
 
           {/*header*/}
           <div className="flex items-start justify-between rounded-t-lg bg-[#f3f3f3]">

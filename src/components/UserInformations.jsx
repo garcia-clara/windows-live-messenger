@@ -1,3 +1,4 @@
+// UserInformation.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import AvatarSmall from "../components/AvatarSmall";
 import arrow from "/assets/general/arrow.png";
@@ -66,7 +67,6 @@ const UserInformation = () => {
         setUser({ ...user, status });
         localStorage.setItem('status', status);
     };
-
     return (
         <div className="flex">
             <AvatarSmall />
@@ -93,7 +93,7 @@ const UserInformation = () => {
                         />
                     ) : (
                         <p className="cursor-pointer flex gap-1">
-                            {replaceEmoticons(message) || 'Share a quick message...'}
+                            {replaceEmoticons(message) ? 'Share a quick message...' : replaceEmoticons(message)}
                         </p>
                     )}
                     <div className="ml-1">

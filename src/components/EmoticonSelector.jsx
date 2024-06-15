@@ -1,16 +1,30 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import selectEmoticon from "/assets/chat/select_emoticon.png";
 import arrow from "/assets/general/arrow.png";
 import pinnedEmoticons from '../imports/pinnedEmoticons';
-import EmoticonContext from '../contexts/EmoticonContext'; // Correct import
+import EmoticonContext from '../contexts/EmoticonContext';
 
 const EmoticonSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { setSelectedEmoticon } = useContext(EmoticonContext);
+  const dropdownRef = useRef(null);
 
-  const addEmoticon = (emoticon) => {
-    setSelectedEmoticon(emoticon);
-    setIsOpen(false);
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleEmoticonClick = (alias) => {
+    setSelectedEmoticon(alias); // Set the selected emoticon using the alias (e.g., ":)")
+    setIsOpen(false); // Close the emoticon selector dropdown
   };
 
   const lastUsedEmoticons = Array.from({ length: 11 });
@@ -18,7 +32,7 @@ const EmoticonSelector = () => {
   return (
     <>
       {/* Dropdown button */}
-      <div className="relative">
+      <div className="relative" ref={dropdownRef}>
         <div className="flex items-center aerobutton p-1 h-6" onClick={() => setIsOpen(!isOpen)}>
           <div className='w-5'><img src={selectEmoticon} alt="Select Emoticon" /></div>
           <div><img src={arrow} alt="Dropdown Arrow"/></div>
@@ -41,13 +55,13 @@ const EmoticonSelector = () => {
                 <p className='my-1 opacity-75'>Pinned emoticons</p>
             </div>
             <div className="flex flex-wrap gap-1 mb-2">
-             {Object.entries(pinnedEmoticons).map(([name, src]) => (
-                    <div key={name} className="cursor-pointer border w-7 h-7 flex justify-center items-center" onClick={() => addEmoticon(name)}>
+             {Object.entries(pinnedEmoticons).map(([alias, src]) => (
+                    <div key={alias} className="cursor-pointer border w-7 h-7 flex justify-center items-center" onClick={() => handleEmoticonClick(alias)}>
                       <div>
                         <img
-                            key={name}
+                            key={alias}
                             src={src}
-                            alt={name}
+                            alt={alias}
                         />
                       </div>
                     </div>

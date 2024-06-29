@@ -99,3 +99,46 @@ body {
 .usertiles-shadow {
     box-shadow: 3px 2px 4px 0px rgba(0,0,0,0.35);
 }
+
+/* -----------------WHATS NEW COMPONENT CSS----------------- */
+
+.whats-new-arrow-previous {
+    height: 17px;
+    width: 17px;
+    background-image: url("/assets/general/whats_new_arrow_previous.png");
+    cursor: pointer;
+}
+
+.whats-new-arrow-previous:active {
+    background-image: url("/assets/general/whats_new_arrow_previous_active.png");
+}
+
+.whats-new-arrow-previous:hover {
+    background-image: url("/assets/general/whats_new_arrow_previous_hover.png");
+}
+
+.whats-new-arrow-next {
+    height: 17px;
+    width: 17px;
+    background-image: url("/assets/general/whats_new_arrow_next.png");
+    cursor: pointer;
+}
+
+.whats-new-arrow-next:active {
+    background-image: url("/assets/general/whats_new_arrow_next_active.png");
+}
+
+.whats-new-arrow-next:hover {
+    background-image: url("/assets/general/whats_new_arrow_next_hover.png");
+}
+
+.whats-new-settings {
+    height: 10px;
+    width: 10px;
+    background-image: url("/assets/general/whats_new_settings.png");
+    cursor: pointer;
+}
+
+.whats-new-settings:hover {
+    background-image: url("/assets/general/whats_new_settings_hover.png");
+}

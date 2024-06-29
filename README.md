@@ -15,3 +15,7 @@ The goal here is purely to evoke nostalgia through visuals and sounds.
 I also recreated the app to learn more about React JS, so my code may not be very clear, clean, and could be inconsistent.
 
 Since I'm not an expert, please be understanding if the application has bugs.
+
+<h6>
+  Note: No account is required for login. You can enter anything in the email and password fields, and this data will be stored locally. If you log out, these data and the associated message history will be automatically deleted.
+</h6>

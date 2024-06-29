@@ -21,10 +21,31 @@ const WhatsNew = () => {
         return () => clearInterval(intervalId);
     }, []);
 
+    const handlePrevious = () => {
+        setFadeClass('fade-out');
+        setTimeout(() => {
+            setContent((prevContent) => (prevContent - 1 + messages.length) % messages.length);
+            setFadeClass('fade-in');
+        }, 500);
+    };
+
+    const handleNext = () => {
+        setFadeClass('fade-out');
+        setTimeout(() => {
+            setContent((prevContent) => (prevContent + 1) % messages.length);
+            setFadeClass('fade-in');
+        }, 500);
+    };
+
     return (
         <div className='px-4 pb-11'>
             <div className="w-full"><img src={divider} alt="" /></div>
-            <p className="text-[16px] pt-2 text-[#1D2F7F]">What's new</p>
+            <div className='flex gap-1 pt-2 items-center'>
+                <p className="text-[16px] text-[#1D2F7F]">What's new</p>
+                <div className='ml-3 whats-new-arrow-previous' onClick={handlePrevious}></div>
+                <div className='whats-new-arrow-next' onClick={handleNext}></div>
+                <div className='ml-2 whats-new-settings'></div>
+            </div>
             <p className={fadeClass} dangerouslySetInnerHTML={{ __html: messages[content] }} />
         </div>
     );

@@ -1,7 +1,7 @@
 
 <img src="https://cdn1.iconfinder.com/data/icons/fs-icons-ubuntu-by-franksouza-/512/wlm_protocol.png" width="100" height="100">
 
-# [Windows Live Messenger Clone](https://wlm.vercel.app/)
+# [Windows Live Messenger](https://wlm.vercel.app/)
 
 https://wlm.vercel.app/
 

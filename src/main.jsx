@@ -10,19 +10,6 @@ import { EmoticonProvider } from './contexts/EmoticonContext';
 import Notification from './components/Notification';
 
 const Main = () => {
-  const [showNotification, setShowNotification] = useState(false);
-
-  const toggleNotification = () => {
-    setShowNotification(!showNotification);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      toggleNotification();
-    }, 10000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <React.StrictMode>
@@ -34,7 +21,6 @@ const Main = () => {
             <Route path="/chat/:id" element={<PrivateRoute element={ChatPage} />} />
           </Routes>
         </Router>
-        {showNotification && <Notification message="has just signed in." />}
       </EmoticonProvider>
     </React.StrictMode>
   );

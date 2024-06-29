@@ -93,7 +93,7 @@ const UserInformation = () => {
                         />
                     ) : (
                         <p className="cursor-pointer flex gap-1">
-                            {replaceEmoticons(message) ? 'Share a quick message...' : replaceEmoticons(message)}
+                            {!message ? 'Share a quick message...' : <span className='flex gap-1' dangerouslySetInnerHTML={{ __html: replaceEmoticons(message) }}></span>}
                         </p>
                     )}
                     <div className="ml-1">

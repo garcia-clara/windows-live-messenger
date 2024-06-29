@@ -4,7 +4,7 @@
         "name": "ChatGPT",
         "email": "openai@hotmail.com",
         "status": "online",
-        "message" : "You must create the .env file and add a valid OpenAI API key to chat with me (co)",
+        "message" : "",
         "image" : "/assets/usertiles/custom/openai.png",
         "isFavorite" : 1
     },

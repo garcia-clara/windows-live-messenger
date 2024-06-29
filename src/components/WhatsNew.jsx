@@ -5,10 +5,8 @@ const WhatsNew = () => {
     const [content, setContent] = useState(0);
     const [fadeClass, setFadeClass] = useState('fade-in');
     const messages = [
-        "Find the github repository of this MSN clone <a href='https://github.com/your_repository' class='link'>here</a>!",
-        "Message 2",
-        "Message 3",
-        "Message 4",
+        "Find the github repository of this MSN clone <a target='_blank' href='https://github.com/garcia-clara/windows-live-messenger-clone' class='link'>here</a>!",
+        "The site is under construction, so don't be surprised to find bugs or missing features ;)",
     ];
 
     useEffect(() => {

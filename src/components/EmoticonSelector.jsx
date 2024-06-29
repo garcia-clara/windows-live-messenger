@@ -29,6 +29,14 @@ const EmoticonSelector = () => {
 
   const lastUsedEmoticons = Array.from({ length: 11 });
 
+  // Create a map to store unique image paths and their aliases
+  const uniqueEmoticonMap = new Map();
+  Object.entries(pinnedEmoticons).forEach(([alias, src]) => {
+    if (!uniqueEmoticonMap.has(src)) {
+      uniqueEmoticonMap.set(src, alias);
+    }
+  });
+
   return (
     <>
       {/* Dropdown button */}
@@ -55,17 +63,16 @@ const EmoticonSelector = () => {
                 <p className='my-1 opacity-75'>Pinned emoticons</p>
             </div>
             <div className="flex flex-wrap gap-1 mb-2">
-             {Object.entries(pinnedEmoticons).map(([alias, src]) => (
-                    <div key={alias} className="cursor-pointer border w-7 h-7 flex justify-center items-center" onClick={() => handleEmoticonClick(alias)}>
-                      <div>
-                        <img
-                            key={alias}
-                            src={src}
-                            alt={alias}
-                        />
-                      </div>
-                    </div>
-                ))}
+              {Array.from(uniqueEmoticonMap.entries()).map(([src, alias]) => (
+                <div key={alias} className="cursor-pointer border w-7 h-7 flex justify-center items-center" onClick={() => handleEmoticonClick(alias)}>
+                  <div>
+                    <img
+                      src={src}
+                      alt={alias}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}

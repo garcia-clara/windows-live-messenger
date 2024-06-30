@@ -26,7 +26,7 @@ const ChangeDisplayPictureModal = ({ setShowOptionsModal }) => {
   };
 
   const handleNameChange = (e) => {
-    setName(replaceEmoticons(e.target.value));
+    setName(e.target.value);
     setIsModified(true);
   };
 

@@ -151,112 +151,149 @@ const ChatPage = () => {
     }, 1500); // Simulated typing duration
   };
 
-
   const handleNudgeClick = () => {
+    const nudgeMessage = "You just sent a nudge!";
+    const newMessages = [...messages, { role: 'nudge', content: nudgeMessage }];
+  
+    // Play nudge sound
     const audio = new Audio(sounds.nudge);
     audio.play();
-
+  
+    // Set shaking state and update messages after animation
     setShaking(true);
     setTimeout(() => {
       setShaking(false);
+      setMessages(newMessages);
     }, 500);
   };
+  
+
   return (
     <div className={`bg-no-repeat bg-[length:100%_100px] h-screen ${shaking ? 'nudge' : ''}`} style={{ backgroundImage: `url(${bg})` }}>
-    <div className="flex flex-col w-full font-sans text-base h-full">
-      <div className="flex items-center w-full h-[31.4px] bg-white p-2 gap-2">
-        <img src={contactChatIcon} alt="" />
-        <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}></p>
-        <p>&lt;{contact.email}&gt;</p>
-      </div>
-      <div
-        className="flex items-center justify-between h-[31.4px] bg-no-repeat shadow-lg"
-        style={{ backgroundImage: `url(${navbarBackground})` }}
-      >
-        <div className="flex items-center text-white gap-3">
-          <div className="aerobutton cursor-pointer p-1 opacity-50">Photos</div>
-          <div className="aerobutton cursor-pointer p-1">Files</div>
-          <div className="aerobutton cursor-pointer p-1 opacity-50">Video</div>
-          <div className="aerobutton cursor-pointer p-1 opacity-50">Call</div>
-          <div className="aerobutton cursor-pointer p-1 opacity-50">Games</div>
-          <div className="aerobutton cursor-pointer p-1 opacity-50">Activities</div>
-          <div className="aerobutton cursor-pointer p-1">Invite</div>
-          <div className="aerobutton cursor-pointer p-1">Block</div>
+      <div className="flex flex-col w-full font-sans text-base h-full">
+        <div className="flex items-center w-full h-[31.4px] bg-white p-2 gap-2">
+          <img src={contactChatIcon} alt="" />
+          <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}></p>
+          <p>&lt;{contact.email}&gt;</p>
         </div>
-        <div className="flex gap-1 items-center aerobutton p-2 h-6">
-          <div className="w-5">
-            <img src={showmenu} alt="" />
+        <div
+          className="flex items-center justify-between h-[31.4px] bg-no-repeat shadow-lg"
+          style={{ backgroundImage: `url(${navbarBackground})` }}
+        >
+          <div className="flex items-center text-white gap-3">
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Photos</div>
+            <div className="aerobutton cursor-pointer p-1">Files</div>
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Video</div>
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Call</div>
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Games</div>
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Activities</div>
+            <div className="aerobutton cursor-pointer p-1">Invite</div>
+            <div className="aerobutton cursor-pointer p-1">Block</div>
           </div>
-          <div>
-            <img src={arrowWhite} alt="" />
-          </div>
-        </div>
-      </div>
-
-      <Background>
-        <div className="px-4 pt-4 grid grid-cols-[170px__1fr] h-full">
-          <div className="h-full flex flex-col items-center justify-between">
-            <AvatarLarge image={contact.image} status={contact.status}/>
+          <div className="flex gap-1 items-center aerobutton p-2 h-6">
+            <div className="w-5">
+              <img src={showmenu} alt="" />
+            </div>
             <div>
-              <AvatarLarge image={localStorage.getItem("picture")}/>
-              <div className="h-10"/>
+              <img src={arrowWhite} alt="" />
             </div>
           </div>
-          <div className="flex flex-col items-center justify-between win7">
-            <div>
-              <div className="flex items-center white-light mb-10">
-              <p className="flex gap-1 text-lg" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}></p>
-                <p className="ml-1 capitalize">({contact.status})</p>
+        </div>
+
+        <Background>
+          <div className="px-4 pt-4 grid grid-cols-[170px__1fr] h-full">
+            <div className="h-full flex flex-col items-center justify-between">
+              <AvatarLarge image={contact.image} status={contact.status} />
+              <div>
+                <AvatarLarge image={localStorage.getItem("picture")} />
+                <div className="h-10" />
               </div>
-              <img src={divider} alt="" className='mb-[-5px] pointer-events-none' />
             </div>
-
-            <div className="h-[610px] w-full my-4 text-sm overflow-y-auto has-scrollbar pr-2">
-              {messages.map((message, index) => (
-                <div key={index} className={`message ${message.role}`}>
-
-                  {/* Affichage du nom de l'expéditeur */}
-                  <div className="flex text-black text-opacity-70">
-                  {message.role === 'user' ? 
-                    <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }}/>
-                    : 
-                    <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}/>
-                  } 
-                  <p className="ml-1">says:</p>
-                  </div>
-
-                  {/* Affichage du contenu du message */}
-                  <div className="flex gap-2 items-start ml-1">
-                    <div className="flex-shrink-0 mt-2.5">
-                      <img src={messageDot} alt="Message Dot" />
-                    </div>
-                    <div className="flex gap-1">
-                    <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(message.content) }}/>
-                    </div>
-                  </div>
+            <div className="flex flex-col items-center justify-between win7">
+              <div>
+                <div className="flex items-center white-light mb-10">
+                  <p className="flex gap-1 text-lg" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}></p>
+                  <p className="ml-1 capitalize">({contact.status})</p>
                 </div>
-              ))}
-            </div>
+                <img src={divider} alt="" className='mb-[-5px] pointer-events-none' />
+              </div>
 
-            <div className="w-full">
-            {contactTyping && <p className="flex">{replaceEmoticons(contact.name)} is typing...</p>}
-            {lastMessageTime && (
+              <div className="h-[610px] w-full my-4 text-sm overflow-y-auto has-scrollbar pr-2">
+                {messages.map((message, index) => (
+                  <div key={index} className={`message ${message.role}`}>
+                    {/* Display "user says" or "contact says" for regular messages */}
+                    {message.role === 'user' && (
+                      <div>
+                          <div className="flex text-black text-opacity-70">
+                          <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }} />
+                          <p className="ml-1">says:</p>
+                        </div>
+                        {/* Display the content of the message */}
+                        <div className="flex gap-2 items-start ml-1">
+                        <div className="flex-shrink-0 mt-2.5">
+                          <img src={messageDot} alt="Message Dot" />
+                        </div>
+                        <div className="flex gap-1">
+                          <p dangerouslySetInnerHTML={{ __html: replaceEmoticons(message.content) }} />
+                        </div>
+                        </div>
+                      </div>
+                      
+                    )}
+                    {message.role === 'assistant' && (
+                     <div>
+                        <div className="flex text-black text-opacity-70">
+                        <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }} />
+                        <p className="ml-1">says:</p>
+                      </div>
+                      <div className="flex text-black text-opacity-70">
+                      <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }} />
+                      <p className="ml-1">says:</p>
+                    </div>
+
+                      {/* Display the content of the message */}
+                      <div className="flex gap-2 items-start ml-1">
+                      <div className="flex-shrink-0 mt-2.5">
+                      <img src={messageDot} alt="Message Dot" />
+                      </div>
+                      <div className="flex gap-1">
+                      <p dangerouslySetInnerHTML={{ __html: replaceEmoticons(message.content) }} />
+                      </div>
+                      </div>
+                     </div>
+                    )}
+                    
+                    {/* Display nudge message */}
+                    {message.role === 'nudge' && (
+                      <div className="flex text-black text-opacity-70">
+                        <p className="ml-1">{message.content}</p>
+                      </div>
+                    )}
+                    
+                    
+                  </div>
+                ))}
+              </div>
+
+              <div className="w-full">
+                {contactTyping && <p className="flex">{replaceEmoticons(contact.name)} is typing...</p>}
+                {lastMessageTime && (
                   <p className="opacity-50 my-1">
                     Last message received at {lastMessageTime}
                   </p>
                 )}
-              <img src={divider} alt="" className='pointer-events-none' />
-              {/*--------------------- INPUT ---------------------*/}
-              <form onSubmit={handleSubmit}>
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  className="w-full border rounded-t-[4px] outline-none p-1 bg-[#F6FCFF] border-[#bdd5df]"
-                />
+                <img src={divider} alt="" className='pointer-events-none' />
+                {/*--------------------- INPUT ---------------------*/}
+                <form onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    className="w-full border rounded-t-[4px] outline-none p-1 bg-[#F6FCFF] border-[#bdd5df]"
+                  />
                 </form>
-              <div><img className="absolute bottom-[68px] left-[173.6px]" src={chatPointBackground} alt="" /></div>
-              <div className="flex border-x border-b rounded-b-[4px] border-[#bdd5df]" style={{ backgroundImage: `url(${chatIconsBackground})`}}>
+                <div><img className="absolute bottom-[68px] left-[173.6px]" src={chatPointBackground} alt="" /></div>
+                <div className="flex border-x border-b rounded-b-[4px] border-[#bdd5df]" style={{ backgroundImage: `url(${chatIconsBackground})` }}>
                   {EmoticonSelector()}
                   <div className="flex items-center aerobutton p-1 h-6">
                     <div className='w-5'><img src={selectWink} alt="" /></div>
@@ -273,13 +310,13 @@ const ChatPage = () => {
                     <div className='w-5'><img src={changeBackground} alt="" /></div>
                     <div><img src={arrow} alt="" /></div>
                   </div>
+                </div>
+                <div className="h-10" />
               </div>
-              <div className="h-10"/>
             </div>
           </div>
-        </div>
-      </Background>
-    </div>
+        </Background>
+      </div>
     </div>
   );
 };

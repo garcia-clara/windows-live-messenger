@@ -76,9 +76,9 @@ const Dropdown = ({ options, onChange }) => {
         ) : (
           <div className="flex items-center">
             {user.name !== '' ?
-            <span className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }}></span>
+            <span className="flex gap-1 text-lg items-baseline" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }} />
             : 
-            <span className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.email) }}></span>
+            <span className="flex gap-1 text-lg items-baseline" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.email) }} />
             }
             <p className="ml-1 capitalize">({selectedOption.label})</p>
           </div>

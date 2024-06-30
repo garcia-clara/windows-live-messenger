@@ -166,7 +166,6 @@ const ChatPage = () => {
       setMessages(newMessages);
     }, 500);
   };
-  
 
   return (
     <div className={`bg-no-repeat bg-[length:100%_100px] h-screen ${shaking ? 'nudge' : ''}`} style={{ backgroundImage: `url(${bg})` }}>

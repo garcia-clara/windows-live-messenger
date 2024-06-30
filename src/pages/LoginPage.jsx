@@ -54,6 +54,8 @@ const LoginPage = () => {
     localStorage.setItem('rememberme', rememberMe);
     localStorage.setItem('rememberpassword', rememberPassword);
     localStorage.setItem('signinautomatically', signInAutomatically);
+    localStorage.setItem('scene', '/assets/scenes/default_background.png');
+    localStorage.setItem('colorScheme', '/assets/color_schemes/match_my_scene_color.png');
 
     localStorage.setItem('name', '');
     localStorage.setItem('message', '');

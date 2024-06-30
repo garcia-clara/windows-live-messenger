@@ -5,6 +5,7 @@ import arrow from '/assets/general/arrow.png';
 import ChangeDisplayPictureModal from './ChangeDisplayPictureModal';
 import OptionsModal from './OptionsModal';
 import { replaceEmoticons } from '../helpers/replaceEmoticons';
+import ChangeSceneModal from '../components/ChangeSceneModal';
 
 const Dropdown = ({ options, onChange }) => {
   const [user, setUser] = useState({
@@ -16,6 +17,7 @@ const Dropdown = ({ options, onChange }) => {
 
   const [changePictureShowModal, setShowChangePictureModal] = useState(false);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
+  const [showChangeSceneModal, setShowChangeSceneModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options.find(option => option.value === user.status) || options[0]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -39,6 +41,9 @@ const Dropdown = ({ options, onChange }) => {
       case 'ChangeDisplayPicture':
         setShowChangePictureModal(true);
         break;
+      case 'ChangeScene':
+        setShowChangeSceneModal(true);
+      break;
       case 'ChangeDisplayName':
         setShowOptionsModal(true);
         break;
@@ -111,6 +116,7 @@ const Dropdown = ({ options, onChange }) => {
 
       {changePictureShowModal && <ChangeDisplayPictureModal setShowChangePictureModal={setShowChangePictureModal} />}
       {showOptionsModal && <OptionsModal setShowOptionsModal={setShowOptionsModal} />}
+      {showChangeSceneModal && <ChangeSceneModal setShowChangeSceneModal={setShowChangeSceneModal} />}
     </div>
   );
 };

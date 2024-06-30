@@ -29,7 +29,7 @@ const Dropdown = ({ options, onChange }) => {
       case 'Away':
       case 'Offline':
         setSelectedOption(option);
-        localStorage.setItem('status', option.value);
+        user.email ? localStorage.setItem('status', option.value) : null
         onChange(option.value); // Call onChange when a status is selected
         break;
       case 'Sign out':

@@ -8,12 +8,15 @@ import "7.css/dist/7.scoped.css";
 import bg from '/assets/background/background.jpg';
 import CryptoJS from 'crypto-js';
 import { isAuthenticated } from '../utils/auth';
+import UnableToConnectModal from '../components/UnableToConnectModal';
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [showUnableToConnectModal, setShowUnableToConnectModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [status, setStatus] = useState('Available');
   const [rememberMe, setRememberMe] = useState(false);
   const [rememberPassword, setRememberPassword] = useState(false);
@@ -25,10 +28,24 @@ const LoginPage = () => {
     }
   }, [navigate]);
 
-
   const handleSignIn = () => {
-    // Hash the password
     const hashedPassword = CryptoJS.SHA256(password).toString();
+    const isValidEmail = (value) => {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(value);
+    };
+
+    if (!email || !isValidEmail(email)) {
+      setModalMessage("Please enter your Windows Live ID in this format: yourname@example.com");
+      setShowUnableToConnectModal(true);
+      return;
+    }
+
+    if (!password) {
+      setModalMessage("Please enter your password");
+      setShowUnableToConnectModal(true);
+      return;
+    }
 
     // Store values in local storage
     localStorage.setItem('email', email);
@@ -54,7 +71,7 @@ const LoginPage = () => {
 
   return (
     <Background>
-      <div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})`}}>
+      <div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})` }}>
         <div className="flex flex-col items-center w-full pt-4 win7 font-sans text-base">
           <AvatarLarge />
           <p className="mt-4 text-xl text-[#1D2F7F]">Sign in</p>
@@ -68,6 +85,7 @@ const LoginPage = () => {
               placeholder="Example555@hotmail.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <input
               className="w-full mt-2 placeholder:italic"
@@ -75,13 +93,14 @@ const LoginPage = () => {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
 
             {/* Status */}
             <div className="flex my-4">
               <p>Sign in as: </p>
-              <Dropdown 
-                options={options} 
+              <Dropdown
+                options={options}
                 value={status}
                 onChange={(option) => setStatus(option.value)}
               />
@@ -90,27 +109,27 @@ const LoginPage = () => {
             {/* Checkboxes */}
             <div>
               <div className="mt-2">
-                <input 
-                  type="checkbox" 
-                  id="rememberme" 
+                <input
+                  type="checkbox"
+                  id="rememberme"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
                 />
                 <label htmlFor="rememberme">Remember me</label>
               </div>
               <div className="mt-2">
-                <input 
-                  type="checkbox" 
-                  id="rememberpassword" 
+                <input
+                  type="checkbox"
+                  id="rememberpassword"
                   checked={rememberPassword}
                   onChange={(e) => setRememberPassword(e.target.checked)}
                 />
                 <label htmlFor="rememberpassword">Remember my password</label>
               </div>
               <div className="mt-2">
-                <input 
-                  type="checkbox" 
-                  id="signinautomatically" 
+                <input
+                  type="checkbox"
+                  id="signinautomatically"
                   checked={signInAutomatically}
                   onChange={(e) => setSignInAutomatically(e.target.checked)}
                 />
@@ -118,14 +137,15 @@ const LoginPage = () => {
               </div>
             </div>
           </fieldset>
-
           {/* Sign in button */}
           <button className="mt-4" onClick={handleSignIn}>
             Sign in
           </button>
         </div>
       </div>
+      {showUnableToConnectModal && <UnableToConnectModal setShowUnableToConnectModal={setShowUnableToConnectModal} errorMessage={modalMessage}/>}
     </Background>
+    
   );
 };
 

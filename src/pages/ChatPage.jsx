@@ -152,8 +152,8 @@ const ChatPage = () => {
   };
 
   const handleNudgeClick = () => {
-    const nudgeMessage = "You just sent a nudge!";
-    const newMessages = [...messages, { role: 'nudge', content: nudgeMessage }];
+    const nudgeMessage = "You have just sent a nudge.";
+    const newMessages = [...messages, { role: 'nudging', content: nudgeMessage }];
   
     // Play nudge sound
     const audio = new Audio(sounds.nudge);
@@ -219,60 +219,70 @@ const ChatPage = () => {
               </div>
 
               <div className="h-[610px] w-full my-4 text-sm overflow-y-auto has-scrollbar pr-2">
-                {messages.map((message, index) => (
+              {messages.map((message, index) => {
+                  const previousMessage = messages[index - 1];
+
+                return (
                   <div key={index} className={`message ${message.role}`}>
                     {/* Display "user says" or "contact says" for regular messages */}
                     {message.role === 'user' && (
                       <div>
-                          <div className="flex text-black text-opacity-70">
+                        <div className="flex text-black text-opacity-70">
                           <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }} />
                           <p className="ml-1">says:</p>
                         </div>
                         {/* Display the content of the message */}
                         <div className="flex gap-2 items-start ml-1">
-                        <div className="flex-shrink-0 mt-2.5">
-                          <img src={messageDot} alt="Message Dot" />
-                        </div>
-                        <div className="flex gap-1">
-                          <p dangerouslySetInnerHTML={{ __html: replaceEmoticons(message.content) }} />
-                        </div>
+                          <div className="flex-shrink-0 mt-2.5">
+                            <img src={messageDot} alt="Message Dot" />
+                          </div>
+                          <div className="flex gap-1">
+                            <p dangerouslySetInnerHTML={{ __html: replaceEmoticons(message.content) }} />
+                          </div>
                         </div>
                       </div>
-                      
                     )}
                     {message.role === 'assistant' && (
-                     <div>
+                      <div>
                         <div className="flex text-black text-opacity-70">
-                        <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }} />
-                        <p className="ml-1">says:</p>
+                          <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }} />
+                          <p className="ml-1">says:</p>
+                        </div>
+                        <div className="flex text-black text-opacity-70">
+                          <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }} />
+                          <p className="ml-1">says:</p>
+                        </div>
+                        {/* Display the content of the message */}
+                        <div className="flex gap-2 items-start ml-1">
+                          <div className="flex-shrink-0 mt-2.5">
+                            <img src={messageDot} alt="Message Dot" />
+                          </div>
+                          <div className="flex gap-1">
+                            <p dangerouslySetInnerHTML={{ __html: replaceEmoticons(message.content) }} />
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex text-black text-opacity-70">
-                      <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }} />
-                      <p className="ml-1">says:</p>
-                    </div>
+                    )}
 
-                      {/* Display the content of the message */}
-                      <div className="flex gap-2 items-start ml-1">
-                      <div className="flex-shrink-0 mt-2.5">
-                      <img src={messageDot} alt="Message Dot" />
-                      </div>
-                      <div className="flex gap-1">
-                      <p dangerouslySetInnerHTML={{ __html: replaceEmoticons(message.content) }} />
-                      </div>
-                      </div>
-                     </div>
-                    )}
-                    
                     {/* Display nudge message */}
-                    {message.role === 'nudge' && (
-                      <div className="flex text-black text-opacity-70">
-                        <p className="ml-1">{message.content}</p>
-                      </div>
+                    {message.role === 'nudging' && (
+                      previousMessage && previousMessage.role === 'nudging' ? (
+                        <div>
+                          <p className="ml-1">{message.content}</p>
+                          <p>————</p>
+                        </div>
+                      ) : (
+                        <div>
+                          <p>————</p>
+                          <p className="ml-1">{message.content}</p>
+                          <p>————</p>
+                        </div>
+                      )
                     )}
-                    
-                    
                   </div>
-                ))}
+                );
+              })}
+
               </div>
 
               <div className="w-full">

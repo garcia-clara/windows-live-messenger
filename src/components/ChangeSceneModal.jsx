@@ -10,6 +10,7 @@ const ChangeSceneModal = ({ setShowChangeSceneModal }) => {
 
   const [userScene, setUserScene] = useState(localStorage.getItem('scene'));
   const [userColorScheme, setUserColorScheme] = useState(localStorage.getItem('colorScheme'));
+  const [selected, setSelected] = useState(false);
 
     const updateUserScene = (imageSrc) => {
         localStorage.setItem('scene', imageSrc)
@@ -37,6 +38,11 @@ const ChangeSceneModal = ({ setShowChangeSceneModal }) => {
         };
         reader.readAsDataURL(file);
       }
+    };
+
+
+    const handleClick = (name) => {
+      setSelected(name);
     };
 
   return (
@@ -67,17 +73,22 @@ const ChangeSceneModal = ({ setShowChangeSceneModal }) => {
                 </div>
                 <div className="win7 mr-4">
                     <p className="ml-2 text-[16px] text-[#1D2F7F]">Select a scene</p>
-                    <div className="flex flex-wrap gap-2.5 w-[460px] h-[275px] overflow-y-auto p-2.5 has-scrollbar mb-2">
-                    {Object.entries(scenes).map(([name, src]) => (
-                            <div key={name} onClick={() => updateUserScene(src)} className="cursor-pointer w-24 shadow-lg usertiles-shadow border border-hidden">
+                      <div className="flex flex-wrap w-[460px] h-[275px] overflow-y-auto p-2.5 has-scrollbar mb-2">
+                      {Object.entries(scenes).map(([name, src]) => (
+                        <div
+                          key={name}
+                          className={`hoverscene p-0.5 pb-1.5 pr-1.5 rounded-sm ${selected === name ? 'selectedscene' : ''}`}
+                          onClick={() => handleClick(name)}>
+                          <div
+                            onClick={() => updateUserScene(src)}
+                            className="cursor-pointer w-24 shadow-lg usertiles-shadow border border-hidden">
                             <img
-                                key={name}
-                                src={src}
-                                alt={name}
-                                className="object-cover h-12"
-                            />
-                            </div>
-                    ))}
+                              src={src}
+                              alt={name}
+                              className="object-cover h-12"/>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                     <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange}/>
                     <button className="ml-2 mt-[-20px] mb-2" onClick={handleButtonClick}>Browse...</button>

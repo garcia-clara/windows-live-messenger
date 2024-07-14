@@ -39,7 +39,7 @@ const WhatsNew = () => {
 
     return (
         <div className='px-4 pb-11'>
-            <div className="w-full"><img src={divider} alt="" /></div>
+            <div className="w-full"><img src={divider} alt="" className='mix-blend-multiply' /></div>
             <div className='flex gap-1 pt-2 items-center'>
                 <p className="text-[16px] text-[#1D2F7F]">What's new</p>
                 <div className='ml-3 whats-new-arrow-previous' onClick={handlePrevious}></div>

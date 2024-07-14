@@ -12,6 +12,8 @@
   "dependencies": {
     "7.css": "^0.16.0",
     "axios": "^1.7.2",
+    "color-thief-react": "^2.1.0",
+    "colorthief": "^2.4.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
     "dotenv": "^16.4.5",

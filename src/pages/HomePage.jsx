@@ -34,8 +34,12 @@ const HomePage = () => {
   return (
     <Background>
       <div
-      className={`bg-no-repeat bg-[length:100%_100px] ${background === '/assets/scenes/default_background.jpg' ? 'h-screen' : 'h-[97px]'}`}
-      style={{ backgroundImage: `url(${background})`, backgroundSize: `cover`, backgroundPosition: `center` }}
+        className={`bg-no-repeat ${background === '/assets/scenes/default_background.jpg' ? 'h-screen' : 'h-[97px]'} bg-[length:100%_100px]`}
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: background !== '/assets/scenes/default_background.jpg' ? 'cover' : '',
+          backgroundPosition: background !== '/assets/scenes/default_background.jpg' ? 'center' : ''
+        }}
       >
         <div className="flex flex-col w-full font-sans text-base h-screen">
         {/* Personnal informations row */}
@@ -50,7 +54,7 @@ const HomePage = () => {
 
         {/* Contacts row */}
         <div className="h-full">
-        <img src={divider} alt="" className='mb-[-5px] pointer-events-none' />
+        <img src={divider} alt="" className='mb-[-5px] pointer-events-none mix-blend-multiply' />
 
         {/* Searchbar and icons */}
           <div className="flex items-center mt-2 px-4">
@@ -79,7 +83,7 @@ const HomePage = () => {
         <WhatsNew />
 
         {/* Footer row */}
-        <div className='w-full bg-white h-[1px] shadow-sm shadow-[#6b8fa3]'></div>
+        <div className='w-full mix-blend-luminosity bg-white h-[1px] shadow-sm shadow-[#6b8fa3]'></div>
         <footer className="w-full flex justify-center pb-4">
           <div className="mt-4"><img src={ad} alt="" /></div>
         </footer>

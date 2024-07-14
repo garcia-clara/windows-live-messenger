@@ -142,3 +142,23 @@ body {
 .whats-new-settings:hover {
     background-image: url("/assets/general/whats_new_settings_hover.png");
 }
+
+/* -----------------WHATS NEW COMPONENT CSS----------------- */
+
+.hoverscene{
+    border: transparent 1px solid;
+}
+
+.hoverscene:hover{
+    border: 1px solid #B9D7FC;
+    border-radius: 3px;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,234,249,1) 70%, rgb(198, 237, 255) 97%);
+}
+
+.selectedscene{
+    border: 1px solid #84ACDD;
+    border-radius: 3px;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,234,249,1) 70%, rgb(198, 237, 255) 97%);
+}

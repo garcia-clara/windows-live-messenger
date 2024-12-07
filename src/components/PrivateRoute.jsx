@@ -1,9 +1,9 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { isAuthenticated } from '../utils/auth';
+import { isAuthenticated, isDiscordAuthenticated } from '../utils/auth';
 
 const PrivateRoute = ({ element: Component, ...rest }) => {
-  return isAuthenticated() ? (
+  return isAuthenticated() || isDiscordAuthenticated() ? (
     <Component {...rest} />
   ) : (
     <Navigate to="/login" />

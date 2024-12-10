@@ -80,21 +80,30 @@ const ChatPage = () => {
 
   const getAssistantResponse = async (newMessages) => {
     try {
+      // Ajouter un message système pour personnaliser l'assistant
+      const systemMessage = {
+        role: "system",
+        content: "You are not an assistant but a friend, and we are chatting like we would with any human. You respond naturally, as if you are a real person. The setting is an online chat application, similar to Windows Live Messenger from around 2009. You can send emoticons, just like in that era (for example: a heart by typing (l)).",
+      };
+  
+      // Inclure le message système avant les nouveaux messages
+      const updatedMessages = [systemMessage, ...newMessages];
+  
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
           model: "gpt-3.5-turbo",
-          messages: newMessages,
+          messages: updatedMessages,
           max_tokens: 300,
         },
         {
           headers: {
             Authorization: `Bearer ${apiKey}`,
             "Content-Type": "application/json",
-          },
+          }
         }
       );
-
+  
       if (response.data.choices && response.data.choices.length > 0) {
         const botMessage = {
           role: "assistant",
@@ -108,10 +117,10 @@ const ChatPage = () => {
       }
     } catch (error) {
       console.error("Error fetching response from OpenAI:", error);
-
+  
       let errorMessageContent =
         "Oops! It seems you haven't created your .env file or haven't correctly added your OpenAI API key. To start chatting, make sure you've created a .env file with the correct configuration. Additionally, ensure your OpenAI API key is properly inserted. Remember, you must have sufficient credit to make requests and engage in chat conversations.";
-
+  
       if (error.response) {
         console.error("Status:", error.response.status);
         console.error("Data:", error.response.data);
@@ -122,12 +131,12 @@ const ChatPage = () => {
             "API endpoint not found. Please check the URL and model.";
         }
       }
-
+  
       const errorMessage = { role: "assistant", content: errorMessageContent };
-      setMessages([...newMessages, errorMessage]);
+      setMessages([...newMessages, errorMessage]); // Ajoute un message d'erreur à l'utilisateur
     }
   };
-
+  
   const contact = contacts.find((c) => c.id === parseInt(id, 10));
 
   useEffect(() => {

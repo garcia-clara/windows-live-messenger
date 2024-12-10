@@ -8,6 +8,7 @@ import ChatPage from './pages/ChatPage';
 import PrivateRoute from './components/PrivateRoute';
 import { EmoticonProvider } from './contexts/EmoticonContext';
 import Notification from './components/Notification';
+import { DiscordAuthHandler } from "./utils/discordAuth";
 
 const Main = () => {
 
@@ -19,6 +20,7 @@ const Main = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<PrivateRoute element={HomePage} />} />
             <Route path="/chat/:id" element={<PrivateRoute element={ChatPage} />} />
+            <Route path="/discordAuth" element={<DiscordAuthHandler />} />
           </Routes>
         </Router>
       </EmoticonProvider>

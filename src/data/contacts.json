@@ -1,18 +1,18 @@
 [
     {
         "id": 2,
-        "name": "ChatGPT",
-        "email": "openai@hotmail.com",
+        "name": "Clara (l)",
+        "email": "clara2@hotmail.com",
         "status": "online",
         "message" : "",
-        "image" : "/assets/usertiles/custom/openai.png",
+        "image" : "/assets/usertiles/daisy.png",
         "isFavorite" : 1
     },
 
     {
         "id": 3,
         "name": "Jack...",
-        "email": "clara58@hotmail.com",
+        "email": "jack3@hotmail.com",
         "status": "busy",
         "message" : "(b)(d)(d)(b)(d)(b)(b)...+o(",
         "image" : "/assets/usertiles/winter.gif",
@@ -22,7 +22,7 @@
     {
         "id": 4,
         "name": "★·.·´¯`·.·★ JENNY ★·.·´¯`·.·★",
-        "email": "clara58@hotmail.com",
+        "email": "jenny4@hotmail.com",
         "status": "away",
         "message" : "Love is the flower you've got to let grow (r)",
         "image" : "/assets/usertiles/daisy.png",
@@ -32,7 +32,7 @@
     {
         "id": 5,
         "name": "Anne ♥",
-        "email": "clara58@hotmail.com",
+        "email": "anne5@hotmail.com",
         "status": "offline",
         "message" : "Loving you makes life worth it",
         "image" : "/assets/usertiles/doctor.png",
@@ -42,7 +42,7 @@
     {
         "id": 6,
         "name": "(( (#) Kassandra",
-        "email": "clara58@hotmail.com",
+        "email": "kassandra6@hotmail.com",
         "status": "offline",
         "message" : "(l) I luv u 4 ever (l)",
         "image" : "/assets/usertiles/gerber_daisy.png",
@@ -52,7 +52,7 @@
     {
         "id": 7,
         "name": "Graham",
-        "email": "clara58@hotmail.com",
+        "email": "graham7@hotmail.com",
         "status": "offline",
         "message" : "i need a new job :/",
         "image" : "/assets/usertiles/dog.png",
@@ -62,7 +62,7 @@
     {
         "id": 8,
         "name": "(um)...Laurence...(um)",
-        "email": "clara58@hotmail.com",
+        "email": "laurence8@hotmail.com",
         "status": "offline",
         "message" : "(h)Let's go les Habs!!!!!!(h)",
         "image" : "/assets/usertiles/sports.png",
@@ -72,7 +72,7 @@
     {
         "id": 9,
         "name": "(*) GUILLAUME (*)",
-        "email": "clara58@hotmail.com",
+        "email": "guillaume9@hotmail.com",
         "status": "online",
         "message" : "Playing Assassin's Creed (y)",
         "image" : "/assets/usertiles/fall.gif",
@@ -81,8 +81,8 @@
 
     {
         "id": 10,
-        "name": "(6) sтɘpн            ×",
-        "email": "clara58@hotmail.com",
+        "name": "(6) sтɘpн ×",
+        "email": "stepn10@hotmail.com",
         "status": "online",
         "message" : "",
         "image" : "/assets/usertiles/summer.gif",

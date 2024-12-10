@@ -29,10 +29,6 @@ import { replaceEmoticons } from "../helpers/replaceEmoticons";
 const ChatPage = () => {
   const { id } = useParams();
   const [shaking, setShaking] = useState(false);
-  const [messages, setMessages] = useState(() => {
-    const savedMessages = localStorage.getItem("chatMessages");
-    return savedMessages ? JSON.parse(savedMessages) : [];
-  });
   const [input, setInput] = useState("");
   const [lastMessageTime, setLastMessageTime] = useState(null);
   const [contactTyping, setContactTyping] = useState(false);
@@ -40,6 +36,17 @@ const ChatPage = () => {
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   const { selectedEmoticon, setSelectedEmoticon } = useContext(EmoticonContext);
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log(id);
+
+  const [messages, setMessages] = useState(() => {
+    // Only attempt to get messages from localStorage if the 'id' exists (i.e., a valid conversation exists)
+    if (id) {
+      const savedMessages = localStorage.getItem(`chatMessages_${id}`);
+      return savedMessages ? JSON.parse(savedMessages) : []; // Default to an empty array if no messages
+    }
+    return []; // Default to an empty array if no 'id' or invalid 'id'
+  });
 
   useEffect(() => {
     if (selectedEmoticon) {
@@ -49,8 +56,10 @@ const ChatPage = () => {
   }, [selectedEmoticon, setSelectedEmoticon]);
 
   useEffect(() => {
-    localStorage.setItem("chatMessages", JSON.stringify(messages));
-  }, [messages]);
+    if (user && id) {
+      localStorage.setItem(`chatMessages_${id}`, JSON.stringify(messages));
+    }
+  }, [messages, user]);
 
   const handleInputChange = (e) => {
     const updatedInput = e.target.value;
@@ -83,12 +92,67 @@ const ChatPage = () => {
       // Ajouter un message système pour personnaliser l'assistant
       const systemMessage = {
         role: "system",
-        content: "You are not an assistant but a friend, and we are chatting like we would with any human. You respond naturally, as if you are a real person. The setting is an online chat application, similar to Windows Live Messenger from around 2009. You can send emoticons, just like in that era (for example: a heart by typing (l)).",
+        content: `You are not an assistant but a friend, and we are chatting like we would with any human.
+                  You respond naturally, as if you are a real person. The setting is an online chat application, similar to Windows Live Messenger from around 2009.
+                  You can also use emoticons if you want, but only from this list—do not display modern Unicode emojis. Only use the emoticons from Windows Live Messenger:
+
+                  :) : smile
+                  :D : laugh
+                  ;) : wink
+                  :-O : ooh
+                  :P : tongue
+                  :@ : angry
+                  :$ : blush
+                  :S : erm
+                  :( : sad
+                  :'( : cry
+                  :| : what
+                  (H) : cool
+                  (L) : heart
+                  (u) : broken heart
+                  (M) : MSN logo
+                  (@) : cat
+                  (&) : dog
+                  (*) : star
+                  (^) : cake
+                  (p) : camera
+                  (T) : telephone
+                  ({) : hug left
+                  (}) : hug right
+                  (B) : beer
+                  (D) : cocktail
+                  (Z) : guy
+                  (X) : girl
+                  (N) : thumbs down
+                  (Y) : thumbs up
+                  (R) : rainbow
+                  (8-|) : nerd
+                  :-* : secret
+                  +o( : sick
+                  (sn) : snail
+                  (tu) : turtle
+                  (PI) : pizza
+                  (AU) : car
+                  (ap) : plane
+                  (IP) : island
+                  (CO) : computer
+                  (MP) : mobile phone
+                  (BRB) : be right back
+                  (st) : storm
+                  (H5) : hi five
+                  :^) : huh
+                  *-) : thinking
+                  (li) : lightning
+                  <:o) : party
+                  8-) : eyeroll
+                  |-) : sleepy
+                  Make sure to avoid any modern emojis and stick strictly to this list when responding.
+              `,
       };
-  
+
       // Inclure le message système avant les nouveaux messages
       const updatedMessages = [systemMessage, ...newMessages];
-  
+
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
@@ -100,10 +164,10 @@ const ChatPage = () => {
           headers: {
             Authorization: `Bearer ${apiKey}`,
             "Content-Type": "application/json",
-          }
+          },
         }
       );
-  
+
       if (response.data.choices && response.data.choices.length > 0) {
         const botMessage = {
           role: "assistant",
@@ -117,10 +181,10 @@ const ChatPage = () => {
       }
     } catch (error) {
       console.error("Error fetching response from OpenAI:", error);
-  
+
       let errorMessageContent =
         "Oops! It seems you haven't created your .env file or haven't correctly added your OpenAI API key. To start chatting, make sure you've created a .env file with the correct configuration. Additionally, ensure your OpenAI API key is properly inserted. Remember, you must have sufficient credit to make requests and engage in chat conversations.";
-  
+
       if (error.response) {
         console.error("Status:", error.response.status);
         console.error("Data:", error.response.data);
@@ -131,12 +195,12 @@ const ChatPage = () => {
             "API endpoint not found. Please check the URL and model.";
         }
       }
-  
+
       const errorMessage = { role: "assistant", content: errorMessageContent };
       setMessages([...newMessages, errorMessage]); // Ajoute un message d'erreur à l'utilisateur
     }
   };
-  
+
   const contact = contacts.find((c) => c.id === parseInt(id, 10));
 
   useEffect(() => {

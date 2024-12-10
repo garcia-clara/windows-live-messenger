@@ -293,15 +293,6 @@ const ChatPage = () => {
                             />
                             <p className="ml-1">says:</p>
                           </div>
-                          <div className="flex text-black text-opacity-70">
-                            <p
-                              className="flex gap-1"
-                              dangerouslySetInnerHTML={{
-                                __html: replaceEmoticons(user.name),
-                              }}
-                            />
-                            <p className="ml-1">says:</p>
-                          </div>
                           {/* Display the content of the message */}
                           <div className="flex gap-2 items-start ml-1">
                             <div className="flex-shrink-0 mt-2.5">

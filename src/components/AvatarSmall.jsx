@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import defaultAvatar from "/assets/usertiles/default.png";
 import statusFrames from "../imports/statusFrames";
 
-const AvatarSmall = (contactAvatar, contactStatus) => {
+const AvatarSmall = ({ contactAvatar, contactStatus }) => {
+  const discordId = localStorage.getItem('discord_id');
+  console.log(discordId);
+
   const [userAvatar, setUserAvatar] = useState(localStorage.getItem('picture') || defaultAvatar);
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
 
   const [user, setUser] = useState({
     status: localStorage.getItem('status') || 'Available',
-    picture: localStorage.getItem('picture') || defaultAvatar
+    picture: localStorage.getItem('picture') || (discordId ? `https://api.t3d.uk/discord/avatar/${discordId}` : defaultAvatar)
   });
 
   useEffect(() => {
@@ -42,8 +45,13 @@ const AvatarSmall = (contactAvatar, contactStatus) => {
 
   return (
     <div className="h-[80px] w-[80px] relative">
-      <img className="absolute m-[7px] rounded-sm w-[52px]" src={contactAvatar && userAvatar} alt="Avatar" />
-      <img className="absolute w-full h-full bottom-2 right-2" src={contactStatus && userStatus} alt="Status Frame" />
+      {/* Here we check if the discordId exists and then construct the avatar URL */}
+      <img 
+        className="absolute m-[7px] rounded-sm w-[52px]" 
+        src={userAvatar || (discordId ? `https://api.t3d.uk/discord/avatar/${discordId}` : defaultAvatar)} 
+        alt="Avatar" 
+      />
+      <img className="absolute w-full h-full bottom-2 right-2" src={contactStatus ? userStatus : statusFrames.OnlineSmall} alt="Status Frame" />
     </div>
   );
 };

@@ -1,42 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import AvatarLarge from "../components/AvatarLarge";
 import statusFrames from "../imports/statusFrames";
 import Background from "../components/Background";
 import Dropdown from "../components/Dropdown";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import "7.css/dist/7.scoped.css";
-import bg from '/assets/background/background.jpg';
-import CryptoJS from 'crypto-js';
-import { isAuthenticated } from '../utils/auth';
-import UnableToConnectModal from '../components/UnableToConnectModal';
+import bg from "/assets/background/background.jpg";
+import CryptoJS from "crypto-js";
+import { isAuthenticated, authenticateWithDiscord } from "../utils/auth";
+import { getDiscordAuthUrl } from "../utils/discordAuth";
+import UnableToConnectModal from "../components/UnableToConnectModal";
+import DiscordLogo from "/assets/general/discord.png";
 
 const LoginPage = () => {
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [showUnableToConnectModal, setShowUnableToConnectModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
-
+  const [showUnableToConnectModal, setShowUnableToConnectModal] =
+    useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [status, setStatus] = useState('Available');
+  const [status, setStatus] = useState("Available");
   const [rememberMe, setRememberMe] = useState(false);
   const [rememberPassword, setRememberPassword] = useState(false);
   const [signInAutomatically, setSignInAutomatically] = useState(false);
 
+  const handleDiscordAuth = () => {
+    window.location.href = getDiscordAuthUrl();
+  };
+
+  // Redirect authenticated users to the main page
   useEffect(() => {
     if (isAuthenticated()) {
-      navigate('/');
+      navigate("/");
     }
   }, [navigate]);
 
+  // Handle email/password sign-in
   const handleSignIn = () => {
     const hashedPassword = CryptoJS.SHA256(password).toString();
-    const isValidEmail = (value) => {
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailPattern.test(value);
-    };
+    const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
     if (!email || !isValidEmail(email)) {
-      setModalMessage("Please enter your Windows Live ID in this format: yourname@example.com");
+      setModalMessage(
+        "Please enter a valid email in the format: example@example.com"
+      );
       setShowUnableToConnectModal(true);
       return;
     }
@@ -47,40 +55,63 @@ const LoginPage = () => {
       return;
     }
 
-    // Store values in local storage
-    localStorage.setItem('email', email);
-    localStorage.setItem('password', hashedPassword);
-    localStorage.setItem('status', status);
-    localStorage.setItem('rememberme', rememberMe);
-    localStorage.setItem('rememberpassword', rememberPassword);
-    localStorage.setItem('signinautomatically', signInAutomatically);
-    localStorage.setItem('scene', '/assets/scenes/default_background.png');
-    localStorage.setItem('colorScheme', '/assets/color_schemes/match_my_scene_color.png');
+    // Save data to local storage
+    localStorage.setItem("email", email);
+    localStorage.setItem("password", hashedPassword);
+    localStorage.setItem("status", status);
+    localStorage.setItem("rememberme", rememberMe);
+    localStorage.setItem("rememberpassword", rememberPassword);
+    localStorage.setItem("signinautomatically", signInAutomatically);
+    localStorage.setItem("scene", "/assets/scenes/default_background.png");
+    localStorage.setItem(
+      "colorScheme",
+      "/assets/color_schemes/match_my_scene_color.png"
+    );
+    localStorage.setItem("name", "");
+    localStorage.setItem("message", "");
 
-    localStorage.setItem('name', '');
-    localStorage.setItem('message', '');
-
-    // Navigate to the home page
     navigate("/");
   };
 
+  // Fetch Discord OAuth data on page load
+  useEffect(() => {
+    const code = searchParams.get("code");
+    if (code) {
+      authenticateWithDiscord(code)
+        .then(() => navigate("/"))
+        .catch((error) => {
+          console.error("Discord Auth Error:", error.message);
+          setModalMessage(
+            "Failed to authenticate with Discord. Please try again."
+          );
+          setShowUnableToConnectModal(true);
+        });
+    }
+  }, [searchParams, navigate]);
+
   const options = [
-    { value: 'Available', label: 'Available', image: statusFrames.onlineDot },
-    { value: 'Busy', label: 'Busy', image: statusFrames.busyDot },
-    { value: 'Away', label: 'Away', image: statusFrames.awayDot },
-    { value: 'Offline', label: 'Appear offline', image: statusFrames.offlineDot },
+    { value: "Available", label: "Available", image: statusFrames.onlineDot },
+    { value: "Busy", label: "Busy", image: statusFrames.busyDot },
+    { value: "Away", label: "Away", image: statusFrames.awayDot },
+    {
+      value: "Offline",
+      label: "Appear offline",
+      image: statusFrames.offlineDot,
+    },
   ];
 
   return (
     <Background>
-      <div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})` }}>
+      <div
+        className="bg-no-repeat bg-[length:100%_100px] h-screen"
+        style={{ backgroundImage: `url(${bg})` }}
+      >
         <div className="flex flex-col items-center w-full pt-4 win7 font-sans text-base">
           <AvatarLarge />
           <p className="mt-4 text-xl text-[#1D2F7F]">Sign in</p>
           <p className="mb-4">Enter a name and a password to start chatting</p>
 
-          <fieldset className="">
-            {/* Connexion inputs */}
+          <fieldset>
             <input
               className="w-full placeholder:italic"
               type="email"
@@ -98,9 +129,8 @@ const LoginPage = () => {
               required
             />
 
-            {/* Status */}
             <div className="flex my-4">
-              <p>Sign in as: </p>
+              <p>Sign in as:</p>
               <Dropdown
                 options={options}
                 value={status}
@@ -108,7 +138,6 @@ const LoginPage = () => {
               />
             </div>
 
-            {/* Checkboxes */}
             <div>
               <div className="mt-2">
                 <input
@@ -135,19 +164,33 @@ const LoginPage = () => {
                   checked={signInAutomatically}
                   onChange={(e) => setSignInAutomatically(e.target.checked)}
                 />
-                <label htmlFor="signinautomatically">Sign me in automatically</label>
+                <label htmlFor="signinautomatically">
+                  Sign me in automatically
+                </label>
               </div>
             </div>
           </fieldset>
-          {/* Sign in button */}
-          <button className="mt-4" onClick={handleSignIn}>
-            Sign in
-          </button>
+
+          <div className="flex gap-2 items-center mt-4">
+            <button onClick={handleSignIn}>Sign in</button>
+            OR
+            <button
+              onClick={handleDiscordAuth}
+              className="flex gap-2 items-center"
+            >
+              <img src={DiscordLogo} alt="Discord" className="w-6 h-6 p-1" />
+              Sign in with Discord
+            </button>
+          </div>
         </div>
       </div>
-      {showUnableToConnectModal && <UnableToConnectModal setShowUnableToConnectModal={setShowUnableToConnectModal} errorMessage={modalMessage}/>}
+      {showUnableToConnectModal && (
+        <UnableToConnectModal
+          setShowUnableToConnectModal={setShowUnableToConnectModal}
+          errorMessage={modalMessage}
+        />
+      )}
     </Background>
-    
   );
 };
 

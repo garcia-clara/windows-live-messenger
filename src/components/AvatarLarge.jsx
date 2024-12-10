@@ -7,7 +7,6 @@ const AvatarLarge = ({ image, status }) => {
   const [contactStatus, setContactStatus] = useState(statusFrames.OnlineSmall);
 
   useEffect(() => {
-   
     switch (localStorage.getItem('status')) {
       case "Available":
         setUserStatus(statusFrames.OnlineLarge);
@@ -45,11 +44,16 @@ const AvatarLarge = ({ image, status }) => {
     }
   }, [status]);
 
+  const discordId = localStorage.getItem('discord_id');
+
+  // Ensure fallback to defaultAvatar when discordId is not available
+  const avatarUrl = image || (discordId ? `https://api.t3d.uk/discord/avatar/${discordId}` : defaultAvatar);
+
   return (
     <div className="h-28 w-28">
       <img
         className="absolute ml-[9px] mt-[8px] w-24 rounded-sm"
-        src={image || defaultAvatar}
+        src={avatarUrl}
         alt="Avatar"
       />
       <img

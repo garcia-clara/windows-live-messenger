@@ -12,7 +12,7 @@ const Dropdown = ({ options, onChange }) => {
     email: localStorage.getItem('email') || '',
     message: localStorage.getItem('message') || '',
     status: localStorage.getItem('status') || 'Available',
-    name: localStorage.getItem('name') || ''
+    name: localStorage.getItem('name') || localStorage.getItem('discord_username') || ''
   });
 
   const [changePictureShowModal, setShowChangePictureModal] = useState(false);
@@ -73,12 +73,12 @@ const Dropdown = ({ options, onChange }) => {
   return (
     <div className="relative inline-block" ref={dropdownRef}>
       <div onClick={handleToggleDropdown} className="flex aerobutton cursor-pointer items-center px-1 ml-1 white-light">
-        {!user.email ? (
+        {/* {!user.email ? (
           <div className="flex items-center">
             <img className="inline-block mt-0.5 mr-2 w-2" src={selectedOption.image} alt="" />
             <p className="capitalize">{selectedOption.label}</p>
           </div>
-        ) : (
+        ) : ( */}
           <div className="flex items-center">
             {user.name !== '' ?
             <span className="flex gap-1 text-lg items-baseline" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }} />
@@ -87,7 +87,7 @@ const Dropdown = ({ options, onChange }) => {
             }
             <p className="ml-1 capitalize">({selectedOption.label})</p>
           </div>
-        )}
+        {/* )} */}
         <img src={arrow} className="inline-block mb-0.5 ml-2" alt="Toggle Dropdown" />
       </div>
 

@@ -232,7 +232,7 @@ const ChatPage = () => {
                 <div className="h-10" />
               </div>
             </div>
-            <div className="win7 h-full">
+            <div className="win7">
               <div className="flex items-center white-light mb-10">
                 <p
                   className="flex gap-1 text-lg"
@@ -248,85 +248,85 @@ const ChatPage = () => {
                 className="mb-[-5px] pointer-events-none"
               />
 
-              <div className="flex flex-col justify-between h-full w-full my-4 text-sm overflow-y-auto has-scrollbar pr-2">
-                <div>
-                {messages.map((message, index) => {
-                  const previousMessage = messages[index - 1];
+              <div className="flex flex-col justify-between h-full w-full my-4 text-sm pr-2">
+                <div className="overflow-y-auto has-scrollbar">
+                  {messages.map((message, index) => {
+                    const previousMessage = messages[index - 1];
 
-                  return (
-                    <div key={index} className={`message ${message.role}`}>
-                      {/* Display "user says" or "contact says" for regular messages */}
-                      {message.role === "user" && (
-                        <div>
-                          <div className="flex text-black text-opacity-70">
-                            <p
-                              className="flex gap-1"
-                              dangerouslySetInnerHTML={{
-                                __html: replaceEmoticons(user.name),
-                              }}
-                            />
-                            <p className="ml-1">says:</p>
-                          </div>
-                          {/* Display the content of the message */}
-                          <div className="flex gap-2 items-start ml-1">
-                            <div className="flex-shrink-0 mt-2.5">
-                              <img src={messageDot} alt="Message Dot" />
-                            </div>
-                            <div className="flex gap-1">
+                    return (
+                      <div key={index} className={`message ${message.role}`}>
+                        {/* Display "user says" or "contact says" for regular messages */}
+                        {message.role === "user" && (
+                          <div>
+                            <div className="flex text-black text-opacity-70">
                               <p
+                                className="flex gap-1"
                                 dangerouslySetInnerHTML={{
-                                  __html: replaceEmoticons(message.content),
+                                  __html: replaceEmoticons(user.name),
                                 }}
                               />
+                              <p className="ml-1">says:</p>
+                            </div>
+                            {/* Display the content of the message */}
+                            <div className="flex gap-2 items-start ml-1">
+                              <div className="flex-shrink-0 mt-2.5">
+                                <img src={messageDot} alt="Message Dot" />
+                              </div>
+                              <div className="flex gap-1">
+                                <p
+                                  dangerouslySetInnerHTML={{
+                                    __html: replaceEmoticons(message.content),
+                                  }}
+                                />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      )}
-                      {message.role === "assistant" && (
-                        <div>
-                          <div className="flex text-black text-opacity-70">
-                            <p
-                              className="flex gap-1"
-                              dangerouslySetInnerHTML={{
-                                __html: replaceEmoticons(contact.name),
-                              }}
-                            />
-                            <p className="ml-1">says:</p>
-                          </div>
-                          {/* Display the content of the message */}
-                          <div className="flex gap-2 items-start ml-1">
-                            <div className="flex-shrink-0 mt-2.5">
-                              <img src={messageDot} alt="Message Dot" />
-                            </div>
-                            <div className="flex gap-1">
+                        )}
+                        {message.role === "assistant" && (
+                          <div>
+                            <div className="flex text-black text-opacity-70">
                               <p
+                                className="flex gap-1"
                                 dangerouslySetInnerHTML={{
-                                  __html: replaceEmoticons(message.content),
+                                  __html: replaceEmoticons(contact.name),
                                 }}
                               />
+                              <p className="ml-1">says:</p>
+                            </div>
+                            {/* Display the content of the message */}
+                            <div className="flex gap-2 items-start ml-1">
+                              <div className="flex-shrink-0 mt-2.5">
+                                <img src={messageDot} alt="Message Dot" />
+                              </div>
+                              <div className="flex gap-1">
+                                <p
+                                  dangerouslySetInnerHTML={{
+                                    __html: replaceEmoticons(message.content),
+                                  }}
+                                />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      )}
+                        )}
 
-                      {/* Display nudge message */}
-                      {message.role === "nudging" &&
-                        (previousMessage &&
-                        previousMessage.role === "nudging" ? (
-                          <div>
-                            <p className="ml-1">{message.content}</p>
-                            <p>————</p>
-                          </div>
-                        ) : (
-                          <div>
-                            <p>————</p>
-                            <p className="ml-1">{message.content}</p>
-                            <p>————</p>
-                          </div>
-                        ))}
-                    </div>
-                  );
-                })}
+                        {/* Display nudge message */}
+                        {message.role === "nudging" &&
+                          (previousMessage &&
+                          previousMessage.role === "nudging" ? (
+                            <div>
+                              <p className="ml-1">{message.content}</p>
+                              <p>————</p>
+                            </div>
+                          ) : (
+                            <div>
+                              <p>————</p>
+                              <p className="ml-1">{message.content}</p>
+                              <p>————</p>
+                            </div>
+                          ))}
+                      </div>
+                    );
+                  })}
                 </div>
                 <div className="w-full">
                   {contactTyping && (

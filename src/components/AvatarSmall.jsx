@@ -4,7 +4,6 @@ import statusFrames from "../imports/statusFrames";
 
 const AvatarSmall = ({ contactAvatar, contactStatus }) => {
   const discordId = localStorage.getItem('discord_id');
-  console.log(discordId);
 
   const [userAvatar, setUserAvatar] = useState(localStorage.getItem('picture') || defaultAvatar);
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
@@ -15,22 +14,17 @@ const AvatarSmall = ({ contactAvatar, contactStatus }) => {
   });
 
   useEffect(() => {
-    console.log(user.status);
     switch (user.status) {
       case "Available":
-        console.log("online");
         setUserStatus(statusFrames.OnlineSmall);
         break;
       case "Offline":
-        console.log("offline");
         setUserStatus(statusFrames.OfflineSmall);
         break;
       case "Away":
-        console.log("away");
         setUserStatus(statusFrames.AwaySmall);
         break;
       case "Busy":
-        console.log("busy");
         setUserStatus(statusFrames.BusySmall);
         break;
       default:

@@ -76,7 +76,6 @@ export const DiscordAuthHandler = () => {
     if (code) {
       authenticateWithDiscord(code)
         .then((userData) => {
-          console.log("Discord authentication successful:", userData);
           navigate("/");
         })
         .catch((error) => {

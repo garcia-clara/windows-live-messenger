@@ -13,9 +13,10 @@ export const isDiscordAuthenticated = () => {
 
 export const saveDiscordUserData = (userData) => {
   localStorage.setItem("discord_id", userData.id);
-  localStorage.setItem("discord_username", userData.username);
+  localStorage.setItem("discord_username", userData.global_name);
   localStorage.setItem("discord_email", userData.email || "N/A");
   localStorage.setItem("discord_avatar", userData.avatar || "default_avatar.png");
+  localStorage.setItem("message", "")
 };
 
 export const getDiscordUserData = () => {

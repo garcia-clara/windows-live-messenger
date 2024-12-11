@@ -37,7 +37,6 @@ const ChatPage = () => {
   const { selectedEmoticon, setSelectedEmoticon } = useContext(EmoticonContext);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(id);
 
   const [messages, setMessages] = useState(() => {
     // Only attempt to get messages from localStorage if the 'id' exists (i.e., a valid conversation exists)

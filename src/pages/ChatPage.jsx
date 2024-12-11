@@ -61,16 +61,6 @@ const ChatPage = () => {
     }
   }, [messages, user]);
 
-  const handleInputChange = (e) => {
-    const updatedInput = e.target.value;
-    if (updatedInput.endsWith(")")) {
-      const replacedInput = replaceEmoticons(updatedInput);
-      setInput(replacedInput);
-    } else {
-      setInput(updatedInput);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (input.trim() === "") return;
@@ -236,11 +226,9 @@ const ChatPage = () => {
       { role: "nudging", content: nudgeMessage },
     ];
 
-    // Play nudge sound
     const audio = new Audio(sounds.nudge);
     audio.play();
 
-    // Set shaking state and update messages after animation
     setShaking(true);
     setTimeout(() => {
       setShaking(false);
@@ -403,9 +391,15 @@ const ChatPage = () => {
                 </div>
                 <div className="w-full">
                   {contactTyping && (
-                    <p className="flex">
-                      {replaceEmoticons(contact.name)} is typing...
-                    </p>
+                    <div className="flex gap-1">
+                      <p
+                        className="flex"
+                        dangerouslySetInnerHTML={{
+                          __html: replaceEmoticons(contact.name),
+                        }}
+                      />
+                      <p>is typing...</p>
+                    </div>
                   )}
                   {lastMessageTime && (
                     <p className="opacity-50 my-1">

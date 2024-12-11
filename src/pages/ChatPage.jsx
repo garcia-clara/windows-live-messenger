@@ -333,8 +333,8 @@ const ChatPage = () => {
                               <div className="flex-shrink-0 mt-2.5">
                                 <img src={messageDot} alt="Message Dot" />
                               </div>
-                              <div className="flex gap-1">
-                                <p
+                              <div>
+                                <p className="flex gap-1"
                                   dangerouslySetInnerHTML={{
                                     __html: replaceEmoticons(message.content),
                                   }}
@@ -359,8 +359,8 @@ const ChatPage = () => {
                               <div className="flex-shrink-0 mt-2.5">
                                 <img src={messageDot} alt="Message Dot" />
                               </div>
-                              <div className="flex gap-1">
-                                <p
+                              <div>
+                                <p  className="flex gap-1"
                                   dangerouslySetInnerHTML={{
                                     __html: replaceEmoticons(message.content),
                                   }}

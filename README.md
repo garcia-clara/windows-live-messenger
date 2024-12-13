@@ -54,6 +54,12 @@ Some features are not yet implemented but are planned for future updates:
 
 ---
 
+## Acknowledgments  
+
+- [7.css](https://github.com/khang-nd/7.css): For offering a collection of Windows 7-inspired components, which saved me a significant amount of time and effort.  
+
+---
+
 ## Contribute and Share Feedback  
 
 If you’d like to contribute to the project or provide feedback, feel free to reach out. I welcome all suggestions and help to improve this nostalgic trip down memory lane!  

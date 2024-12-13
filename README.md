@@ -2,7 +2,7 @@
 
 # [Windows Live Messenger](https://wlm.vercel.app/)
 
-Website: [https://wlm.vercel.app/](https://wlm.vercel.app/)
+🌐 **Try it here**: [WLM](https://wlm.vercel.app)  
 
 ---
 

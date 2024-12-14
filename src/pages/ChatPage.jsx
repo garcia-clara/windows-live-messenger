@@ -39,12 +39,11 @@ const ChatPage = () => {
 
 
   const [messages, setMessages] = useState(() => {
-    // Only attempt to get messages from localStorage if the 'id' exists (i.e., a valid conversation exists)
     if (id) {
       const savedMessages = localStorage.getItem(`chatMessages_${id}`);
-      return savedMessages ? JSON.parse(savedMessages) : []; // Default to an empty array if no messages
+      return savedMessages ? JSON.parse(savedMessages) : [];
     }
-    return []; // Default to an empty array if no 'id' or invalid 'id'
+    return [];
   });
 
   useEffect(() => {
@@ -292,7 +291,7 @@ const ChatPage = () => {
                 <div className="h-10" />
               </div>
             </div>
-            <div className="win7">
+            <div className="win7 h-[calc(100vh-70px)]">
               <div className="flex items-center white-light mb-10">
                 <p
                   className="flex gap-1 text-lg"
@@ -309,7 +308,7 @@ const ChatPage = () => {
               />
 
               <div className="flex flex-col justify-between h-full w-full my-4 text-sm pr-2">
-                <div className="overflow-y-auto has-scrollbar">
+                <div className="overflow-y-auto break-all has-scrollbar">
                   {messages.map((message, index) => {
                     const previousMessage = messages[index - 1];
 

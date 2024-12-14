@@ -7,7 +7,7 @@ import OptionsModal from './OptionsModal';
 import { replaceEmoticons } from '../helpers/replaceEmoticons';
 import ChangeSceneModal from '../components/ChangeSceneModal';
 
-const Dropdown = ({ options, onChange }) => {
+const Dropdown = ({ options, onChange, showStatusDots=false }) => {
   const [user, setUser] = useState({
     email: localStorage.getItem('email') || '',
     message: localStorage.getItem('message') || '',
@@ -32,7 +32,7 @@ const Dropdown = ({ options, onChange }) => {
       case 'Offline':
         setSelectedOption(option);
         user.email ? localStorage.setItem('status', option.value) : null
-        onChange(option.value); // Call onChange when a status is selected
+        onChange(option.value);
         break;
       case 'Sign out':
         localStorage.clear();
@@ -73,13 +73,12 @@ const Dropdown = ({ options, onChange }) => {
   return (
     <div className="relative inline-block" ref={dropdownRef}>
       <div onClick={handleToggleDropdown} className="flex aerobutton cursor-pointer items-center px-1 ml-1 white-light">
-        {/* {!user.email ? (
+        
           <div className="flex items-center">
-            <img className="inline-block mt-0.5 mr-2 w-2" src={selectedOption.image} alt="" />
-            <p className="capitalize">{selectedOption.label}</p>
-          </div>
-        ) : ( */}
-          <div className="flex items-center">
+          {showStatusDots && selectedOption.image && ( 
+              <img src={selectedOption.image} alt={selectedOption.label} className="inline-block mt-0.5 mr-1 w-2" />
+            )}
+
             {user.name !== '' ?
             <span className="flex gap-1 text-lg items-baseline" dangerouslySetInnerHTML={{ __html: replaceEmoticons(user.name) }} />
             : 

@@ -28,5 +28,4 @@ const Main = () => {
   );
 };
 
-// Use createRoot to render the app
 ReactDOM.createRoot(document.getElementById('root')).render(<Main />);

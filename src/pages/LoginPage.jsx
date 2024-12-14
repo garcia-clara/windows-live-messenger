@@ -7,7 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import "7.css/dist/7.scoped.css";
 import bg from "/assets/background/background.jpg";
 import CryptoJS from "crypto-js";
-import { isAuthenticated, authenticateWithDiscord } from "../utils/auth";
+import { isAuthenticated, authenticateWithDiscord, isDiscordAuthenticated } from "../utils/auth";
 import { getDiscordAuthUrl } from "../utils/discordAuth";
 import UnableToConnectModal from "../components/UnableToConnectModal";
 import DiscordLogo from "/assets/general/discord.png";
@@ -29,9 +29,8 @@ const LoginPage = () => {
     window.location.href = getDiscordAuthUrl();
   };
 
-  // Redirect authenticated users to the main page
   useEffect(() => {
-    if (isAuthenticated()) {
+    if (isAuthenticated() || isDiscordAuthenticated()) {
       navigate("/");
     }
   }, [navigate]);
@@ -135,6 +134,7 @@ const LoginPage = () => {
                 options={options}
                 value={status}
                 onChange={(option) => setStatus(option.value)}
+                showStatusDots={true}
               />
             </div>
 

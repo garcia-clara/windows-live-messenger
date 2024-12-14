@@ -11,12 +11,14 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
 
   const updateUserPicture = (imageSrc) => {
     localStorage.setItem("picture", imageSrc);
+    localStorage.setItem("discord_picture", imageSrc);
     setUserPicture(imageSrc);
+    setUserDiscordPicture(imageSrc);
   };
 
   const removeUserPicture = () => {
-    localStorage.setItem("picture", "");
-    setUserPicture(defaultAvatar);
+    localStorage.setItem("picture", defaultAvatar);
+    localStorage.setItem("discord_picture", defaultAvatar);
   };
 
   const handleButtonClick = () => {
@@ -41,17 +43,16 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
 
   const cropToSquare = (image) => {
     const canvas = document.createElement("canvas");
-    const size = Math.min(image.width, image.height); // Crop to the smallest dimension
+    const size = Math.min(image.width, image.height);
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d");
 
-    // Calculate the starting point for cropping
     const x = (image.width - size) / 2;
     const y = (image.height - size) / 2;
 
     ctx.drawImage(image, x, y, size, size, 0, 0, size, size);
-    return canvas.toDataURL("image/png"); // Return the cropped image as a Base64 string
+    return canvas.toDataURL("image/png");
   };
 
   return (

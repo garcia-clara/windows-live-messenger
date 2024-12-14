@@ -134,6 +134,7 @@ const LoginPage = () => {
                 options={options}
                 value={status}
                 onChange={(option) => setStatus(option.value)}
+                showStatusDots={true}
               />
             </div>
 

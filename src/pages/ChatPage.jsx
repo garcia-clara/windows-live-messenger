@@ -5,9 +5,9 @@ import Background from "../components/Background";
 import AvatarLarge from "../components/AvatarLarge";
 import useUserStore from "../lib/user-store";
 import contacts from "../data/contacts.json";
-import emoticons from "../imports/emoticons";
 import sounds from "../imports/sounds";
 import EmoticonSelector from "../components/EmoticonSelector";
+import WinkSelector from "../components/WinkSelector";
 import EmoticonContext from "../contexts/EmoticonContext"; // Ensure this import is correct
 import navbarBackground from "/assets/background/chat_navbar_background.png";
 import contactChatIcon from "/assets/chat/contact_chat_icon.png";
@@ -16,7 +16,6 @@ import arrowWhite from "/assets/general/arrow_white.png";
 import arrow from "/assets/general/arrow.png";
 import divider from "/assets/general/divider.png";
 import bg from "/assets/background/background.jpg";
-import selectWink from "/assets/chat/select_wink.png";
 import sendNudge from "/assets/chat/send_nudge.png";
 import changeFont from "/assets/chat/change_font.png";
 import changeBackground from "/assets/chat/select_background.png";
@@ -426,14 +425,9 @@ const ChatPage = () => {
                     style={{ backgroundImage: `url(${chatIconsBackground})` }}
                   >
                     {EmoticonSelector()}
-                    <div className="flex items-center aerobutton p-1 h-6">
-                      <div className="w-5">
-                        <img src={selectWink} alt="" />
-                      </div>
-                      <div>
-                        <img src={arrow} alt="" />
-                      </div>
-                    </div>
+
+                    {WinkSelector()}
+
                     <div
                       className="flex items-center aerobutton p-1 h-6"
                       onClick={handleNudgeClick}

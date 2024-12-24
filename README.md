@@ -35,7 +35,8 @@ To log in, simply enter a random email and password or use Discord authenticatio
 - **Scene customization**: Personalize the application background.  
 - **Chat with contacts**.  
 - **Send emoticons**.  
-- **Send wizz (nudge)**: Relive the iconic MSN feature!  
+- **Send wizz (nudge)**: Relive the iconic MSN feature!
+- **Winks**: Add animations to your interactions.    
 
 ---
 
@@ -46,7 +47,6 @@ Some features are not yet implemented but are planned for future updates:
 - **A proper authentication system**.  
 - **Real-time chat with other users (non-AI)**.  
 - **Advanced settings**: More customizable options.  
-- **Winks**: Add animations to your interactions.  
 - **Text style customization**: Change font color, size, and type in chat.  
 - **Photo sharing**.  
 - **Audio and video calls**.  

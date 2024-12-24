@@ -53,7 +53,7 @@ const ChatPage = () => {
   }, [selectedEmoticon, setSelectedEmoticon]);
 
   useEffect(() => {
-    if (user && id) {
+    if (id) {
       localStorage.setItem(`chatMessages_${id}`, JSON.stringify(messages));
     }
   }, [messages, user]);
@@ -216,20 +216,22 @@ const ChatPage = () => {
 
   const handleNudgeClick = () => {
     const nudgeMessage = "You have just sent a nudge.";
+  
     const newMessages = [
       ...messages,
-      { role: "nudging", content: nudgeMessage },
+      { content: nudgeMessage }
     ];
-
+  
     const audio = new Audio(sounds.nudge);
     audio.play();
-
+  
     setShaking(true);
     setTimeout(() => {
       setShaking(false);
       setMessages(newMessages);
     }, 500);
   };
+  
 
   return (
     <div
@@ -362,20 +364,21 @@ const ChatPage = () => {
                           </div>
                         )}
 
-                        {message.role === "nudging" &&
-                          (previousMessage &&
-                          previousMessage.role === "nudging" ? (
-                            <div>
-                              <p className="ml-1">{message.content}</p>
-                              <p>————</p>
-                            </div>
-                          ) : (
-                            <div>
-                              <p>————</p>
-                              <p className="ml-1">{message.content}</p>
-                              <p>————</p>
-                            </div>
-                          ))}
+{ (message.role === null || message.role === undefined) && (
+  previousMessage && previousMessage.role === undefined ? (
+    <div>
+      <p className="ml-1">{message.content}</p>
+      <p>————</p>
+    </div>
+  ) : (
+    <div>
+      <p>————</p>
+      <p className="ml-1">{message.content}</p>
+      <p>————</p>
+    </div>
+  )
+)}
+
                       </div>
                     );
                   })}

@@ -33,8 +33,8 @@ const ContactCategory = ({ title, contacts, count }) => {
         {title === "Favorites" && (
           <img src={favoritesIcon} className="mr-1" alt="favorites icon" />
         )}
-        <h2 className="text-[16px] text-[#1D2F7F] mr-1">{title}</h2>
-        <h2 className="opacity-40">({count})</h2>
+        <p className="text-[#1D2F7F] mr-1">{title}</p>
+        <p className="opacity-40">({count})</p>
       </div>
       {isOpen && <ContactList contacts={contacts} />}
     </div>

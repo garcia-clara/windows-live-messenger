@@ -58,7 +58,7 @@ const HomePage = () => {
               : "",
         }}
       >
-        <div className="flex flex-col w-full font-sans text-base h-screen">
+        <div className="flex flex-col w-full font-sans text-base h-screen win7">
           {/* Personnal informations row */}
           <div className="flex justify-between px-4 pt-4">
             <UserInformations />
@@ -71,7 +71,7 @@ const HomePage = () => {
           </div>
 
           {/* Contacts row */}
-          <div className="h-full">
+          <div className="h-full overflow-y-auto has-scrollbar">
             <img
               src={divider}
               alt=""

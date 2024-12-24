@@ -31,6 +31,7 @@ const ChatPage = () => {
   const [lastMessageTime, setLastMessageTime] = useState(null);
   const [contactTyping, setContactTyping] = useState(false);
   const user = localStorage.getItem("name");
+  const userEmail = localStorage.getItem("email");
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   const { selectedEmoticon, setSelectedEmoticon } = useContext(EmoticonContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -316,7 +317,7 @@ const ChatPage = () => {
                               <p
                                 className="flex gap-1"
                                 dangerouslySetInnerHTML={{
-                                  __html: replaceEmoticons(user),
+                                  __html: replaceEmoticons(user == "" ? userEmail : user),
                                 }}
                               />
                               <p className="ml-1">says:</p>

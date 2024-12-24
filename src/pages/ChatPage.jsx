@@ -3,12 +3,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Background from "../components/Background";
 import AvatarLarge from "../components/AvatarLarge";
-import useUserStore from "../lib/user-store";
 import contacts from "../data/contacts.json";
 import sounds from "../imports/sounds";
 import EmoticonSelector from "../components/EmoticonSelector";
 import WinkSelector from "../components/WinkSelector";
-import EmoticonContext from "../contexts/EmoticonContext"; // Ensure this import is correct
+import EmoticonContext from "../contexts/EmoticonContext";
 import navbarBackground from "/assets/background/chat_navbar_background.png";
 import contactChatIcon from "/assets/chat/contact_chat_icon.png";
 import showmenu from "/assets/contacts/1489.png";
@@ -31,7 +30,7 @@ const ChatPage = () => {
   const [input, setInput] = useState("");
   const [lastMessageTime, setLastMessageTime] = useState(null);
   const [contactTyping, setContactTyping] = useState(false);
-  const user = useUserStore((state) => state.user);
+  const user = localStorage.getItem("name");
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   const { selectedEmoticon, setSelectedEmoticon } = useContext(EmoticonContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -70,13 +69,12 @@ const ChatPage = () => {
     simulateContactTyping();
 
     setTimeout(() => {
-      getAssistantResponse(newMessages); // Use updated messages for the response
-    }, 1000); // Simulated delay for response
+      getAssistantResponse(newMessages);
+    }, 1000);
   };
 
   const getAssistantResponse = async (newMessages) => {
     try {
-      // Ajouter un message système pour personnaliser l'assistant
       const systemMessage = {
         role: "system",
         content: `You are not an assistant but a friend, and we are chatting like we would with any human.
@@ -137,7 +135,6 @@ const ChatPage = () => {
               `,
       };
 
-      // Inclure le message système avant les nouveaux messages
       const updatedMessages = [systemMessage, ...newMessages];
 
       const response = await axios.post(
@@ -184,7 +181,7 @@ const ChatPage = () => {
       }
 
       const errorMessage = { role: "assistant", content: errorMessageContent };
-      setMessages([...newMessages, errorMessage]); // Ajoute un message d'erreur à l'utilisateur
+      setMessages([...newMessages, errorMessage]);
     }
   };
 
@@ -213,7 +210,7 @@ const ChatPage = () => {
     setContactTyping(true);
     setTimeout(() => {
       setContactTyping(false);
-    }, 1500); // Simulated typing duration
+    }, 1500);
   };
 
   const handleNudgeClick = () => {
@@ -313,19 +310,17 @@ const ChatPage = () => {
 
                     return (
                       <div key={index} className={`message ${message.role}`}>
-                        {/* Display "user says" or "contact says" for regular messages */}
                         {message.role === "user" && (
                           <div>
                             <div className="flex text-black text-opacity-70">
                               <p
                                 className="flex gap-1"
                                 dangerouslySetInnerHTML={{
-                                  __html: replaceEmoticons(user.name),
+                                  __html: replaceEmoticons(user),
                                 }}
                               />
                               <p className="ml-1">says:</p>
                             </div>
-                            {/* Display the content of the message */}
                             <div className="flex gap-2 items-start ml-1">
                               <div className="flex-shrink-0 mt-2.5">
                                 <img src={messageDot} alt="Message Dot" />
@@ -351,7 +346,6 @@ const ChatPage = () => {
                               />
                               <p className="ml-1">says:</p>
                             </div>
-                            {/* Display the content of the message */}
                             <div className="flex gap-2 items-start ml-1">
                               <div className="flex-shrink-0 mt-2.5">
                                 <img src={messageDot} alt="Message Dot" />
@@ -367,7 +361,6 @@ const ChatPage = () => {
                           </div>
                         )}
 
-                        {/* Display nudge message */}
                         {message.role === "nudging" &&
                           (previousMessage &&
                           previousMessage.role === "nudging" ? (

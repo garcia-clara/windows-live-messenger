@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 // Generate the Discord OAuth URL
 export const getDiscordAuthUrl = () => {
@@ -14,36 +14,36 @@ export const getDiscordAuthUrl = () => {
 // Fetch the Discord OAuth token
 export const fetchDiscordToken = async (code) => {
   const data = new URLSearchParams();
-  data.append("client_id", import.meta.env.VITE_DISCORD_CLIENT_ID);
-  data.append("client_secret", import.meta.env.VITE_DISCORD_CLIENT_SECRET);
-  data.append("grant_type", "authorization_code");
-  data.append("code", code);
-  data.append("redirect_uri", import.meta.env.VITE_DISCORD_REDIRECT_URI);
+  data.append('client_id', import.meta.env.VITE_DISCORD_CLIENT_ID);
+  data.append('client_secret', import.meta.env.VITE_DISCORD_CLIENT_SECRET);
+  data.append('grant_type', 'authorization_code');
+  data.append('code', code);
+  data.append('redirect_uri', import.meta.env.VITE_DISCORD_REDIRECT_URI);
 
   try {
     const response = await axios.post(
-      "https://discord.com/api/oauth2/token",
+      'https://discord.com/api/oauth2/token',
       data,
       {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       }
     );
     const token = response.data.access_token;
-    localStorage.setItem("discord_token", token); // Save the token
+    localStorage.setItem('discord_token', token); // Save the token
     return token;
   } catch (error) {
     console.error(
-      "Failed to fetch Discord token:",
+      'Failed to fetch Discord token:',
       error.response?.data || error.message
     );
-    throw new Error("Failed to fetch Discord token");
+    throw new Error('Failed to fetch Discord token');
   }
 };
 
 // Fetch user data from Discord
 export const fetchDiscordUserData = async (token) => {
   try {
-    const response = await axios.get("https://discord.com/api/users/@me", {
+    const response = await axios.get('https://discord.com/api/users/@me', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const userData = response.data;
@@ -51,10 +51,10 @@ export const fetchDiscordUserData = async (token) => {
     return userData;
   } catch (error) {
     console.error(
-      "Failed to fetch Discord user data:",
+      'Failed to fetch Discord user data:',
       error.response?.data || error.message
     );
-    throw new Error("Failed to fetch Discord user data");
+    throw new Error('Failed to fetch Discord user data');
   }
 };
 
@@ -71,22 +71,20 @@ export const DiscordAuthHandler = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const code = searchParams.get("code");
+    const code = searchParams.get('code');
 
     if (code) {
       authenticateWithDiscord(code)
         .then((userData) => {
-          navigate("/");
+          navigate('/');
         })
         .catch((error) => {
-          console.error("Discord authentication failed:", error.message);
-          navigate("/login");
+          console.error('Discord authentication failed:', error.message);
+          navigate('/login');
         });
     } else {
-      console.error("No code found in URL");
-      navigate("/login");
+      console.error('No code found in URL');
+      navigate('/login');
     }
   }, [searchParams, navigate]);
-
-  return <div>Authenticating with Discord...</div>;
 };

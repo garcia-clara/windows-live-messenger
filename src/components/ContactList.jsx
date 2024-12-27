@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import online from "/assets/status/online-dot.png";
-import busy from "/assets/status/busy-dot.png";
-import away from "/assets/status/away-dot.png";
-import offline from "/assets/status/offline-dot.png";
-import favoritesIcon from "/assets/general/favorites.png";
-import openTabArrow from "/assets/general/open_tab_arrow.png";
-import closedTabArrow from "/assets/general/closed_tab_arrow.png";
-import { replaceEmoticons } from "../helpers/replaceEmoticons";
+import React, { useState } from 'react';
+import online from '/assets/status/online-dot.png';
+import busy from '/assets/status/busy-dot.png';
+import away from '/assets/status/away-dot.png';
+import offline from '/assets/status/offline-dot.png';
+import favoritesIcon from '/assets/general/favorites.png';
+import openTabArrow from '/assets/general/open_tab_arrow.png';
+import closedTabArrow from '/assets/general/closed_tab_arrow.png';
+import { replaceEmoticons } from '../helpers/replaceEmoticons';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const ContactCategory = ({ title, contacts, count }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -30,7 +30,7 @@ const ContactCategory = ({ title, contacts, count }) => {
             <img src={openTabArrow} alt="open tab" />
           )}
         </h2>
-        {title === "Favorites" && (
+        {title === 'Favorites' && (
           <img src={favoritesIcon} className="mr-1" alt="favorites icon" />
         )}
         <p className="text-[#1D2F7F] mr-1">{title}</p>
@@ -46,13 +46,13 @@ const Contacts = ({ contact }) => {
 
   const whichStatus = (contactStatus) => {
     switch (contactStatus) {
-      case "online":
+      case 'online':
         return online;
-      case "busy":
+      case 'busy':
         return busy;
-      case "away":
+      case 'away':
         return away;
-      case "offline":
+      case 'offline':
         return offline;
       default:
         return offline;
@@ -75,7 +75,7 @@ const Contacts = ({ contact }) => {
         className="flex gap-1"
         dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}
       ></span>
-      <span>{!contact.message ? null : "-"}</span>
+      <span>{!contact.message ? null : '-'}</span>
       <span
         className="flex gap-1 text-gray-400"
         dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.message) }}

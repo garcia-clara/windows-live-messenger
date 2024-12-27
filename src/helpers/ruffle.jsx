@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 
 const Ruffle = forwardRef((_, ref) => {
   const containerRef = useRef(null);
@@ -6,9 +12,13 @@ const Ruffle = forwardRef((_, ref) => {
   const timeoutRef = useRef(null);
 
   useEffect(() => {
-    if (!document.querySelector('script[src="https://unpkg.com/@ruffle-rs/ruffle"]')) {
-      const script = document.createElement("script");
-      script.src = "https://unpkg.com/@ruffle-rs/ruffle";
+    if (
+      !document.querySelector(
+        'script[src="https://unpkg.com/@ruffle-rs/ruffle"]'
+      )
+    ) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@ruffle-rs/ruffle';
       script.async = true;
       document.body.appendChild(script);
     }
@@ -21,31 +31,31 @@ const Ruffle = forwardRef((_, ref) => {
 
     const ruffleInstance = window.RufflePlayer?.newest();
     if (!ruffleInstance) {
-      console.error("RufflePlayer non disponible !");
+      console.error('RufflePlayer non disponible !');
       return;
     }
 
     if (containerRef.current) {
-      containerRef.current.innerHTML = "";
+      containerRef.current.innerHTML = '';
     }
 
     const player = ruffleInstance.createPlayer();
     player.config = {
       autoplay: true,
-      quality: "high",
-      wmode: "transparent",
+      quality: 'high',
+      wmode: 'transparent',
       splashScreen: false,
     };
 
-    player.style.width = "900px";
-    player.style.height = "700px";
+    player.style.width = '900px';
+    player.style.height = '700px';
 
     if (containerRef.current) {
       containerRef.current.appendChild(player);
       player.load(path);
 
       timeoutRef.current = setTimeout(() => {
-        containerRef.current.innerHTML = "";
+        containerRef.current.innerHTML = '';
         setIsPlaying(false);
       }, duration * 1000);
     }

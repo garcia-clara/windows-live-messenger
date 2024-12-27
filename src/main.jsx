@@ -8,10 +8,9 @@ import ChatPage from './pages/ChatPage';
 import PrivateRoute from './components/PrivateRoute';
 import { EmoticonProvider } from './contexts/EmoticonContext';
 import Notification from './components/Notification';
-import { DiscordAuthHandler } from "./utils/discordAuth";
+import { DiscordAuthHandler } from './utils/discordAuth';
 
 const Main = () => {
-
   return (
     <React.StrictMode>
       <EmoticonProvider>
@@ -19,7 +18,10 @@ const Main = () => {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<PrivateRoute element={HomePage} />} />
-            <Route path="/chat/:id" element={<PrivateRoute element={ChatPage} />} />
+            <Route
+              path="/chat/:id"
+              element={<PrivateRoute element={ChatPage} />}
+            />
             <Route path="/discordAuth" element={<DiscordAuthHandler />} />
           </Routes>
         </Router>

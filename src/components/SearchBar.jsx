@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 
 const SearchBar = ({ initialValue }) => {
   const [value, setValue] = useState(initialValue);
@@ -7,7 +7,7 @@ const SearchBar = ({ initialValue }) => {
 
   const handleInputClick = () => {
     setIsReset(true);
-    setValue("");
+    setValue('');
   };
 
   const handleClickOutside = (event) => {
@@ -18,10 +18,10 @@ const SearchBar = ({ initialValue }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -30,7 +30,7 @@ const SearchBar = ({ initialValue }) => {
       className="p-1.5 border rounded-[4px] w-full searchbar bg-transparent text-[#6b8fa3]"
       ref={inputRef}
       type="text"
-      value={isReset ? "" : value}
+      value={isReset ? '' : value}
       onClick={handleInputClick}
       onChange={(e) => setValue(e.target.value)}
     />

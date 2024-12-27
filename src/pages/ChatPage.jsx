@@ -1,41 +1,41 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import Background from "../components/Background";
-import AvatarLarge from "../components/AvatarLarge";
-import contacts from "../data/contacts.json";
-import sounds from "../imports/sounds";
-import EmoticonSelector from "../components/EmoticonSelector";
-import WinkSelector from "../components/WinkSelector";
-import EmoticonContext from "../contexts/EmoticonContext";
-import navbarBackground from "/assets/background/chat_navbar_background.png";
-import contactChatIcon from "/assets/chat/contact_chat_icon.png";
-import showmenu from "/assets/contacts/1489.png";
-import arrowWhite from "/assets/general/arrow_white.png";
-import arrow from "/assets/general/arrow.png";
-import divider from "/assets/general/divider.png";
-import bg from "/assets/background/background.jpg";
-import sendNudge from "/assets/chat/send_nudge.png";
-import changeFont from "/assets/chat/change_font.png";
-import changeBackground from "/assets/chat/select_background.png";
-import messageDot from "/assets/chat/message_dot.png";
-import chatIconsBackground from "/assets/background/chat_icons_background.png";
-import chatPointBackground from "/assets/background/chat_background_point.png";
-import chatIconsSeparator from "/assets/background/chat_icons_separator.png";
-import { replaceEmoticons } from "../helpers/replaceEmoticons";
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import Background from '../components/Background';
+import AvatarLarge from '../components/AvatarLarge';
+import contacts from '../data/contacts.json';
+import sounds from '../imports/sounds';
+import EmoticonSelector from '../components/EmoticonSelector';
+import WinkSelector from '../components/WinkSelector';
+import EmoticonContext from '../contexts/EmoticonContext';
+import navbarBackground from '/assets/background/chat_navbar_background.png';
+import contactChatIcon from '/assets/chat/contact_chat_icon.png';
+import showmenu from '/assets/contacts/1489.png';
+import arrowWhite from '/assets/general/arrow_white.png';
+import arrow from '/assets/general/arrow.png';
+import divider from '/assets/general/divider.png';
+import bg from '/assets/background/background.jpg';
+import sendNudge from '/assets/chat/send_nudge.png';
+import changeFont from '/assets/chat/change_font.png';
+import changeBackground from '/assets/chat/select_background.png';
+import messageDot from '/assets/chat/message_dot.png';
+import chatIconsBackground from '/assets/background/chat_icons_background.png';
+import chatPointBackground from '/assets/background/chat_background_point.png';
+import chatIconsSeparator from '/assets/background/chat_icons_separator.png';
+import { replaceEmoticons } from '../helpers/replaceEmoticons';
+import { getOpenAIResponse } from '../utils/openai';
 
 const ChatPage = () => {
   const { id } = useParams();
   const [shaking, setShaking] = useState(false);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const [lastMessageTime, setLastMessageTime] = useState(null);
   const [contactTyping, setContactTyping] = useState(false);
-  const user = localStorage.getItem("name");
-  const userEmail = localStorage.getItem("email");
+  const user = localStorage.getItem('name');
+  const userEmail = localStorage.getItem('email');
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   const { selectedEmoticon, setSelectedEmoticon } = useContext(EmoticonContext);
   const [isOpen, setIsOpen] = useState(false);
-
 
   const [messages, setMessages] = useState(() => {
     if (id) {
@@ -58,132 +58,36 @@ const ChatPage = () => {
     }
   }, [messages, user]);
 
+  const scrollToBottom = () => {
+    const messageContainer = document.getElementById('message-container');
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (input.trim() === "") return;
+    if (input.trim() === '') return;
 
-    const newMessage = { role: "user", content: input };
+    const newMessage = { role: 'user', content: input };
     const newMessages = [...messages, newMessage];
 
     setMessages(newMessages);
-    setInput("");
+    setInput('');
     simulateContactTyping();
 
     setTimeout(() => {
       getAssistantResponse(newMessages);
     }, 1000);
+
+    scrollToBottom();
   };
 
   const getAssistantResponse = async (newMessages) => {
-    try {
-      const systemMessage = {
-        role: "system",
-        content: `You are not an assistant but a friend, and we are chatting like we would with any human.
-                  You respond naturally, as if you are a real person. The setting is an online chat application, similar to Windows Live Messenger from around 2009.
-                  You can also use emoticons if you want, but only from this list—do not display modern Unicode emojis. Only use the emoticons from Windows Live Messenger:
-
-                  :) : smile
-                  :D : laugh
-                  ;) : wink
-                  :-O : ooh
-                  :P : tongue
-                  :@ : angry
-                  :$ : blush
-                  :S : erm
-                  :( : sad
-                  :'( : cry
-                  :| : what
-                  (H) : cool
-                  (L) : heart
-                  (u) : broken heart
-                  (M) : MSN logo
-                  (@) : cat
-                  (&) : dog
-                  (*) : star
-                  (^) : cake
-                  (p) : camera
-                  (T) : telephone
-                  ({) : hug left
-                  (}) : hug right
-                  (B) : beer
-                  (D) : cocktail
-                  (Z) : guy
-                  (X) : girl
-                  (N) : thumbs down
-                  (Y) : thumbs up
-                  (R) : rainbow
-                  (8-|) : nerd
-                  :-* : secret
-                  +o( : sick
-                  (sn) : snail
-                  (tu) : turtle
-                  (PI) : pizza
-                  (AU) : car
-                  (ap) : plane
-                  (IP) : island
-                  (CO) : computer
-                  (MP) : mobile phone
-                  (BRB) : be right back
-                  (st) : storm
-                  (H5) : hi five
-                  :^) : huh
-                  *-) : thinking
-                  (li) : lightning
-                  <:o) : party
-                  8-) : eyeroll
-                  |-) : sleepy
-                  Make sure to avoid any modern emojis and stick strictly to this list when responding.
-              `,
-      };
-
-      const updatedMessages = [systemMessage, ...newMessages];
-
-      const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          model: "gpt-3.5-turbo",
-          messages: updatedMessages,
-          max_tokens: 300,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.data.choices && response.data.choices.length > 0) {
-        const botMessage = {
-          role: "assistant",
-          content: response.data.choices[0].message.content.trim(),
-        };
-        setMessages([...newMessages, botMessage]);
-        const audio = new Audio(sounds.newmessage);
-        audio.play();
-      } else {
-        throw new Error("No response choices received");
-      }
-    } catch (error) {
-      console.error("Error fetching response from OpenAI:", error);
-
-      let errorMessageContent =
-        "Oops! It seems you haven't created your .env file or haven't correctly added your OpenAI API key. To start chatting, make sure you've created a .env file with the correct configuration. Additionally, ensure your OpenAI API key is properly inserted. Remember, you must have sufficient credit to make requests and engage in chat conversations.";
-
-      if (error.response) {
-        console.error("Status:", error.response.status);
-        console.error("Data:", error.response.data);
-        if (error.response.status === 429) {
-          errorMessageContent = "Too many requests. Please try again later.";
-        } else if (error.response.status === 404) {
-          errorMessageContent =
-            "API endpoint not found. Please check the URL and model.";
-        }
-      }
-
-      const errorMessage = { role: "assistant", content: errorMessageContent };
-      setMessages([...newMessages, errorMessage]);
-    }
+    const assistantMessage = await getOpenAIResponse(newMessages, apiKey);
+    const botMessage = {
+      role: 'assistant',
+      content: assistantMessage,
+    };
+    setMessages([...newMessages, botMessage]);
   };
 
   const contact = contacts.find((c) => c.id === parseInt(id, 10));
@@ -192,13 +96,13 @@ const ChatPage = () => {
     const getLastMessageTime = () => {
       if (messages.length > 0) {
         const lastMessage = messages[messages.length - 1];
-        if (lastMessage.role === "assistant") {
+        if (lastMessage.role === 'assistant') {
           const currentDate = new Date();
-          const options = { year: "2-digit", month: "2-digit", day: "2-digit" };
+          const options = { year: '2-digit', month: '2-digit', day: '2-digit' };
           const formattedDate = currentDate.toLocaleDateString([], options);
           const formattedTime = currentDate.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
+            hour: '2-digit',
+            minute: '2-digit',
           });
           setLastMessageTime(`${formattedTime} on ${formattedDate}`);
         }
@@ -215,28 +119,24 @@ const ChatPage = () => {
   };
 
   const handleNudgeClick = () => {
-    const nudgeMessage = "You have just sent a nudge.";
-  
-    const newMessages = [
-      ...messages,
-      { content: nudgeMessage }
-    ];
-  
+    const nudgeMessage = 'You have just sent a nudge.';
+
+    const newMessages = [...messages, { content: nudgeMessage }];
+
     const audio = new Audio(sounds.nudge);
     audio.play();
-  
+
     setShaking(true);
     setTimeout(() => {
       setShaking(false);
       setMessages(newMessages);
     }, 500);
   };
-  
 
   return (
     <div
       className={`bg-no-repeat bg-[length:100%_100px] h-screen ${
-        shaking ? "nudge" : ""
+        shaking ? 'nudge' : ''
       }`}
       style={{ backgroundImage: `url(${bg})` }}
     >
@@ -286,7 +186,7 @@ const ChatPage = () => {
             <div className="h-full flex flex-col items-center justify-between">
               <AvatarLarge image={contact.image} status={contact.status} />
               <div>
-                <AvatarLarge image={localStorage.getItem("picture")} />
+                <AvatarLarge image={localStorage.getItem('picture')} />
                 <div className="h-10" />
               </div>
             </div>
@@ -313,13 +213,15 @@ const ChatPage = () => {
 
                     return (
                       <div key={index} className={`message ${message.role}`}>
-                        {message.role === "user" && (
+                        {message.role === 'user' && (
                           <div>
                             <div className="flex text-black text-opacity-70">
                               <p
                                 className="flex gap-1"
                                 dangerouslySetInnerHTML={{
-                                  __html: replaceEmoticons(user == "" ? userEmail : user),
+                                  __html: replaceEmoticons(
+                                    user == '' ? userEmail : user
+                                  ),
                                 }}
                               />
                               <p className="ml-1">says:</p>
@@ -329,7 +231,8 @@ const ChatPage = () => {
                                 <img src={messageDot} alt="Message Dot" />
                               </div>
                               <div>
-                                <p className="flex gap-1"
+                                <p
+                                  className="flex gap-1"
                                   dangerouslySetInnerHTML={{
                                     __html: replaceEmoticons(message.content),
                                   }}
@@ -338,7 +241,7 @@ const ChatPage = () => {
                             </div>
                           </div>
                         )}
-                        {message.role === "assistant" && (
+                        {message.role === 'assistant' && (
                           <div>
                             <div className="flex text-black text-opacity-70">
                               <p
@@ -354,7 +257,8 @@ const ChatPage = () => {
                                 <img src={messageDot} alt="Message Dot" />
                               </div>
                               <div>
-                                <p  className="flex gap-1"
+                                <p
+                                  className="flex gap-1"
                                   dangerouslySetInnerHTML={{
                                     __html: replaceEmoticons(message.content),
                                   }}
@@ -364,21 +268,21 @@ const ChatPage = () => {
                           </div>
                         )}
 
-{ (message.role === null || message.role === undefined) && (
-  previousMessage && previousMessage.role === undefined ? (
-    <div>
-      <p className="ml-1">{message.content}</p>
-      <p>————</p>
-    </div>
-  ) : (
-    <div>
-      <p>————</p>
-      <p className="ml-1">{message.content}</p>
-      <p>————</p>
-    </div>
-  )
-)}
-
+                        {(message.role === null ||
+                          message.role === undefined) &&
+                          (previousMessage &&
+                          previousMessage.role === undefined ? (
+                            <div>
+                              <p className="ml-1">{message.content}</p>
+                              <p>————</p>
+                            </div>
+                          ) : (
+                            <div>
+                              <p>————</p>
+                              <p className="ml-1">{message.content}</p>
+                              <p>————</p>
+                            </div>
+                          ))}
                       </div>
                     );
                   })}

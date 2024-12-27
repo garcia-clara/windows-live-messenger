@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from "react";
-import defaultAvatar from "/assets/usertiles/default.png";
-import statusFrames from "../imports/statusFrames";
+import React, { useEffect, useState } from 'react';
+import defaultAvatar from '/assets/usertiles/default.png';
+import statusFrames from '../imports/statusFrames';
 
 const AvatarSmall = () => {
-  const discordId = localStorage.getItem("discord_id");
+  const discordId = localStorage.getItem('discord_id');
 
   const [user, setUser] = useState({
-    status: localStorage.getItem("status") || "Available",
+    status: localStorage.getItem('status') || 'Available',
     picture:
-      localStorage.getItem("picture") ||
-      (discordId ? `https://api.t3d.uk/discord/avatar/${discordId}` : defaultAvatar),
+      localStorage.getItem('picture') ||
+      (discordId
+        ? `https://api.t3d.uk/discord/avatar/${discordId}`
+        : defaultAvatar),
   });
 
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const newStatus = localStorage.getItem("status") || "Available";
+      const newStatus = localStorage.getItem('status') || 'Available';
       const newPicture =
-        localStorage.getItem("picture") ||
-        (discordId ? `https://api.t3d.uk/discord/avatar/${discordId}` : defaultAvatar);
+        localStorage.getItem('picture') ||
+        (discordId
+          ? `https://api.t3d.uk/discord/avatar/${discordId}`
+          : defaultAvatar);
 
       setUser((prevUser) => {
         if (prevUser.status !== newStatus || prevUser.picture !== newPicture) {
@@ -32,19 +36,18 @@ const AvatarSmall = () => {
     return () => clearInterval(interval);
   }, [discordId]);
 
-
   useEffect(() => {
     switch (user.status) {
-      case "Available":
+      case 'Available':
         setUserStatus(statusFrames.OnlineSmall);
         break;
-      case "Offline":
+      case 'Offline':
         setUserStatus(statusFrames.OfflineSmall);
         break;
-      case "Away":
+      case 'Away':
         setUserStatus(statusFrames.AwaySmall);
         break;
-      case "Busy":
+      case 'Busy':
         setUserStatus(statusFrames.BusySmall);
         break;
       default:

@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from "react";
-import AvatarLarge from "../components/AvatarLarge";
-import statusFrames from "../imports/statusFrames";
-import Background from "../components/Background";
-import Dropdown from "../components/Dropdown";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import "7.css/dist/7.scoped.css";
-import bg from "/assets/background/background.jpg";
-import CryptoJS from "crypto-js";
-import { isAuthenticated, authenticateWithDiscord, isDiscordAuthenticated } from "../utils/auth";
-import { getDiscordAuthUrl } from "../utils/discordAuth";
-import UnableToConnectModal from "../components/UnableToConnectModal";
-import DiscordLogo from "/assets/general/discord.png";
+import React, { useState, useEffect } from 'react';
+import AvatarLarge from '../components/AvatarLarge';
+import statusFrames from '../imports/statusFrames';
+import Background from '../components/Background';
+import Dropdown from '../components/Dropdown';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import '7.css/dist/7.scoped.css';
+import bg from '/assets/background/background.jpg';
+import CryptoJS from 'crypto-js';
+import {
+  isAuthenticated,
+  authenticateWithDiscord,
+  isDiscordAuthenticated,
+} from '../utils/auth';
+import { getDiscordAuthUrl } from '../utils/discordAuth';
+import UnableToConnectModal from '../components/UnableToConnectModal';
+import DiscordLogo from '/assets/general/discord.png';
 
 const LoginPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [showUnableToConnectModal, setShowUnableToConnectModal] =
     useState(false);
-  const [modalMessage, setModalMessage] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [status, setStatus] = useState("Available");
+  const [modalMessage, setModalMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [status, setStatus] = useState('Available');
   const [rememberMe, setRememberMe] = useState(false);
   const [rememberPassword, setRememberPassword] = useState(false);
   const [signInAutomatically, setSignInAutomatically] = useState(false);
@@ -31,7 +35,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (isAuthenticated() || isDiscordAuthenticated()) {
-      navigate("/");
+      navigate('/');
     }
   }, [navigate]);
 
@@ -42,46 +46,46 @@ const LoginPage = () => {
 
     if (!email || !isValidEmail(email)) {
       setModalMessage(
-        "Please enter a valid email in the format: example@example.com"
+        'Please enter a valid email in the format: example@example.com'
       );
       setShowUnableToConnectModal(true);
       return;
     }
 
     if (!password) {
-      setModalMessage("Please enter your password");
+      setModalMessage('Please enter your password');
       setShowUnableToConnectModal(true);
       return;
     }
 
     // Save data to local storage
-    localStorage.setItem("email", email);
-    localStorage.setItem("password", hashedPassword);
-    localStorage.setItem("status", status);
-    localStorage.setItem("rememberme", rememberMe);
-    localStorage.setItem("rememberpassword", rememberPassword);
-    localStorage.setItem("signinautomatically", signInAutomatically);
-    localStorage.setItem("scene", "/assets/scenes/default_background.png");
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', hashedPassword);
+    localStorage.setItem('status', status);
+    localStorage.setItem('rememberme', rememberMe);
+    localStorage.setItem('rememberpassword', rememberPassword);
+    localStorage.setItem('signinautomatically', signInAutomatically);
+    localStorage.setItem('scene', '/assets/scenes/default_background.png');
     localStorage.setItem(
-      "colorScheme",
-      "/assets/color_schemes/match_my_scene_color.png"
+      'colorScheme',
+      '/assets/color_schemes/match_my_scene_color.png'
     );
-    localStorage.setItem("name", "");
-    localStorage.setItem("message", "");
+    localStorage.setItem('name', '');
+    localStorage.setItem('message', '');
 
-    navigate("/");
+    navigate('/');
   };
 
   // Fetch Discord OAuth data on page load
   useEffect(() => {
-    const code = searchParams.get("code");
+    const code = searchParams.get('code');
     if (code) {
       authenticateWithDiscord(code)
-        .then(() => navigate("/"))
+        .then(() => navigate('/'))
         .catch((error) => {
-          console.error("Discord Auth Error:", error.message);
+          console.error('Discord Auth Error:', error.message);
           setModalMessage(
-            "Failed to authenticate with Discord. Please try again."
+            'Failed to authenticate with Discord. Please try again.'
           );
           setShowUnableToConnectModal(true);
         });
@@ -89,12 +93,12 @@ const LoginPage = () => {
   }, [searchParams, navigate]);
 
   const options = [
-    { value: "Available", label: "Available", image: statusFrames.onlineDot },
-    { value: "Busy", label: "Busy", image: statusFrames.busyDot },
-    { value: "Away", label: "Away", image: statusFrames.awayDot },
+    { value: 'Available', label: 'Available', image: statusFrames.onlineDot },
+    { value: 'Busy', label: 'Busy', image: statusFrames.busyDot },
+    { value: 'Away', label: 'Away', image: statusFrames.awayDot },
     {
-      value: "Offline",
-      label: "Appear offline",
+      value: 'Offline',
+      label: 'Appear offline',
       image: statusFrames.offlineDot,
     },
   ];

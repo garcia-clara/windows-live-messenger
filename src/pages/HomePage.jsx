@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Background from "../components/Background";
-import SearchBar from "../components/SearchBar";
-import ContactCategory from "../components/ContactList";
-import arrow from "/assets/general/arrow.png";
-import ad from "/assets/ad.png";
-import mail from "/assets/general/mail.png";
-import addcontact from "/assets/contacts/add_contact.png";
-import showmenu from "/assets/contacts/1489.png";
-import contactlistlayout from "/assets/contacts/change_contact_list_layout.png";
-import contactsData from "../data/contacts.json";
-import divider from "/assets/general/divider.png";
-import WhatsNew from "../components/WhatsNew";
-import UserInformations from "../components/UserInformations";
-import bg from "/assets/background/background.jpg";
-import hotmail from "/assets/general/hotmail.png";
+import React, { useState, useEffect } from 'react';
+import Background from '../components/Background';
+import SearchBar from '../components/SearchBar';
+import ContactCategory from '../components/ContactList';
+import arrow from '/assets/general/arrow.png';
+import ad from '/assets/ad.png';
+import mail from '/assets/general/mail.png';
+import addcontact from '/assets/contacts/add_contact.png';
+import showmenu from '/assets/contacts/1489.png';
+import contactlistlayout from '/assets/contacts/change_contact_list_layout.png';
+import contactsData from '../data/contacts.json';
+import divider from '/assets/general/divider.png';
+import WhatsNew from '../components/WhatsNew';
+import UserInformations from '../components/UserInformations';
+import bg from '/assets/background/background.jpg';
+import hotmail from '/assets/general/hotmail.png';
 
 const HomePage = () => {
   const [contacts, setContacts] = useState([]);
@@ -27,35 +27,35 @@ const HomePage = () => {
     (contact) => contact.isFavorite === 1
   );
   const groupsContacts = contacts.filter(
-    (contact) => contact.status === "group"
+    (contact) => contact.status === 'group'
   );
   const availableContacts = contacts.filter(
-    (contact) => contact.status !== "offline"
+    (contact) => contact.status !== 'offline'
   );
   const offlineContacts = contacts.filter(
-    (contact) => contact.status === "offline"
+    (contact) => contact.status === 'offline'
   );
 
-  const background = localStorage.getItem("scene");
+  const background = localStorage.getItem('scene');
 
   return (
     <Background>
       <div
         className={`bg-no-repeat ${
-          background === "/assets/scenes/default_background.jpg"
-            ? "h-screen"
-            : "h-[97px]"
+          background === '/assets/scenes/default_background.jpg'
+            ? 'h-screen'
+            : 'h-[97px]'
         } bg-[length:100%_100px]`}
         style={{
           backgroundImage: `url(${background})`,
           backgroundSize:
-            background !== "/assets/scenes/default_background.jpg"
-              ? "cover"
-              : "",
+            background !== '/assets/scenes/default_background.jpg'
+              ? 'cover'
+              : '',
           backgroundPosition:
-            background !== "/assets/scenes/default_background.jpg"
-              ? "center"
-              : "",
+            background !== '/assets/scenes/default_background.jpg'
+              ? 'center'
+              : '',
         }}
       >
         <div className="flex flex-col w-full font-sans text-base h-screen win7">
@@ -71,7 +71,7 @@ const HomePage = () => {
           </div>
 
           {/* Contacts row */}
-          <div className="h-full overflow-y-auto has-scrollbar">
+          <div className="h-full">
             <img
               src={divider}
               alt=""
@@ -104,27 +104,29 @@ const HomePage = () => {
               </div>
             </div>
 
-            {/* Contacts */}
-            <ContactCategory
-              title="Favorites"
-              contacts={favoritesContacts}
-              count={favoritesContacts.length}
-            />
-            <ContactCategory
-              title="Groups"
-              contacts={groupsContacts}
-              count={groupsContacts.length}
-            />
-            <ContactCategory
-              title="Available"
-              contacts={availableContacts}
-              count={availableContacts.length}
-            />
-            <ContactCategory
-              title="Offline"
-              contacts={offlineContacts}
-              count={offlineContacts.length}
-            />
+            <div className="overflow-y-auto has-scrollbar h-[58.8vh]">
+              {/* Contacts */}
+              <ContactCategory
+                title="Favorites"
+                contacts={favoritesContacts}
+                count={favoritesContacts.length}
+              />
+              <ContactCategory
+                title="Groups"
+                contacts={groupsContacts}
+                count={groupsContacts.length}
+              />
+              <ContactCategory
+                title="Available"
+                contacts={availableContacts}
+                count={availableContacts.length}
+              />
+              <ContactCategory
+                title="Offline"
+                contacts={offlineContacts}
+                count={offlineContacts.length}
+              />
+            </div>
           </div>
 
           {/* What's New row */}

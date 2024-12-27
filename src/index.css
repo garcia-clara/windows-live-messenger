@@ -3,162 +3,197 @@
 @tailwind utilities;
 
 .aerobutton {
-    background-color: transparent;
-    border: 2px solid transparent;
+  background-color: transparent;
+  border: 2px solid transparent;
 }
 .aerobutton:hover {
-    border-image: url("/assets/general/aerobutton_border.png") 2 round;
-    background-size: 100% 100%;
+  border-image: url('/assets/general/aerobutton_border.png') 2 round;
+  background-size: 100% 100%;
 }
 .aerobutton:active {
-    border-image: url("/assets/general/aerobutton_border_down.png") 2 round;
+  border-image: url('/assets/general/aerobutton_border_down.png') 2 round;
 }
 
 .divider {
-    box-shadow: 0 3px 4px black;
+  box-shadow: 0 3px 4px black;
 }
 
 .white-light {
-    text-shadow: 0 1px 3px white;
+  text-shadow: 0 1px 3px white;
 }
 
 .searchbar {
-    background-image: url('.//assets/general/magnifying-glass.png'); /* URL de votre icône SVG locale */
-    background-size: 12px 12px; /* Taille de l'icône */
-    background-repeat: no-repeat;
-    background-position: right 10px center; /* Position de l'icône */
-    box-shadow: inset 0px 7px 6px -7px rgba(0,0,0,0.1);
+  background-image: url('.//assets/general/magnifying-glass.png'); /* URL de votre icône SVG locale */
+  background-size: 12px 12px; /* Taille de l'icône */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Position de l'icône */
+  box-shadow: inset 0px 7px 6px -7px rgba(0, 0, 0, 0.1);
 }
 
 .searchbar:hover {
-    border: 1px solid #179bf3;
+  border: 1px solid #179bf3;
 }
 
 .searchbar:focus {
-    border: 1px solid #179bf3;
-    outline: none;
+  border: 1px solid #179bf3;
+  outline: none;
 }
 
-
 .hovercontact:hover {
-    cursor: pointer;
-    border: 1px solid #80D2F1;
-    border-radius: 3px;
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,234,249,1) 70%, rgb(198, 237, 255) 97%);
-    
+  cursor: pointer;
+  border: 1px solid #80d2f1;
+  border-radius: 3px;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(200, 234, 249, 1) 70%,
+    rgb(198, 237, 255) 97%
+  );
 }
 
 .fade-in {
-    opacity: 1;
-    transition: opacity 1s ease-in;
+  opacity: 1;
+  transition: opacity 1s ease-in;
 }
 
 .fade-out {
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
 }
 
 @keyframes nudge {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
 
 .nudge {
-    animation: nudge 0.5s; /* Duration of the animation */
-    animation-iteration-count: 1; /* Number of iterations of the animation */
-    overflow: hidden; /* Hide scrollbars */
-    -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer, Edge */
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
+  animation: nudge 0.5s; /* Duration of the animation */
+  animation-iteration-count: 1; /* Number of iterations of the animation */
+  overflow: hidden; /* Hide scrollbars */
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer, Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
 body {
-    overflow: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  overflow: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .link {
-    color : #1232c2;
+  color: #1232c2;
 }
 
 .link:hover {
-    cursor: pointer;
-    text-decoration: underline;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .usertiles-shadow {
-    box-shadow: 3px 2px 4px 0px rgba(0,0,0,0.35);
+  box-shadow: 3px 2px 4px 0px rgba(0, 0, 0, 0.35);
 }
 
 /* -----------------WHATS NEW COMPONENT CSS----------------- */
 
 .whats-new-arrow-previous {
-    height: 17px;
-    width: 17px;
-    background-image: url("/assets/general/whats_new_arrow_previous.png");
-    cursor: pointer;
+  height: 17px;
+  width: 17px;
+  background-image: url('/assets/general/whats_new_arrow_previous.png');
+  cursor: pointer;
 }
 
 .whats-new-arrow-previous:active {
-    background-image: url("/assets/general/whats_new_arrow_previous_active.png");
+  background-image: url('/assets/general/whats_new_arrow_previous_active.png');
 }
 
 .whats-new-arrow-previous:hover {
-    background-image: url("/assets/general/whats_new_arrow_previous_hover.png");
+  background-image: url('/assets/general/whats_new_arrow_previous_hover.png');
 }
 
 .whats-new-arrow-next {
-    height: 17px;
-    width: 17px;
-    background-image: url("/assets/general/whats_new_arrow_next.png");
-    cursor: pointer;
+  height: 17px;
+  width: 17px;
+  background-image: url('/assets/general/whats_new_arrow_next.png');
+  cursor: pointer;
 }
 
 .whats-new-arrow-next:active {
-    background-image: url("/assets/general/whats_new_arrow_next_active.png");
+  background-image: url('/assets/general/whats_new_arrow_next_active.png');
 }
 
 .whats-new-arrow-next:hover {
-    background-image: url("/assets/general/whats_new_arrow_next_hover.png");
+  background-image: url('/assets/general/whats_new_arrow_next_hover.png');
 }
 
 .whats-new-settings {
-    height: 10px;
-    width: 10px;
-    background-image: url("/assets/general/whats_new_settings.png");
-    cursor: pointer;
+  height: 10px;
+  width: 10px;
+  background-image: url('/assets/general/whats_new_settings.png');
+  cursor: pointer;
 }
 
 .whats-new-settings:hover {
-    background-image: url("/assets/general/whats_new_settings_hover.png");
+  background-image: url('/assets/general/whats_new_settings_hover.png');
 }
 
 /* -----------------WHATS NEW COMPONENT CSS----------------- */
 
-.hoverscene{
-    border: transparent 1px solid;
+.hoverscene {
+  border: transparent 1px solid;
 }
 
-.hoverscene:hover{
-    border: 1px solid #B9D7FC;
-    border-radius: 3px;
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,234,249,1) 70%, rgb(198, 237, 255) 97%);
+.hoverscene:hover {
+  border: 1px solid #b9d7fc;
+  border-radius: 3px;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(200, 234, 249, 1) 70%,
+    rgb(198, 237, 255) 97%
+  );
 }
 
-.selectedscene{
-    border: 1px solid #84ACDD;
-    border-radius: 3px;
-    background: rgb(255,255,255);
-    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(200,234,249,1) 70%, rgb(198, 237, 255) 97%);
+.selectedscene {
+  border: 1px solid #84acdd;
+  border-radius: 3px;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(200, 234, 249, 1) 70%,
+    rgb(198, 237, 255) 97%
+  );
 }

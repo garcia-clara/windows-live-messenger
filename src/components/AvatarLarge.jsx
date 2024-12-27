@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import defaultAvatar from "/assets/usertiles/default.png";
-import statusFrames from "../imports/statusFrames";
+import React, { useEffect, useState } from 'react';
+import defaultAvatar from '/assets/usertiles/default.png';
+import statusFrames from '../imports/statusFrames';
 
 const AvatarLarge = ({ image, status }) => {
   const [userStatus, setUserStatus] = useState(statusFrames.OnlineSmall);
@@ -8,16 +8,16 @@ const AvatarLarge = ({ image, status }) => {
 
   useEffect(() => {
     switch (localStorage.getItem('status')) {
-      case "Available":
+      case 'Available':
         setUserStatus(statusFrames.OnlineLarge);
         break;
-      case "Offline":
+      case 'Offline':
         setUserStatus(statusFrames.OfflineLarge);
         break;
-      case "Away":
+      case 'Away':
         setUserStatus(statusFrames.AwayLarge);
         break;
-      case "Busy":
+      case 'Busy':
         setUserStatus(statusFrames.BusyLarge);
         break;
       default:
@@ -26,16 +26,16 @@ const AvatarLarge = ({ image, status }) => {
     }
 
     switch (status) {
-      case "available":
+      case 'available':
         setContactStatus(statusFrames.OnlineLarge);
         break;
-      case "offline":
+      case 'offline':
         setContactStatus(statusFrames.OfflineLarge);
         break;
-      case "away":
+      case 'away':
         setContactStatus(statusFrames.AwayLarge);
         break;
-      case "busy":
+      case 'busy':
         setContactStatus(statusFrames.BusyLarge);
         break;
       default:
@@ -47,7 +47,11 @@ const AvatarLarge = ({ image, status }) => {
   const discordId = localStorage.getItem('discord_id');
 
   // Ensure fallback to defaultAvatar when discordId is not available
-  const avatarUrl = image || (discordId ? `https://api.t3d.uk/discord/avatar/${discordId}` : defaultAvatar);
+  const avatarUrl =
+    image ||
+    (discordId
+      ? `https://api.t3d.uk/discord/avatar/${discordId}`
+      : defaultAvatar);
 
   return (
     <div className="h-28 w-28">

@@ -1,6 +1,5 @@
 import React, { createContext, useState } from 'react';
 
-
 const EmoticonContext = createContext();
 
 export const EmoticonProvider = ({ children }) => {

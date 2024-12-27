@@ -1,4 +1,3 @@
-
 import away from '/assets/status/away.png';
 import awayDot from '/assets/status/away-dot.png';
 import busy from '/assets/status/busy.png';

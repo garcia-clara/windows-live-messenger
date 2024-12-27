@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import "7.css/dist/7.scoped.css";
-import line from "/assets/general/subtitles_line_options.png";
-import defaultAvatar from "/assets/usertiles/default.png";
-import { replaceEmoticons } from "../helpers/replaceEmoticons";
+import React, { useState } from 'react';
+import '7.css/dist/7.scoped.css';
+import line from '/assets/general/subtitles_line_options.png';
+import defaultAvatar from '/assets/usertiles/default.png';
+import { replaceEmoticons } from '../helpers/replaceEmoticons';
 
 const ChangeDisplayPictureModal = ({ setShowOptionsModal }) => {
   const [user, setUser] = useState({
-    message: localStorage.getItem("message"),
-    email: localStorage.getItem("email"),
-    name: localStorage.getItem("name"),
+    message: localStorage.getItem('message'),
+    email: localStorage.getItem('email'),
+    name: localStorage.getItem('name'),
   });
 
   const [initialState, setInitialState] = useState({
@@ -33,8 +33,8 @@ const ChangeDisplayPictureModal = ({ setShowOptionsModal }) => {
   const handleApplyChanges = () => {
     if (isModified) {
       // Update localStorage with new values
-      localStorage.setItem("message", message);
-      localStorage.setItem("name", name);
+      localStorage.setItem('message', message);
+      localStorage.setItem('name', name);
       setIsModified(false);
     }
   };
@@ -48,7 +48,6 @@ const ChangeDisplayPictureModal = ({ setShowOptionsModal }) => {
   const handleCloseModal = () => {
     setShowOptionsModal(false);
   };
-
 
   return (
     <>

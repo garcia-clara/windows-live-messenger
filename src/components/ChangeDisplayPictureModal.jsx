@@ -1,24 +1,26 @@
-import React, { useState, useRef } from "react";
-import "7.css/dist/7.scoped.css";
-import AvatarLarge from "./AvatarLarge";
-import usertiles from "../imports/usertiles";
-import defaultAvatar from "/assets/usertiles/default.png";
-import WLMIcon from "/assets/general/wlm-icon.png";
+import React, { useState, useRef } from 'react';
+import '7.css/dist/7.scoped.css';
+import AvatarLarge from './AvatarLarge';
+import usertiles from '../imports/usertiles';
+import defaultAvatar from '/assets/usertiles/default.png';
+import WLMIcon from '/assets/general/wlm-icon.png';
 
 const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
-  const [userPicture, setUserPicture] = useState(localStorage.getItem("picture"));
+  const [userPicture, setUserPicture] = useState(
+    localStorage.getItem('picture')
+  );
   const fileInputRef = useRef(null);
 
   const updateUserPicture = (imageSrc) => {
-    localStorage.setItem("picture", imageSrc);
-    localStorage.setItem("discord_picture", imageSrc);
+    localStorage.setItem('picture', imageSrc);
+    localStorage.setItem('discord_picture', imageSrc);
     setUserPicture(imageSrc);
     setUserDiscordPicture(imageSrc);
   };
 
   const removeUserPicture = () => {
-    localStorage.setItem("picture", defaultAvatar);
-    localStorage.setItem("discord_picture", defaultAvatar);
+    localStorage.setItem('picture', defaultAvatar);
+    localStorage.setItem('discord_picture', defaultAvatar);
   };
 
   const handleButtonClick = () => {
@@ -42,17 +44,17 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
   };
 
   const cropToSquare = (image) => {
-    const canvas = document.createElement("canvas");
+    const canvas = document.createElement('canvas');
     const size = Math.min(image.width, image.height);
     canvas.width = size;
     canvas.height = size;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
 
     const x = (image.width - size) / 2;
     const y = (image.height - size) / 2;
 
     ctx.drawImage(image, x, y, size, size, 0, 0, size, size);
-    return canvas.toDataURL("image/png");
+    return canvas.toDataURL('image/png');
   };
 
   return (
@@ -79,14 +81,20 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
 
             {/* Body */}
             <div className="mx-4 mb-6">
-              <p className="mt-2 text-xl text-[#1D2F7F]">Select a display picture</p>
-              <p className="opacity-60">Choose how you want to appear in Messenger:</p>
+              <p className="mt-2 text-xl text-[#1D2F7F]">
+                Select a display picture
+              </p>
+              <p className="opacity-60">
+                Choose how you want to appear in Messenger:
+              </p>
             </div>
 
             <div className="flex ml-2">
               <div className="win7">
                 <div className="flex flex-wrap gap-2.5 h-[351px] w-72 overflow-y-auto p-2.5 has-scrollbar mb-2">
-                  <div className="font-bold w-full mb-[-5px]">Regular pictures</div>
+                  <div className="font-bold w-full mb-[-5px]">
+                    Regular pictures
+                  </div>
                   {Object.entries(usertiles).map(([name, src]) => (
                     <div
                       key={name}
@@ -138,7 +146,10 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
               >
                 OK
               </button>
-              <button type="button" onClick={() => setShowChangePictureModal(false)}>
+              <button
+                type="button"
+                onClick={() => setShowChangePictureModal(false)}
+              >
                 Close
               </button>
             </div>

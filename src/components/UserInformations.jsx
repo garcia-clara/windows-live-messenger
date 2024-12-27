@@ -1,16 +1,17 @@
 // UserInformation.jsx
-import React, { useState, useEffect, useRef } from "react";
-import AvatarSmall from "../components/AvatarSmall";
-import arrow from "/assets/general/arrow.png";
-import Dropdown from "./Dropdown";
-import statusFrames from "../imports/statusFrames";
-import { replaceEmoticons } from "../helpers/replaceEmoticons";
+import React, { useState, useEffect, useRef } from 'react';
+import AvatarSmall from '../components/AvatarSmall';
+import arrow from '/assets/general/arrow.png';
+import Dropdown from './Dropdown';
+import statusFrames from '../imports/statusFrames';
+import { replaceEmoticons } from '../helpers/replaceEmoticons';
 
 const UserInformation = () => {
   const [user, setUser] = useState({
-    message: localStorage.getItem("message"),
-    status: localStorage.getItem("status") || "Available",
-    name: localStorage.getItem("name") || localStorage.getItem("discord_username"),
+    message: localStorage.getItem('message'),
+    status: localStorage.getItem('status') || 'Available',
+    name:
+      localStorage.getItem('name') || localStorage.getItem('discord_username'),
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -18,20 +19,20 @@ const UserInformation = () => {
   const inputRef = useRef(null);
 
   const options = [
-    { value: "Available", label: "Available", image: statusFrames.onlineDot },
-    { value: "Busy", label: "Busy", image: statusFrames.busyDot },
-    { value: "Away", label: "Away", image: statusFrames.awayDot },
+    { value: 'Available', label: 'Available', image: statusFrames.onlineDot },
+    { value: 'Busy', label: 'Busy', image: statusFrames.busyDot },
+    { value: 'Away', label: 'Away', image: statusFrames.awayDot },
     {
-      value: "Offline",
-      label: "Appear offline",
+      value: 'Offline',
+      label: 'Appear offline',
       image: statusFrames.offlineDot,
     },
     { separator: true },
-    { value: "Sign out", label: "Sign out" },
+    { value: 'Sign out', label: 'Sign out' },
     { separator: true },
-    { value: "ChangeDisplayPicture", label: "Change display picture..." },
-    { value: "ChangeScene", label: "Change scene..." },
-    { value: "ChangeDisplayName", label: "Change display name..." },
+    { value: 'ChangeDisplayPicture', label: 'Change display picture...' },
+    { value: 'ChangeScene', label: 'Change scene...' },
+    { value: 'ChangeDisplayName', label: 'Change display name...' },
   ];
 
   const handleMessageClick = () => {
@@ -45,12 +46,12 @@ const UserInformation = () => {
 
   const handleInputBlur = () => {
     setUser({ ...user, message });
-    localStorage.setItem("message", message);
+    localStorage.setItem('message', message);
     setIsEditing(false);
   };
 
   const handleInputKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleInputBlur();
     }
   };
@@ -69,7 +70,7 @@ const UserInformation = () => {
 
   const handleStatusChange = (status) => {
     setUser({ ...user, status });
-    localStorage.setItem("status", status);
+    localStorage.setItem('status', status);
   };
   return (
     <div className="flex">
@@ -101,7 +102,7 @@ const UserInformation = () => {
           ) : (
             <p className="cursor-pointer flex gap-1">
               {!message ? (
-                "Share a quick message..."
+                'Share a quick message...'
               ) : (
                 <span
                   className="flex gap-1"

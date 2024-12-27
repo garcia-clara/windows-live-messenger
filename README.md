@@ -47,7 +47,7 @@ Some features are not yet implemented but are planned for future updates:
 - **Real-time chat with other users (non-AI)**.
 - **Advanced settings**: More customizable options.
 - **Text style customization**: Change font color, size, and type in chat.
-- **Photo sharing**.
+- **Customized background for the chat**.
 - **Audio and video calls**.
 - **Mobile-responsive version**.
 

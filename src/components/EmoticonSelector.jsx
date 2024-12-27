@@ -11,7 +11,6 @@ const EmoticonSelector = () => {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    // Load recent emoticons from localStorage when the component mounts
     const savedEmoticons = JSON.parse(localStorage.getItem('recentEmoticons'));
     if (savedEmoticons) {
       setRecentEmoticons(savedEmoticons);
@@ -30,24 +29,22 @@ const EmoticonSelector = () => {
   }, []);
 
   useEffect(() => {
-    // Save recent emoticons to localStorage whenever they change
     localStorage.setItem('recentEmoticons', JSON.stringify(recentEmoticons));
   }, [recentEmoticons]);
 
   const handleEmoticonClick = (alias) => {
-    setSelectedEmoticon(alias); // Set the selected emoticon using the alias (e.g., ":)")
-    setIsOpen(false); // Close the emoticon selector dropdown
+    setSelectedEmoticon(alias);
+    setIsOpen(false);
 
     setRecentEmoticons((prev) => {
       const updatedRecentEmoticons = [
         alias,
         ...prev.filter((item) => item !== alias),
       ];
-      return updatedRecentEmoticons.slice(0, 11); // Limit to 11 recent emoticons
+      return updatedRecentEmoticons.slice(0, 11);
     });
   };
 
-  // Create a map to store unique image paths and their aliases
   const uniqueEmoticonMap = new Map();
   Object.entries(pinnedEmoticons).forEach(([alias, src]) => {
     if (!uniqueEmoticonMap.has(src)) {
@@ -55,7 +52,6 @@ const EmoticonSelector = () => {
     }
   });
 
-  // Ensure there are 11 slots for recently used emoticons
   const displayRecentEmoticons = [
     ...recentEmoticons,
     ...Array(11 - recentEmoticons.length).fill(null),

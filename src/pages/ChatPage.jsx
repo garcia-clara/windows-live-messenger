@@ -132,7 +132,7 @@ const ChatPage = () => {
 
     setTimeout(() => {
       setShaking(false);
-      setMessages(newMessages); // Ajoute uniquement le message de nudge sans appeler GPT
+      setMessages(newMessages);
     }, 500);
   };
 
@@ -221,14 +221,14 @@ const ChatPage = () => {
                             {previousMessage &&
                             previousMessage.content === nudgeMessage ? (
                               <>
-                              <p className="ml-1">{nudgeMessage}</p>
-                              <p>————</p>
+                                <p className="ml-1">{nudgeMessage}</p>
+                                <p>━━━━</p>
                               </>
                             ) : (
                               <>
-                                <p>————</p>
+                                <p>━━━━</p>
                                 <p className="ml-1">{nudgeMessage}</p>
-                                <p>————</p>
+                                <p>━━━━</p>
                               </>
                             )}
                           </div>
@@ -319,7 +319,7 @@ const ChatPage = () => {
                       type="text"
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
-                      className="w-full border rounded-t-[4px] outline-none p-1 bg-[#F6FCFF] border-[#bdd5df]"
+                      className="w-full border rounded-t-[4px] outline-none p-1 border-[#bdd5df]"
                     />
                   </form>
                   <div>

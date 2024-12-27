@@ -78,7 +78,7 @@ import xbox from '/assets/emoticons/xbox.gif';
 import zipit from '/assets/emoticons/zipit.gif';
 
 export const emoticons = {
-  '😊' : smile,
+  '😊': smile,
   ':)': smile,
   ':3': smile,
   '😄': laugh,
@@ -112,8 +112,8 @@ export const emoticons = {
   '🙁': sad,
   ':(': sad,
   ':/': sad,
-  "😢": cry,
-  "😭": cry,
+  '😢': cry,
+  '😭': cry,
   ":'(": cry,
   '😐': what,
   '😑': what,
@@ -322,7 +322,7 @@ export const emoticons = {
   '😫': sleepy,
   '😩': sleepy,
   '😪': sleepy,
-  '|-)': sleepy
+  '|-)': sleepy,
 };
 
 export default emoticons;

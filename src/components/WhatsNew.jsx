@@ -24,9 +24,7 @@ const WhatsNew = () => {
   const handlePrevious = () => {
     setFadeClass('fade-out');
     setTimeout(() => {
-      setContent(
-        (prevContent) => (prevContent - 1 + messages.length) % messages.length
-      );
+      setContent((prevContent) => (prevContent - 1 + messages.length) % messages.length);
       setFadeClass('fade-in');
     }, 500);
   };
@@ -46,17 +44,11 @@ const WhatsNew = () => {
       </div>
       <div className="flex gap-1 pt-2 items-center">
         <p className="text-[16px] text-[#1D2F7F]">What's new</p>
-        <div
-          className="ml-3 whats-new-arrow-previous"
-          onClick={handlePrevious}
-        ></div>
+        <div className="ml-3 whats-new-arrow-previous" onClick={handlePrevious}></div>
         <div className="whats-new-arrow-next" onClick={handleNext}></div>
         <div className="ml-2 whats-new-settings"></div>
       </div>
-      <p
-        className={fadeClass}
-        dangerouslySetInnerHTML={{ __html: messages[content] }}
-      />
+      <p className={fadeClass} dangerouslySetInnerHTML={{ __html: messages[content] }} />
     </div>
   );
 };

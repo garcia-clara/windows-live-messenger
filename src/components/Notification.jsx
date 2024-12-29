@@ -35,15 +35,9 @@ const Notification = ({ message, onClose }) => {
   }
 
   return (
-    <div
-      className="fixed bottom-4 right-4 bg-[#CFE4FA] px-4 py-2 rounded shadow cursor-pointer"
-      onClick={onClose}
-    >
+    <div className="fixed bottom-4 right-4 bg-[#CFE4FA] px-4 py-2 rounded shadow cursor-pointer" onClick={onClose}>
       <div className="flex items-center">
-        <AvatarSmall
-          contactAvatar={randomContact.image}
-          contactStatus={randomContact.status}
-        />
+        <AvatarSmall contactAvatar={randomContact.image} contactStatus={randomContact.status} />
         <div className="ml-3">
           <p className="font-bold">{randomContact.name}</p>
           <p className="text-sm text-gray-600">{message}</p>

@@ -18,10 +18,7 @@ const Main = () => {
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<PrivateRoute element={HomePage} />} />
-            <Route
-              path="/chat/:id"
-              element={<PrivateRoute element={ChatPage} />}
-            />
+            <Route path="/chat/:id" element={<PrivateRoute element={ChatPage} />} />
             <Route path="/discordAuth" element={<DiscordAuthHandler />} />
           </Routes>
         </Router>

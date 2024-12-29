@@ -138,18 +138,13 @@ const ChatPage = () => {
 
   return (
     <div
-      className={`bg-no-repeat bg-[length:100%_100px] h-screen ${
-        shaking ? 'nudge' : ''
-      }`}
+      className={`bg-no-repeat bg-[length:100%_100px] h-screen ${shaking ? 'nudge' : ''}`}
       style={{ backgroundImage: `url(${bg})` }}
     >
       <div className="flex flex-col w-full font-sans text-base h-full">
         <div className="flex items-center w-full h-[31.4px] bg-white p-2 gap-2">
           <img src={contactChatIcon} alt="" />
-          <p
-            className="flex gap-1"
-            dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}
-          ></p>
+          <p className="flex gap-1" dangerouslySetInnerHTML={{ __html: replaceEmoticons(contact.name) }}></p>
           <p>&lt;{contact.email}&gt;</p>
         </div>
         <div
@@ -157,20 +152,12 @@ const ChatPage = () => {
           style={{ backgroundImage: `url(${navbarBackground})` }}
         >
           <div className="flex items-center text-white gap-3">
-            <div className="aerobutton cursor-pointer p-1 opacity-50">
-              Photos
-            </div>
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Photos</div>
             <div className="aerobutton cursor-pointer p-1">Files</div>
-            <div className="aerobutton cursor-pointer p-1 opacity-50">
-              Video
-            </div>
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Video</div>
             <div className="aerobutton cursor-pointer p-1 opacity-50">Call</div>
-            <div className="aerobutton cursor-pointer p-1 opacity-50">
-              Games
-            </div>
-            <div className="aerobutton cursor-pointer p-1 opacity-50">
-              Activities
-            </div>
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Games</div>
+            <div className="aerobutton cursor-pointer p-1 opacity-50">Activities</div>
             <div className="aerobutton cursor-pointer p-1">Invite</div>
             <div className="aerobutton cursor-pointer p-1">Block</div>
           </div>
@@ -203,11 +190,7 @@ const ChatPage = () => {
                 ></p>
                 <p className="ml-1 capitalize">({contact.status})</p>
               </div>
-              <img
-                src={divider}
-                alt=""
-                className="mb-[-5px] pointer-events-none"
-              />
+              <img src={divider} alt="" className="mb-[-5px] pointer-events-none" />
 
               <div className="flex flex-col justify-between h-full w-full my-4 text-sm pr-2">
                 <div className="overflow-y-auto break-all has-scrollbar">
@@ -218,8 +201,7 @@ const ChatPage = () => {
                       <div key={index} className={`message ${message.role}`}>
                         {message.content === nudgeMessage && (
                           <div>
-                            {previousMessage &&
-                            previousMessage.content === nudgeMessage ? (
+                            {previousMessage && previousMessage.content === nudgeMessage ? (
                               <>
                                 <p className="ml-1">{nudgeMessage}</p>
                                 <p>━━━━</p>
@@ -234,63 +216,59 @@ const ChatPage = () => {
                           </div>
                         )}
 
-                        {message.role === 'user' &&
-                          message.content !== nudgeMessage && (
-                            <div>
-                              <div className="flex text-black text-opacity-70">
+                        {message.role === 'user' && message.content !== nudgeMessage && (
+                          <div>
+                            <div className="flex text-black text-opacity-70">
+                              <p
+                                className="flex gap-1"
+                                dangerouslySetInnerHTML={{
+                                  __html: replaceEmoticons(user == '' ? userEmail : user),
+                                }}
+                              />
+                              <p className="ml-1">says:</p>
+                            </div>
+                            <div className="flex gap-2 items-start ml-1">
+                              <div className="flex-shrink-0 mt-2.5">
+                                <img src={messageDot} alt="Message Dot" />
+                              </div>
+                              <div>
                                 <p
                                   className="flex gap-1"
                                   dangerouslySetInnerHTML={{
-                                    __html: replaceEmoticons(
-                                      user == '' ? userEmail : user
-                                    ),
+                                    __html: replaceEmoticons(message.content),
                                   }}
                                 />
-                                <p className="ml-1">says:</p>
-                              </div>
-                              <div className="flex gap-2 items-start ml-1">
-                                <div className="flex-shrink-0 mt-2.5">
-                                  <img src={messageDot} alt="Message Dot" />
-                                </div>
-                                <div>
-                                  <p
-                                    className="flex gap-1"
-                                    dangerouslySetInnerHTML={{
-                                      __html: replaceEmoticons(message.content),
-                                    }}
-                                  />
-                                </div>
                               </div>
                             </div>
-                          )}
+                          </div>
+                        )}
 
-                        {message.role === 'assistant' &&
-                          message.content !== nudgeMessage && (
-                            <div>
-                              <div className="flex text-black text-opacity-70">
+                        {message.role === 'assistant' && message.content !== nudgeMessage && (
+                          <div>
+                            <div className="flex text-black text-opacity-70">
+                              <p
+                                className="flex gap-1"
+                                dangerouslySetInnerHTML={{
+                                  __html: replaceEmoticons(contact.name),
+                                }}
+                              />
+                              <p className="ml-1">says:</p>
+                            </div>
+                            <div className="flex gap-2 items-start ml-1">
+                              <div className="flex-shrink-0 mt-2.5">
+                                <img src={messageDot} alt="Message Dot" />
+                              </div>
+                              <div>
                                 <p
                                   className="flex gap-1"
                                   dangerouslySetInnerHTML={{
-                                    __html: replaceEmoticons(contact.name),
+                                    __html: replaceEmoticons(message.content),
                                   }}
                                 />
-                                <p className="ml-1">says:</p>
-                              </div>
-                              <div className="flex gap-2 items-start ml-1">
-                                <div className="flex-shrink-0 mt-2.5">
-                                  <img src={messageDot} alt="Message Dot" />
-                                </div>
-                                <div>
-                                  <p
-                                    className="flex gap-1"
-                                    dangerouslySetInnerHTML={{
-                                      __html: replaceEmoticons(message.content),
-                                    }}
-                                  />
-                                </div>
                               </div>
                             </div>
-                          )}
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -307,11 +285,7 @@ const ChatPage = () => {
                       <p>is typing...</p>
                     </div>
                   )}
-                  {lastMessageTime && (
-                    <p className="opacity-50 my-1">
-                      Last message received at {lastMessageTime}
-                    </p>
-                  )}
+                  {lastMessageTime && <p className="opacity-50 my-1">Last message received at {lastMessageTime}</p>}
                   <img src={divider} alt="" className="pointer-events-none" />
                   {/*--------------------- INPUT ---------------------*/}
                   <form onSubmit={handleSubmit}>
@@ -323,11 +297,7 @@ const ChatPage = () => {
                     />
                   </form>
                   <div>
-                    <img
-                      className="absolute bottom-[68px] left-[173.6px]"
-                      src={chatPointBackground}
-                      alt=""
-                    />
+                    <img className="absolute bottom-[68px] left-[173.6px]" src={chatPointBackground} alt="" />
                   </div>
                   <div
                     className="flex border-x border-b rounded-b-[4px] border-[#bdd5df]"
@@ -337,10 +307,7 @@ const ChatPage = () => {
 
                     {WinkSelector()}
 
-                    <div
-                      className="flex items-center aerobutton p-1 h-6"
-                      onClick={handleNudgeClick}
-                    >
+                    <div className="flex items-center aerobutton p-1 h-6" onClick={handleNudgeClick}>
                       <div>
                         <img src={sendNudge} alt="" />
                       </div>

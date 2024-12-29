@@ -1,9 +1,8 @@
 import { fetchDiscordToken, fetchDiscordUserData } from './discordAuth';
 
 export const isAuthenticated = () => {
-  const email = localStorage.getItem('email');
-  const password = localStorage.getItem('password');
-  return email && password;
+  const loggedin = localStorage.getItem('loggedin');
+  return loggedin;
 };
 
 export const isDiscordAuthenticated = () => {
@@ -15,10 +14,7 @@ export const saveDiscordUserData = (userData) => {
   localStorage.setItem('discord_id', userData.id);
   localStorage.setItem('name', userData.global_name);
   localStorage.setItem('email', userData.email || 'N/A');
-  localStorage.setItem(
-    'discord_picture',
-    userData.avatar || 'default_avatar.png'
-  );
+  localStorage.setItem('discord_picture', userData.avatar || 'default_avatar.png');
   localStorage.setItem('message', '');
 };
 
@@ -35,5 +31,5 @@ export const authenticateWithDiscord = async (code) => {
 };
 
 export const logout = () => {
-  localStorage.clear();
+  localStorage.removeItem(loggedin);
 };

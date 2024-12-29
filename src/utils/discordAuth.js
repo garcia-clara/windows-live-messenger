@@ -6,9 +6,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 export const getDiscordAuthUrl = () => {
   return `https://discord.com/oauth2/authorize?client_id=${
     import.meta.env.VITE_DISCORD_CLIENT_ID
-  }&response_type=code&redirect_uri=${encodeURIComponent(
-    import.meta.env.VITE_DISCORD_REDIRECT_URI
-  )}&scope=${import.meta.env.VITE_DISCORD_SCOPE}`;
+  }&response_type=code&redirect_uri=${encodeURIComponent(import.meta.env.VITE_DISCORD_REDIRECT_URI)}&scope=${
+    import.meta.env.VITE_DISCORD_SCOPE
+  }`;
 };
 
 // Fetch the Discord OAuth token
@@ -21,21 +21,14 @@ export const fetchDiscordToken = async (code) => {
   data.append('redirect_uri', import.meta.env.VITE_DISCORD_REDIRECT_URI);
 
   try {
-    const response = await axios.post(
-      'https://discord.com/api/oauth2/token',
-      data,
-      {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      }
-    );
+    const response = await axios.post('https://discord.com/api/oauth2/token', data, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    });
     const token = response.data.access_token;
     localStorage.setItem('discord_token', token); // Save the token
     return token;
   } catch (error) {
-    console.error(
-      'Failed to fetch Discord token:',
-      error.response?.data || error.message
-    );
+    console.error('Failed to fetch Discord token:', error.response?.data || error.message);
     throw new Error('Failed to fetch Discord token');
   }
 };
@@ -50,10 +43,7 @@ export const fetchDiscordUserData = async (token) => {
 
     return userData;
   } catch (error) {
-    console.error(
-      'Failed to fetch Discord user data:',
-      error.response?.data || error.message
-    );
+    console.error('Failed to fetch Discord user data:', error.response?.data || error.message);
     throw new Error('Failed to fetch Discord user data');
   }
 };

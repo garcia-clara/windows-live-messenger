@@ -94,8 +94,7 @@ export const getOpenAIResponse = async (messages, apiKey) => {
       if (error.response.status === 429) {
         errorMessageContent = 'Too many requests. Please try again later.';
       } else if (error.response.status === 404) {
-        errorMessageContent =
-          'API endpoint not found. Please check the URL and model.';
+        errorMessageContent = 'API endpoint not found. Please check the URL and model.';
       }
     }
 

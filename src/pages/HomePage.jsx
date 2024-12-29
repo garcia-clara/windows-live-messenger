@@ -23,18 +23,10 @@ const HomePage = () => {
   }, []);
 
   // Filtrage des contacts par statut
-  const favoritesContacts = contacts.filter(
-    (contact) => contact.isFavorite === 1
-  );
-  const groupsContacts = contacts.filter(
-    (contact) => contact.status === 'group'
-  );
-  const availableContacts = contacts.filter(
-    (contact) => contact.status !== 'offline'
-  );
-  const offlineContacts = contacts.filter(
-    (contact) => contact.status === 'offline'
-  );
+  const favoritesContacts = contacts.filter((contact) => contact.isFavorite === 1);
+  const groupsContacts = contacts.filter((contact) => contact.status === 'group');
+  const availableContacts = contacts.filter((contact) => contact.status !== 'offline');
+  const offlineContacts = contacts.filter((contact) => contact.status === 'offline');
 
   const background = localStorage.getItem('scene');
 
@@ -42,20 +34,12 @@ const HomePage = () => {
     <Background>
       <div
         className={`bg-no-repeat ${
-          background === '/assets/scenes/default_background.jpg'
-            ? 'h-screen'
-            : 'h-[97px]'
+          background === '/assets/scenes/default_background.jpg' ? 'h-screen' : 'h-[97px]'
         } bg-[length:100%_100px]`}
         style={{
           backgroundImage: `url(${background})`,
-          backgroundSize:
-            background !== '/assets/scenes/default_background.jpg'
-              ? 'cover'
-              : '',
-          backgroundPosition:
-            background !== '/assets/scenes/default_background.jpg'
-              ? 'center'
-              : '',
+          backgroundSize: background !== '/assets/scenes/default_background.jpg' ? 'cover' : '',
+          backgroundPosition: background !== '/assets/scenes/default_background.jpg' ? 'center' : '',
         }}
       >
         <div className="flex flex-col w-full font-sans text-base h-screen win7">
@@ -72,11 +56,7 @@ const HomePage = () => {
 
           {/* Contacts row */}
           <div className="h-full">
-            <img
-              src={divider}
-              alt=""
-              className="mb-[-5px] pointer-events-none mix-blend-multiply"
-            />
+            <img src={divider} alt="" className="mb-[-5px] pointer-events-none mix-blend-multiply" />
 
             {/* Searchbar and icons */}
             <div className="flex items-center mt-2 px-4">
@@ -106,26 +86,10 @@ const HomePage = () => {
 
             <div className="overflow-y-auto has-scrollbar h-[58.8vh]">
               {/* Contacts */}
-              <ContactCategory
-                title="Favorites"
-                contacts={favoritesContacts}
-                count={favoritesContacts.length}
-              />
-              <ContactCategory
-                title="Groups"
-                contacts={groupsContacts}
-                count={groupsContacts.length}
-              />
-              <ContactCategory
-                title="Available"
-                contacts={availableContacts}
-                count={availableContacts.length}
-              />
-              <ContactCategory
-                title="Offline"
-                contacts={offlineContacts}
-                count={offlineContacts.length}
-              />
+              <ContactCategory title="Favorites" contacts={favoritesContacts} count={favoritesContacts.length} />
+              <ContactCategory title="Groups" contacts={groupsContacts} count={groupsContacts.length} />
+              <ContactCategory title="Available" contacts={availableContacts} count={availableContacts.length} />
+              <ContactCategory title="Offline" contacts={offlineContacts} count={offlineContacts.length} />
             </div>
           </div>
 

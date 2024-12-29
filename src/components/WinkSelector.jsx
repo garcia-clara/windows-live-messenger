@@ -37,10 +37,7 @@ const WinkSelector = () => {
 
     // Update recent winks
     setRecentWinks((prev) => {
-      const updatedRecentWinks = [
-        alias,
-        ...prev.filter((item) => item !== alias),
-      ];
+      const updatedRecentWinks = [alias, ...prev.filter((item) => item !== alias)];
       return updatedRecentWinks.slice(0, 11);
     });
 
@@ -51,19 +48,13 @@ const WinkSelector = () => {
   };
 
   // Ensure there are 11 slots for recently used winks
-  const displayRecentWinks = [
-    ...recentWinks,
-    ...Array(11 - recentWinks.length).fill(null),
-  ];
+  const displayRecentWinks = [...recentWinks, ...Array(11 - recentWinks.length).fill(null)];
 
   return (
     <>
       {/* Dropdown button */}
       <div className="relative" ref={dropdownRef}>
-        <div
-          className="flex items-center aerobutton p-1 h-6"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <div className="flex items-center aerobutton p-1 h-6" onClick={() => setIsOpen(!isOpen)}>
           <div className="w-5">
             <img src={selectWink} alt="Select Wink" />
           </div>
@@ -88,9 +79,7 @@ const WinkSelector = () => {
                     className="cursor-pointer border w-7 h-7 flex justify-center items-center"
                     onClick={() => alias && handleWinkClick(alias)}
                   >
-                    {alias && (
-                      <img src={winks_icons[`${alias}_icon`]} alt={alias} />
-                    )}
+                    {alias && <img src={winks_icons[`${alias}_icon`]} alt={alias} />}
                   </div>
                 ))}
               </div>

@@ -6,9 +6,7 @@ import defaultAvatar from '/assets/usertiles/default.png';
 import WLMIcon from '/assets/general/wlm-icon.png';
 
 const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
-  const [userPicture, setUserPicture] = useState(
-    localStorage.getItem('picture')
-  );
+  const [userPicture, setUserPicture] = useState(localStorage.getItem('picture'));
   const fileInputRef = useRef(null);
 
   const updateUserPicture = (imageSrc) => {
@@ -81,32 +79,17 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
 
             {/* Body */}
             <div className="mx-4 mb-6">
-              <p className="mt-2 text-xl text-[#1D2F7F]">
-                Select a display picture
-              </p>
-              <p className="opacity-60">
-                Choose how you want to appear in Messenger:
-              </p>
+              <p className="mt-2 text-xl text-[#1D2F7F]">Select a display picture</p>
+              <p className="opacity-60">Choose how you want to appear in Messenger:</p>
             </div>
 
             <div className="flex ml-2">
               <div className="win7">
                 <div className="flex flex-wrap gap-2.5 h-[351px] w-72 overflow-y-auto p-2.5 has-scrollbar mb-2">
-                  <div className="font-bold w-full mb-[-5px]">
-                    Regular pictures
-                  </div>
+                  <div className="font-bold w-full mb-[-5px]">Regular pictures</div>
                   {Object.entries(usertiles).map(([name, src]) => (
-                    <div
-                      key={name}
-                      onClick={() => updateUserPicture(src)}
-                      className="cursor-pointer"
-                    >
-                      <img
-                        key={name}
-                        src={src}
-                        alt={name}
-                        className="w-12 shadow-lg usertiles-shadow border border-hidden"
-                      />
+                    <div key={name} onClick={() => updateUserPicture(src)} className="cursor-pointer">
+                      <img key={name} src={src} alt={name} className="w-12 shadow-lg usertiles-shadow border border-hidden" />
                     </div>
                   ))}
                 </div>
@@ -120,12 +103,7 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
                   <button disabled>Webcam picture...</button>
                   <button disabled>Dynamic picture...</button>
                   <button onClick={handleButtonClick}>Browse...</button>
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    className="hidden"
-                    onChange={handleFileChange}
-                  />
+                  <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileChange} />
                   <button onClick={removeUserPicture}>Remove</button>
                   <button disabled>Modify...</button>
                 </div>
@@ -146,10 +124,7 @@ const ChangeDisplayPictureModal = ({ setShowChangePictureModal }) => {
               >
                 OK
               </button>
-              <button
-                type="button"
-                onClick={() => setShowChangePictureModal(false)}
-              >
+              <button type="button" onClick={() => setShowChangePictureModal(false)}>
                 Close
               </button>
             </div>

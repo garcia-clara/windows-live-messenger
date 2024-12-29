@@ -7,11 +7,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import '7.css/dist/7.scoped.css';
 import bg from '/assets/background/background.jpg';
 import CryptoJS from 'crypto-js';
-import {
-  isAuthenticated,
-  authenticateWithDiscord,
-  isDiscordAuthenticated,
-} from '../utils/auth';
+import { isAuthenticated, authenticateWithDiscord, isDiscordAuthenticated } from '../utils/auth';
 import { getDiscordAuthUrl } from '../utils/discordAuth';
 import UnableToConnectModal from '../components/UnableToConnectModal';
 import DiscordLogo from '/assets/general/discord.png';
@@ -19,15 +15,14 @@ import DiscordLogo from '/assets/general/discord.png';
 const LoginPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [showUnableToConnectModal, setShowUnableToConnectModal] =
-    useState(false);
+  const [showUnableToConnectModal, setShowUnableToConnectModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [status, setStatus] = useState('Available');
-  const [rememberMe, setRememberMe] = useState(false);
-  const [rememberPassword, setRememberPassword] = useState(false);
-  const [signInAutomatically, setSignInAutomatically] = useState(false);
+  const [rememberMe, setRememberMe] = useState(localStorage.getItem('rememberme') === 'true');
+  const [rememberPassword, setRememberPassword] = useState(localStorage.getItem('rememberpassword') === 'true');
+  const [signInAutomatically, setSignInAutomatically] = useState(localStorage.getItem('signinautomatically') === 'true');
+  const [password, setPassword] = useState(rememberPassword ? '••••••••••' : '');
+  const [email, setEmail] = useState(rememberMe ? localStorage.getItem('email') : '');
 
   const handleDiscordAuth = () => {
     window.location.href = getDiscordAuthUrl();
@@ -39,15 +34,12 @@ const LoginPage = () => {
     }
   }, [navigate]);
 
-  // Handle email/password sign-in
   const handleSignIn = () => {
     const hashedPassword = CryptoJS.SHA256(password).toString();
     const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
     if (!email || !isValidEmail(email)) {
-      setModalMessage(
-        'Please enter a valid email in the format: example@example.com'
-      );
+      setModalMessage('Please enter a valid email in the format: example@example.com');
       setShowUnableToConnectModal(true);
       return;
     }
@@ -58,25 +50,23 @@ const LoginPage = () => {
       return;
     }
 
-    // Save data to local storage
     localStorage.setItem('email', email);
     localStorage.setItem('password', hashedPassword);
     localStorage.setItem('status', status);
-    localStorage.setItem('rememberme', rememberMe);
-    localStorage.setItem('rememberpassword', rememberPassword);
-    localStorage.setItem('signinautomatically', signInAutomatically);
+    localStorage.setItem('rememberme', rememberMe.toString());
+    localStorage.setItem('rememberpassword', rememberPassword.toString());
+    localStorage.setItem('signinautomatically', signInAutomatically.toString());
     localStorage.setItem('scene', '/assets/scenes/default_background.png');
-    localStorage.setItem(
-      'colorScheme',
-      '/assets/color_schemes/match_my_scene_color.png'
-    );
+    localStorage.setItem('colorScheme', '/assets/color_schemes/match_my_scene_color.png');
     localStorage.setItem('name', '');
     localStorage.setItem('message', '');
 
-    navigate('/');
+    if (localStorage.getItem('email') && localStorage.getItem('password')) {
+      localStorage.setItem('loggedin', 'true');
+      navigate('/');
+    }
   };
 
-  // Fetch Discord OAuth data on page load
   useEffect(() => {
     const code = searchParams.get('code');
     if (code) {
@@ -84,9 +74,7 @@ const LoginPage = () => {
         .then(() => navigate('/'))
         .catch((error) => {
           console.error('Discord Auth Error:', error.message);
-          setModalMessage(
-            'Failed to authenticate with Discord. Please try again.'
-          );
+          setModalMessage('Failed to authenticate with Discord. Please try again.');
           setShowUnableToConnectModal(true);
         });
     }
@@ -105,12 +93,9 @@ const LoginPage = () => {
 
   return (
     <Background>
-      <div
-        className="bg-no-repeat bg-[length:100%_100px] h-screen"
-        style={{ backgroundImage: `url(${bg})` }}
-      >
+      <div className="bg-no-repeat bg-[length:100%_100px] h-screen" style={{ backgroundImage: `url(${bg})` }}>
         <div className="flex flex-col items-center w-full pt-4 win7 font-sans text-base">
-          <AvatarLarge />
+          <AvatarLarge image={localStorage.getItem('rememberme') === 'true' ? localStorage.getItem('picture') : undefined} />
           <p className="mt-4 text-xl text-[#1D2F7F]">Sign in</p>
           <p className="mb-4">Enter a name and a password to start chatting</p>
 
@@ -134,12 +119,7 @@ const LoginPage = () => {
 
             <div className="flex my-4">
               <p>Sign in as:</p>
-              <Dropdown
-                options={options}
-                value={status}
-                onChange={(option) => setStatus(option.value)}
-                showStatusDots={true}
-              />
+              <Dropdown options={options} value={status} onChange={(option) => setStatus(option.value)} showStatusDots={true} />
             </div>
 
             <div>
@@ -148,7 +128,10 @@ const LoginPage = () => {
                   type="checkbox"
                   id="rememberme"
                   checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
+                  onChange={(e) => {
+                    setRememberMe(e.target.checked);
+                    localStorage.setItem('rememberme', e.target.checked.toString());
+                  }}
                 />
                 <label htmlFor="rememberme">Remember me</label>
               </div>
@@ -157,7 +140,10 @@ const LoginPage = () => {
                   type="checkbox"
                   id="rememberpassword"
                   checked={rememberPassword}
-                  onChange={(e) => setRememberPassword(e.target.checked)}
+                  onChange={(e) => {
+                    setRememberPassword(e.target.checked);
+                    localStorage.setItem('rememberpassword', e.target.checked.toString());
+                  }}
                 />
                 <label htmlFor="rememberpassword">Remember my password</label>
               </div>
@@ -166,11 +152,12 @@ const LoginPage = () => {
                   type="checkbox"
                   id="signinautomatically"
                   checked={signInAutomatically}
-                  onChange={(e) => setSignInAutomatically(e.target.checked)}
+                  onChange={(e) => {
+                    setSignInAutomatically(e.target.checked);
+                    localStorage.setItem('signinautomatically', e.target.checked.toString());
+                  }}
                 />
-                <label htmlFor="signinautomatically">
-                  Sign me in automatically
-                </label>
+                <label htmlFor="signinautomatically">Sign me in automatically</label>
               </div>
             </div>
           </fieldset>
@@ -178,10 +165,7 @@ const LoginPage = () => {
           <div className="flex gap-2 items-center mt-4">
             <button onClick={handleSignIn}>Sign in</button>
             OR
-            <button
-              onClick={handleDiscordAuth}
-              className="flex gap-2 items-center"
-            >
+            <button onClick={handleDiscordAuth} className="flex gap-2 items-center">
               <img src={DiscordLogo} alt="Discord" className="w-6 h-6 p-1" />
               Sign in with Discord
             </button>
@@ -189,10 +173,7 @@ const LoginPage = () => {
         </div>
       </div>
       {showUnableToConnectModal && (
-        <UnableToConnectModal
-          setShowUnableToConnectModal={setShowUnableToConnectModal}
-          errorMessage={modalMessage}
-        />
+        <UnableToConnectModal setShowUnableToConnectModal={setShowUnableToConnectModal} errorMessage={modalMessage} />
       )}
     </Background>
   );

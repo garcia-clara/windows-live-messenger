@@ -44,12 +44,7 @@
   border: 1px solid #80d2f1;
   border-radius: 3px;
   background: rgb(255, 255, 255);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(200, 234, 249, 1) 70%,
-    rgb(198, 237, 255) 97%
-  );
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(200, 234, 249, 1) 70%, rgb(198, 237, 255) 97%);
 }
 
 .fade-in {
@@ -178,22 +173,12 @@ body {
   border: 1px solid #b9d7fc;
   border-radius: 3px;
   background: rgb(255, 255, 255);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(200, 234, 249, 1) 70%,
-    rgb(198, 237, 255) 97%
-  );
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(200, 234, 249, 1) 70%, rgb(198, 237, 255) 97%);
 }
 
 .selectedscene {
   border: 1px solid #84acdd;
   border-radius: 3px;
   background: rgb(255, 255, 255);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(200, 234, 249, 1) 70%,
-    rgb(198, 237, 255) 97%
-  );
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(200, 234, 249, 1) 70%, rgb(198, 237, 255) 97%);
 }

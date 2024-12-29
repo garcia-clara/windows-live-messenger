@@ -10,8 +10,7 @@ const UserInformation = () => {
   const [user, setUser] = useState({
     message: localStorage.getItem('message'),
     status: localStorage.getItem('status') || 'Available',
-    name:
-      localStorage.getItem('name') || localStorage.getItem('discord_username'),
+    name: localStorage.getItem('name') || localStorage.getItem('discord_username'),
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -77,16 +76,9 @@ const UserInformation = () => {
       <AvatarSmall />
       <div className="ml-[-12px]">
         <div className="flex items-center">
-          <Dropdown
-            options={options}
-            value={user.status}
-            onChange={handleStatusChange}
-          />
+          <Dropdown options={options} value={user.status} onChange={handleStatusChange} />
         </div>
-        <div
-          className="flex aerobutton pl-1 ml-1 items-center white-light"
-          onClick={handleMessageClick}
-        >
+        <div className="flex aerobutton pl-1 ml-1 items-center white-light" onClick={handleMessageClick}>
           {isEditing ? (
             <input
               ref={inputRef}

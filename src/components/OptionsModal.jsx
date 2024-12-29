@@ -60,46 +60,23 @@ const ChangeDisplayPictureModal = ({ setShowOptionsModal }) => {
               <div className="flex items-center ml-1">
                 <p className="ml-1 pt-1">Options</p>
               </div>
-              <button
-                className="pb-2 pt-1 px-3 rounded-tr-lg hover:bg-red-700 hover:text-white"
-                onClick={handleCloseModal}
-              >
+              <button className="pb-2 pt-1 px-3 rounded-tr-lg hover:bg-red-700 hover:text-white" onClick={handleCloseModal}>
                 <p className="text-[10px]">╳</p>
               </button>
             </div>
 
             <div className="flex pl-2 h-full w-full">
               <div className="border border-black bg-white w-[110px] mr-2 h-full">
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Personal
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Layout
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Sign In
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Messages
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Alerts
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Sounds
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  File Transfer
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Privacy
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Security
-                </div>
-                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">
-                  Connection
-                </div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Personal</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Layout</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Sign In</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Messages</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Alerts</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Sounds</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">File Transfer</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Privacy</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Security</div>
+                <div className="py-[5px] pl-1 hover:bg-[#0078d7] hover:text-white cursor-pointer m-[1px]">Connection</div>
               </div>
               <div className="w-full pr-1">
                 <fieldset className="border border-black border-opacity-10 h-full">
@@ -142,11 +119,7 @@ const ChangeDisplayPictureModal = ({ setShowOptionsModal }) => {
               <button type="button" onClick={handleCloseModal}>
                 Cancel
               </button>
-              <button
-                type="button"
-                onClick={handleApplyChanges}
-                disabled={!isModified}
-              >
+              <button type="button" onClick={handleApplyChanges} disabled={!isModified}>
                 Apply
               </button>
               <button type="button">Help</button>

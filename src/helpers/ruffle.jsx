@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
+import React, { useEffect, useRef, useState, forwardRef, useImperativeHandle } from 'react';
 
 const Ruffle = forwardRef((_, ref) => {
   const containerRef = useRef(null);
@@ -12,11 +6,7 @@ const Ruffle = forwardRef((_, ref) => {
   const timeoutRef = useRef(null);
 
   useEffect(() => {
-    if (
-      !document.querySelector(
-        'script[src="https://unpkg.com/@ruffle-rs/ruffle"]'
-      )
-    ) {
+    if (!document.querySelector('script[src="https://unpkg.com/@ruffle-rs/ruffle"]')) {
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/@ruffle-rs/ruffle';
       script.async = true;

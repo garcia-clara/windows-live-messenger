@@ -37,10 +37,7 @@ const EmoticonSelector = () => {
     setIsOpen(false);
 
     setRecentEmoticons((prev) => {
-      const updatedRecentEmoticons = [
-        alias,
-        ...prev.filter((item) => item !== alias),
-      ];
+      const updatedRecentEmoticons = [alias, ...prev.filter((item) => item !== alias)];
       return updatedRecentEmoticons.slice(0, 11);
     });
   };
@@ -52,19 +49,13 @@ const EmoticonSelector = () => {
     }
   });
 
-  const displayRecentEmoticons = [
-    ...recentEmoticons,
-    ...Array(11 - recentEmoticons.length).fill(null),
-  ];
+  const displayRecentEmoticons = [...recentEmoticons, ...Array(11 - recentEmoticons.length).fill(null)];
 
   return (
     <>
       {/* Dropdown button */}
       <div className="relative" ref={dropdownRef}>
-        <div
-          className="flex items-center aerobutton p-1 h-6"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <div className="flex items-center aerobutton p-1 h-6" onClick={() => setIsOpen(!isOpen)}>
           <div className="w-5">
             <img src={selectEmoticon} alt="Select Emoticon" />
           </div>
